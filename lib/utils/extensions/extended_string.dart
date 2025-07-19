@@ -1,5 +1,3 @@
-
-
 extension ExtendedString on String {
   // File Name => FileName
   String removeSpaces() {
@@ -8,12 +6,17 @@ extension ExtendedString on String {
 
   // user => User
   String toCapitalize() {
-    return isEmpty ? '' : '${this[0].toUpperCase()}${substring(1).toLowerCase()}';
+    return isEmpty
+        ? ''
+        : '${this[0].toUpperCase()}${substring(1).toLowerCase()}';
   }
 
   // user name => User Name
   String toCapitaliseEachWordFirstChar() {
-    return replaceAll(RegExp(' +'), ' ').split(' ').map((str) => str.toCapitalize).join(' ');
+    return replaceAll(RegExp(' +'), ' ')
+        .split(' ')
+        .map((str) => str.toCapitalize)
+        .join(' ');
   }
 
   // 5 => 5.0

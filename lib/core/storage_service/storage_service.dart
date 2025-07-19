@@ -3,7 +3,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 class StorageService {
   final SharedPreferences _preferences;
 
-  StorageService({required SharedPreferences sharedPreferences}) : _preferences = sharedPreferences;
+  StorageService({required SharedPreferences sharedPreferences})
+      : _preferences = sharedPreferences;
 
   Future<void> setString(String key, String value) async {
     await _preferences.setString(key, value);

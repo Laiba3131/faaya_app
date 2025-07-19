@@ -1,7 +1,8 @@
-   import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:bkmc/constants/asset_paths.dart';
 
 import '../constants/app_colors.dart';
+
 class GlobalWidgets {
   static Widget authBottomWidget(
       String firstTxt, String scndTxt, Function() onTap) {
@@ -23,13 +24,13 @@ class GlobalWidgets {
           Text(
             scndTxt,
             style: const TextStyle(
-              fontSize: 17,
-              color: AppColors.primaryColor,
-              fontFamily: AssetPaths.roboto,
-              fontWeight: FontWeight.w600
-            ),
+                fontSize: 17,
+                color: AppColors.primaryColor,
+                fontFamily: AssetPaths.roboto,
+                fontWeight: FontWeight.w600),
           ),
         ],
       ),
     );
-  }}
+  }
+}

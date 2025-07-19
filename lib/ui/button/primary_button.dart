@@ -217,22 +217,24 @@ class PrefixIconButton extends StatelessWidget {
 }
 
 class SuffixIconButton extends StatelessWidget {
-  const SuffixIconButton(
-      {super.key,
-      required this.onPressed,
-      required this.title,
-      this.height = 44,
-      this.backgroundColor = Colors.white,
-      this.titleColor = Colors.white,
-      this.borderColor,
-      this.foregroundColor,
-      this.fontSize = 16,
-      this.suffixIconSize = 18,
-      this.hPadding = 12,
-      this.suffixIconPath,
-      this.borderRadius = 10,
-      this.mainAxisAlignment = MainAxisAlignment.center,
-      this.titleGap = 14});
+  const SuffixIconButton({
+    super.key,
+    required this.onPressed,
+    required this.title,
+    this.height = 44,
+    this.backgroundColor = Colors.white,
+    this.titleColor = Colors.white,
+    this.borderColor,
+    this.foregroundColor,
+    this.fontSize = 16,
+    this.suffixIconSize = 18,
+    this.hPadding = 12,
+    this.suffixIconPath,
+    this.suffixIconWidget,
+    this.borderRadius = 10,
+    this.mainAxisAlignment = MainAxisAlignment.center,
+    this.titleGap = 14,
+  });
 
   final String title;
   final VoidCallback onPressed;
@@ -245,7 +247,8 @@ class SuffixIconButton extends StatelessWidget {
   final double borderRadius;
   final double suffixIconSize;
   final double hPadding;
-  final String? suffixIconPath;
+  final String? suffixIconPath; // for backward compatibility
+  final Widget? suffixIconWidget; // for flexible custom icon support
   final MainAxisAlignment mainAxisAlignment;
   final double titleGap;
 
@@ -260,12 +263,12 @@ class SuffixIconButton extends StatelessWidget {
           backgroundColor: backgroundColor,
           padding: EdgeInsets.symmetric(horizontal: hPadding),
           shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(borderRadius),
-              side: BorderSide(
-                  color: borderColor != null
-                      ? borderColor!
-                      : context.colorScheme.outline,
-                  width: .5)),
+            borderRadius: BorderRadius.circular(borderRadius),
+            side: BorderSide(
+              color: borderColor ?? context.colorScheme.outline,
+              width: .5,
+            ),
+          ),
         ),
         child: Row(
           mainAxisAlignment: mainAxisAlignment,
@@ -273,17 +276,19 @@ class SuffixIconButton extends StatelessWidget {
             Text(
               title,
               style: context.textTheme.titleLarge?.copyWith(
-                  fontWeight: FontWeight.w600,
-                  fontSize: fontSize,
-                  color: titleColor),
+                fontWeight: FontWeight.w600,
+                fontSize: fontSize,
+                color: titleColor,
+              ),
             ),
-            SizedBox(
-              width: titleGap,
-            ),
-            SvgPicture.asset(
-              height: suffixIconSize,
-              suffixIconPath!,
-            ),
+            if (suffixIconPath != null || suffixIconWidget != null) ...[
+              SizedBox(width: titleGap),
+              suffixIconWidget ??
+                  SvgPicture.asset(
+                    suffixIconPath!,
+                    height: suffixIconSize,
+                  ),
+            ],
           ],
         ),
       ),

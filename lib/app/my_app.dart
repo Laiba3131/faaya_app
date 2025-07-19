@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
 import '../config/routes/nav_router.dart';
 import '../config/themes/light_theme.dart';
+import '../modules/startup/pages/splash_page.dart';
 import '../ui/widgets/unfocus.dart';
 import 'bloc/bloc_di.dart';
 import 'cubit/app_cubit.dart';
@@ -31,30 +32,11 @@ class OxynDev extends StatelessWidget {
               navigatorObservers: [
                 BotToastNavigatorObserver(),
               ],
-              home: HomeScreen(),
+              home: SplashPage(),
               locale: state.locale,
             );
           });
         },
-      ),
-    );
-  }
-}
-
-class HomeScreen extends StatefulWidget {
-  @override
-  _HomeScreenState createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('FCM Token Example'),
-      ),
-      body: Center(
-        child: Text('Welcom'),
       ),
     );
   }

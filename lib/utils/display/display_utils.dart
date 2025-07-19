@@ -4,9 +4,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../ui/widgets/loading_indicator.dart';
 
-
 class DisplayUtils {
-
   static void showSnackBar(BuildContext context, String title) {
     ScaffoldMessenger.of(context)
       ..hideCurrentSnackBar()
@@ -23,8 +21,7 @@ class DisplayUtils {
         timeInSecForIosWeb: 1,
         /*backgroundColor: Colors.red,
         textColor: Colors.white,*/
-        fontSize: 16.0
-    );
+        fontSize: 16.0);
   }
 
   static void showLoader() {
@@ -34,5 +31,4 @@ class DisplayUtils {
   static void removeLoader() {
     BotToast.closeAllLoading();
   }
-
 }

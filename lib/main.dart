@@ -14,12 +14,12 @@ void main() async {
   Bloc.observer = AppBlocObserver();
   WidgetsFlutterBinding.ensureInitialized();
   HttpOverrides.global = MyHttpOverrides();
-    await SystemChrome.setPreferredOrientations([
+  await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
 
   /// =============== App initialization ================
   await initApp(Environment.fromEnv(AppEnv.dev));
-  runApp( BlocDI(child: OxynDev()));
+  runApp(BlocDI(child: OxynDev()));
 }

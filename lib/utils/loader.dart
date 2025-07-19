@@ -21,7 +21,8 @@ class MyLoaderState extends State<MyLoader> {
       child: Center(
         child: BackdropFilter(
           filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-          child: CircularProgressIndicator(backgroundColor: AppColors.primaryColor),
+          child: CircularProgressIndicator(
+              backgroundColor: AppColors.primaryColor),
         ),
       ),
     );

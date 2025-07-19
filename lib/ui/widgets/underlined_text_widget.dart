@@ -20,7 +20,7 @@ class UnderlinedTextWidget extends StatelessWidget {
       required this.underlinedText,
       required this.simpleTextB,
       required this.underlinedTextB,
-        this.textColor=Colors.black,
+      this.textColor = Colors.black,
       required this.simpleTextC,
       this.vMargin = 10});
 

@@ -18,17 +18,22 @@ class RichTextWidget extends StatelessWidget {
   final VoidCallback? onPressed;
   final FontWeight fontWeight;
   final bool isUnderline;
-  RichTextWidget(
-      {super.key, this.width=double.infinity, this.hMargin=5,
-      required this.firstText,
-      required this.secondText,
-      this.firstTextColor = AppColors.lightGrey,
-      this.secondTextColor = AppColors.lightGrey,
-      this.firstBgColor = Colors.transparent,
-      this.secondBgColor = Colors.transparent,
-      this.fontSize = 28,
-      this.vMargin = 10,
-      this.onPressed,  this.fontWeight=FontWeight.w400,  this.isUnderline=true,});
+  RichTextWidget({
+    super.key,
+    this.width = double.infinity,
+    this.hMargin = 5,
+    required this.firstText,
+    required this.secondText,
+    this.firstTextColor = AppColors.lightGrey,
+    this.secondTextColor = AppColors.lightGrey,
+    this.firstBgColor = Colors.transparent,
+    this.secondBgColor = Colors.transparent,
+    this.fontSize = 28,
+    this.vMargin = 10,
+    this.onPressed,
+    this.fontWeight = FontWeight.w400,
+    this.isUnderline = true,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -48,11 +53,11 @@ class RichTextWidget extends StatelessWidget {
           children: [
             TextSpan(
               text: secondText,
-              recognizer: TapGestureRecognizer()..onTap=onPressed,
+              recognizer: TapGestureRecognizer()..onTap = onPressed,
               style: TextStyle(
                 fontWeight: fontWeight,
                 color: secondTextColor,
-                decoration: isUnderline?TextDecoration.underline:null,
+                decoration: isUnderline ? TextDecoration.underline : null,
                 fontSize: fontSize,
                 fontFamily: AssetPaths.roboto,
                 backgroundColor: secondBgColor,

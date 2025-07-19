@@ -16,7 +16,6 @@ class BlocDI extends StatelessWidget {
         BlocProvider<AppCubit>(
           create: (context) => AppCubit(sl())..init(),
         ),
-      
       ],
       child: child,
     );

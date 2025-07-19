@@ -19,14 +19,15 @@ class PictureWidget extends StatelessWidget {
 
   const PictureWidget(
       {Key? key,
-        required this.imageUrl,
-        required this.onTap,
-        this.width = 140,
-        this.height = 140,
-        this.radius = 70,
-        this.isEditable = true,
-        this.borderColor = Colors.transparent,
-        required this.errorPath, this.fit = BoxFit.cover})
+      required this.imageUrl,
+      required this.onTap,
+      this.width = 140,
+      this.height = 140,
+      this.radius = 70,
+      this.isEditable = true,
+      this.borderColor = Colors.transparent,
+      required this.errorPath,
+      this.fit = BoxFit.cover})
       : super(key: key);
 
   @override
@@ -39,37 +40,37 @@ class PictureWidget extends StatelessWidget {
           children: [
             imageUrl.contains('http')
                 ? Hero(
-              tag: imageUrl + generateRandomString(5),
-              child: CircularCachedImage(
-                imageUrl: imageUrl,
-                width: width,
-                height: height,
-                borderRadius: radius,
-                errorPath: errorPath,
-              ),
-            )
+                    tag: imageUrl + generateRandomString(5),
+                    child: CircularCachedImage(
+                      imageUrl: imageUrl,
+                      width: width,
+                      height: height,
+                      borderRadius: radius,
+                      errorPath: errorPath,
+                    ),
+                  )
                 : Container(
-              width: width,
-              height: height,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(radius),
-                border: Border.all(color: borderColor),
-                image: DecorationImage(
-                  fit: fit,
-                  image: imageUrl.contains('assets/')
-                      ? AssetImage(imageUrl) as ImageProvider
-                      : FileImage(
-                    File(imageUrl),
+                    width: width,
+                    height: height,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(radius),
+                      border: Border.all(color: borderColor),
+                      image: DecorationImage(
+                        fit: fit,
+                        image: imageUrl.contains('assets/')
+                            ? AssetImage(imageUrl) as ImageProvider
+                            : FileImage(
+                                File(imageUrl),
+                              ),
+                      ),
+                    ),
                   ),
-                ),
-              ),
-            ),
             if (isEditable)
               Positioned(
                 bottom: -12,
                 right: 0,
                 child: GestureDetector(
-                  onTap:onTap,
+                  onTap: onTap,
                   child: SvgPicture.asset(
                     'assets/images/svg/profile/ic_edit.svg',
                     height: 44,

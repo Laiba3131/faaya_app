@@ -38,7 +38,7 @@
 //         print('Message Notification Body: ${message.notification!.body}');
 //         AndroidNotification? android = message.notification?.android;
 //         sl<LocalNotificationsApi>().showNotification(message, android);
-      
+
 //       }
 //     });
 //   }

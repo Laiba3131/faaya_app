@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-
-
 extension BuildContextUserExt on BuildContext {
   // UserModel get watchCurrentUser {
   //   final userState = watch<UserCubit>().state;

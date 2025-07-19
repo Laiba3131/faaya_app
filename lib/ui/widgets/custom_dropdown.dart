@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-
 class CustomDropDown extends StatefulWidget {
   final String hint;
   final List<String> items;
@@ -65,15 +64,13 @@ class _CustomDropDownState extends State<CustomDropDown> {
           style: TextStyle(
               color: widget.hintColor,
               fontWeight: widget.fontWeight,
-              fontSize: widget.fontSize
-          ),
+              fontSize: widget.fontSize),
           hint: Text(
             widget.hint,
             style: TextStyle(
                 color: widget.hintColor,
                 fontWeight: widget.fontWeight,
-                fontSize: widget.fontSize
-            ),
+                fontSize: widget.fontSize),
             overflow: TextOverflow.ellipsis,
           ),
           decoration: InputDecoration(
@@ -86,13 +83,11 @@ class _CustomDropDownState extends State<CustomDropDown> {
               ),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(widget.borderRadius),
-                borderSide:
-                    BorderSide(color: widget.borderColor, width: .5),
+                borderSide: BorderSide(color: widget.borderColor, width: .5),
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(widget.borderRadius),
-                borderSide:
-                    BorderSide(color: widget.borderColor, width: .5),
+                borderSide: BorderSide(color: widget.borderColor, width: .5),
               ),
               contentPadding: EdgeInsets.symmetric(
                   horizontal: widget.horizontalPadding,
