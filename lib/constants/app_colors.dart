@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class AppColors {
   static const primaryLightBlue = Color(0xFF94B9FF);
   static const primaryColor = Color(0xFFc637e5);
+  static const cardColor = Color(0xFF956f9c);
   static const secondaryColor = Color(0xFF6a0dad);
   static const primaryLightGreen = Color(0xFFCDFFD8);
   static const primaryBlueDarker = Color(0xff426E92);

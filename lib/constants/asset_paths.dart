@@ -30,7 +30,7 @@ class AssetPaths {
   ///* ================ icons  ================ *///
   static const String downloadIcon = 'assets/icons/svg/Vector (2).svg';
   static const String notificationIcon = 'assets/icons/svg/Vector (1).svg';
-  static const String notification = 'assets/icons/svg/bellIcon.svg';
+  // static const String notification = 'assets/icons/svg/bellIcon.svg';
   static const String dropDownIcon = 'assets/icons/svg/Group 1000003355.svg';
   static const String calendarIcon = 'assets/icons/svg/Calendar.svg';
 
@@ -51,4 +51,12 @@ class AssetPaths {
   static const String email = 'assets/images/svg/ic_baseline-email.svg';
   static const String name = 'assets/images/svg/solar_user-bold.svg';
   static const String password = 'assets/images/svg/mdi_password.svg';
+  static const String search = 'assets/images/svg/iconamoon_search-light.svg';
+  static const String notification = 'assets/images/svg/notification.svg';
+  static const String mic = 'assets/images/svg/material-symbols_mic.svg';
+
+  //png
+  static const String avatarImage = 'assets/images/png/Inner Oval (1).png';
+  static const String culture = 'assets/images/png/culture.png';
+  static const String music = 'assets/images/png/music.png';
 }

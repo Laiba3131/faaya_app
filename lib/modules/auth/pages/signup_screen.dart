@@ -26,7 +26,8 @@ class _SignupScreenState extends State<SignupScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(resizeToAvoidBottomInset: true,
+      child: Scaffold(
+        resizeToAvoidBottomInset: true,
         body: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
@@ -52,7 +53,7 @@ class _SignupScreenState extends State<SignupScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 18.0),
             child: SingleChildScrollView(
               child: ConstrainedBox(
-                 constraints: BoxConstraints(
+                constraints: BoxConstraints(
                   minHeight: MediaQuery.of(context).size.height,
                 ),
                 child: Column(
@@ -70,7 +71,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       ),
                     ),
                     h3,
-                      Column(
+                    Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
@@ -156,7 +157,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       ],
                     ),
                     h2,
-                      Column(
+                    Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
@@ -181,7 +182,8 @@ class _SignupScreenState extends State<SignupScreen> {
                           suffixIcon: OnClick(
                               onTap: () {
                                 setState(() {
-                                  isObseureConfirmPasswors = !isObseureConfirmPasswors;
+                                  isObseureConfirmPasswors =
+                                      !isObseureConfirmPasswors;
                                 });
                               },
                               child: SvgPicture.asset(!isObseureConfirmPasswors
@@ -215,8 +217,8 @@ class _SignupScreenState extends State<SignupScreen> {
                           ),
                         ),
                         OnClick(
-                          onTap: (){
-                               NavRouter.push(context, LoginScreen());
+                          onTap: () {
+                            NavRouter.push(context, LoginScreen());
                           },
                           child: Text(
                             'Log in',
@@ -240,7 +242,8 @@ class _SignupScreenState extends State<SignupScreen> {
                           decoration: TextDecoration.none,
                         ),
                         children: const [
-                          TextSpan(text: "By Tapping Sign up you Agree to our "),
+                          TextSpan(
+                              text: "By Tapping Sign up you Agree to our "),
                           TextSpan(
                             text: "Terms of Services",
                             style: TextStyle(

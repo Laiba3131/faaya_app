@@ -148,7 +148,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                   OnClick(
-                    onTap: (){
+                    onTap: () {
                       NavRouter.pushAndRemoveUntil(context, SignupScreen());
                     },
                     child: Text(
