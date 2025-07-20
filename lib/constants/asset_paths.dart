@@ -56,9 +56,15 @@ class AssetPaths {
   static const String notification = 'assets/images/svg/notification.svg';
   static const String mic = 'assets/images/svg/material-symbols_mic.svg';
   static const String liveIcon = 'assets/images/svg/fluent_live-20-filled.svg';
+  static const String prince = 'assets/images/svg/solar_crown-bold.svg';
 
   //png
   static const String avatarImage = 'assets/images/png/Inner Oval (1).png';
   static const String culture = 'assets/images/png/culture.png';
   static const String music = 'assets/images/png/music.png';
+
+  static const String youngMan = 'assets/images/png/youngMan.png';
+  static const String imageMusic = 'assets/images/png/imageMusic.png';
+  static const String listen = 'assets/images/png/listen.png';
+  static const String sound = 'assets/images/png/sound.png';
 }

@@ -91,7 +91,11 @@ class LiveRoomCard extends StatelessWidget {
               Spacer(),
               Row(
                 children: [
-                  SvgPicture.asset(AssetPaths.name,height: 18,width: 18,),
+                  SvgPicture.asset(
+                    AssetPaths.name,
+                    height: 18,
+                    width: 18,
+                  ),
                   w0P5,
                   Text(
                     '$peopleCount',
@@ -101,7 +105,11 @@ class LiveRoomCard extends StatelessWidget {
                         fontWeight: FontWeight.w400),
                   ),
                   w1,
-                  SvgPicture.asset(AssetPaths.mic,height: 18,width: 18,),
+                  SvgPicture.asset(
+                    AssetPaths.mic,
+                    height: 18,
+                    width: 18,
+                  ),
                   w0P5,
                   Text(
                     '$micCount',

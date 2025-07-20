@@ -63,7 +63,11 @@ class RoomCard extends StatelessWidget {
           const SizedBox(height: 4),
           Row(
             children: [
-             SvgPicture.asset(AssetPaths.name,height: 14,width: 14,),
+              SvgPicture.asset(
+                AssetPaths.name,
+                height: 14,
+                width: 14,
+              ),
               w0P2,
               Text(
                 '$peopleCount',
@@ -73,7 +77,11 @@ class RoomCard extends StatelessWidget {
                     fontWeight: FontWeight.w400),
               ),
               w1,
-              SvgPicture.asset(AssetPaths.mic,height: 14,width: 14,),
+              SvgPicture.asset(
+                AssetPaths.mic,
+                height: 14,
+                width: 14,
+              ),
               w0P2,
               Text(
                 '$micCount',

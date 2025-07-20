@@ -6,6 +6,7 @@ class AppColors {
   static const cardColor = Color(0xFF956f9c);
   static const secondaryColor = Color(0xFF6a0dad);
   static const primaryLightGreen = Color(0xFFCDFFD8);
+  static const green = Color(0xFF00ce46);
   static const primaryBlueDarker = Color(0xff426E92);
   static const primaryBlueDark = Color(0xff29445A);
   static const primaryGreenDarker = Color(0xff207888);

@@ -2,6 +2,7 @@ import 'package:bkmc/config/config.dart';
 import 'package:bkmc/constants/app_colors.dart';
 import 'package:bkmc/constants/asset_paths.dart';
 import 'package:bkmc/modules/home/pages/notification_screen.dart';
+import 'package:bkmc/modules/home/pages/rooms_category_screen.dart';
 import 'package:bkmc/ui/input/input_field.dart';
 import 'package:bkmc/ui/widgets/on_click.dart';
 import 'package:bkmc/utils/extensions/extended_context.dart';
@@ -32,7 +33,7 @@ class HomeScreen extends StatelessWidget {
               )),
           actions: [
             OnClick(
-              onTap: (){
+              onTap: () {
                 NavRouter.push(context, NotificationScreen());
               },
               child: Padding(
@@ -50,7 +51,7 @@ class HomeScreen extends StatelessWidget {
             children: [
               _buildStoryAvatars(context),
               h2,
-              _buildFilterButtons(),
+              _buildFilterButtons(context),
               h2,
               LiveRoomCard(
                 title: "Culture Topic",
@@ -117,20 +118,24 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildFilterButtons() {
+  Widget _buildFilterButtons(context) {
     return Row(
       children: [
-        _buildFilterChip("Region"),
+        _buildFilterChip("Region", context),
         const SizedBox(width: 10),
-        _buildFilterChip("Category"),
+        _buildFilterChip("Category", context),
       ],
     );
   }
 
-  Widget _buildFilterChip(String label) {
+  Widget _buildFilterChip(String label, context) {
     return Expanded(
       child: ElevatedButton.icon(
-        onPressed: () {},
+        onPressed: () {
+          if (label == "Category") {
+            NavRouter.push(context, RoomsCategoryScreen());
+          }
+        },
         icon: const Icon(Icons.filter_list),
         label: Text(label),
         style: ElevatedButton.styleFrom(
