@@ -1,11 +1,15 @@
+import 'package:bkmc/config/config.dart';
 import 'package:bkmc/constants/app_colors.dart';
 import 'package:bkmc/constants/asset_paths.dart';
+import 'package:bkmc/modules/home/pages/notification_screen.dart';
 import 'package:bkmc/ui/input/input_field.dart';
+import 'package:bkmc/ui/widgets/on_click.dart';
 import 'package:bkmc/utils/extensions/extended_context.dart';
 import 'package:bkmc/utils/heights_and_widths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../widgets/live_card_room.dart';
 import '../widgets/room_card.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -27,9 +31,14 @@ class HomeScreen extends StatelessWidget {
                 boxConstraints: 20,
               )),
           actions: [
-            Padding(
-              padding: const EdgeInsets.only(right: 13.0),
-              child: SvgPicture.asset(AssetPaths.notification),
+            OnClick(
+              onTap: (){
+                NavRouter.push(context, NotificationScreen());
+              },
+              child: Padding(
+                padding: const EdgeInsets.only(right: 13.0),
+                child: SvgPicture.asset(AssetPaths.notification),
+              ),
             )
           ],
         ),
@@ -43,40 +52,20 @@ class HomeScreen extends StatelessWidget {
               h2,
               _buildFilterButtons(),
               h2,
-              _buildLiveRoomCard(),
+              LiveRoomCard(
+                title: "Culture Topic",
+                description: "Lets Discuss the culture of the north America.",
+                host: "Alyan Alee Khan",
+                timeAgo: "2 Hours Ago",
+                peopleCount: 11,
+                micCount: 3,
+                chatCount: 3,
+              ),
               h2,
               _buildRoomGrid(),
             ],
           ),
         ));
-  }
-
-  Widget _buildSearchBar() {
-    return Container(
-      height: 45,
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      decoration: BoxDecoration(
-        color: Color(0xFFF0D6F9),
-        borderRadius: BorderRadius.circular(30),
-      ),
-      child: Row(
-        children: const [
-          Icon(Icons.search, color: Colors.white),
-          SizedBox(width: 8),
-          Expanded(
-            child: TextField(
-              decoration: InputDecoration(
-                hintText: 'Search rooms',
-                border: InputBorder.none,
-                hintStyle: TextStyle(color: Colors.white70),
-              ),
-              style: TextStyle(color: Colors.white),
-            ),
-          ),
-          CircleAvatar(radius: 4, backgroundColor: Colors.green),
-        ],
-      ),
-    );
   }
 
   Widget _buildStoryAvatars(BuildContext context) {
@@ -99,13 +88,11 @@ class HomeScreen extends StatelessWidget {
             child: Column(
               children: [
                 Container(
-                  padding: const EdgeInsets.all(
-                      3), 
+                  padding: const EdgeInsets.all(3),
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     border: Border.all(
-                      color: AppColors
-                          .primaryColor, 
+                      color: AppColors.primaryColor,
                       width: 2,
                     ),
                   ),
@@ -151,63 +138,6 @@ class HomeScreen extends StatelessWidget {
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         ),
-      ),
-    );
-  }
-
-  Widget _buildLiveRoomCard() {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.black,
-        borderRadius: BorderRadius.circular(16),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: const [
-              Text("Culture Topic",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold)),
-              Spacer(),
-              Icon(Icons.wifi, color: Colors.purple),
-              Text(" Live", style: TextStyle(color: Colors.purple)),
-            ],
-          ),
-          const SizedBox(height: 8),
-          const Text(
-            "Lets Discuss the culture of the north America.",
-            style: TextStyle(color: Colors.white70),
-          ),
-          const SizedBox(height: 8),
-          const Text("Alyan Alee Khan", style: TextStyle(color: Colors.white)),
-          const SizedBox(height: 4),
-          const Text("2 Hours Ago",
-              style: TextStyle(color: Colors.white38, fontSize: 12)),
-          const SizedBox(height: 8),
-          const Row(
-            children: [
-              Icon(Icons.people, size: 16, color: Colors.white),
-              SizedBox(width: 4),
-              Text("11", style: TextStyle(color: Colors.white)),
-              SizedBox(width: 16),
-              Icon(Icons.mic, size: 16, color: Colors.white),
-              SizedBox(width: 4),
-              Text("3", style: TextStyle(color: Colors.white)),
-              SizedBox(width: 16),
-              Icon(Icons.chat, size: 16, color: Colors.white),
-              SizedBox(width: 4),
-              Text("3", style: TextStyle(color: Colors.white)),
-            ],
-          ),
-          const SizedBox(height: 12),
-          const Text("View Room",
-              style: TextStyle(
-                  color: Colors.purpleAccent, fontWeight: FontWeight.bold)),
-        ],
       ),
     );
   }

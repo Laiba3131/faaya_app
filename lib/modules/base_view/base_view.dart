@@ -1,6 +1,8 @@
 import 'package:bkmc/modules/home/pages/home_screen.dart';
 import 'package:flutter/material.dart';
 
+import '../profile/profile_screen.dart';
+
 class BaseView extends StatefulWidget {
   @override
   State<BaseView> createState() => _BaseViewState();
@@ -12,7 +14,7 @@ class _BaseViewState extends State<BaseView> {
   final List<Widget> _pages = [
     HomeScreen(),
     AddRoomPage(),
-    ProfilePage(),
+    ProfileScreen(),
   ];
 
   final List<IconData> _icons = [
@@ -96,7 +98,3 @@ class AddRoomPage extends StatelessWidget {
   Widget build(BuildContext context) => Center(child: Text("➕ Add Room Page"));
 }
 
-class ProfilePage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) => Center(child: Text("👤 Profile Page"));
-}

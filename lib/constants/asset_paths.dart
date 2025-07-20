@@ -47,6 +47,7 @@ class AssetPaths {
   //svg
 
   static const String eye = 'assets/images/svg/eye.svg';
+  static const String user = 'assets/images/svg/eye.svg';
   static const String eyeInVisible = 'assets/images/svg/eye-slash.svg';
   static const String email = 'assets/images/svg/ic_baseline-email.svg';
   static const String name = 'assets/images/svg/solar_user-bold.svg';
@@ -54,6 +55,7 @@ class AssetPaths {
   static const String search = 'assets/images/svg/iconamoon_search-light.svg';
   static const String notification = 'assets/images/svg/notification.svg';
   static const String mic = 'assets/images/svg/material-symbols_mic.svg';
+  static const String liveIcon = 'assets/images/svg/fluent_live-20-filled.svg';
 
   //png
   static const String avatarImage = 'assets/images/png/Inner Oval (1).png';

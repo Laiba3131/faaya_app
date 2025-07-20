@@ -1,5 +1,5 @@
+import 'package:bkmc/constants/app_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:bkmc/utils/extensions/extended_context.dart';
 
 import '../../config/routes/nav_router.dart';
@@ -25,30 +25,22 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: Colors.transparent,
+      backgroundColor:AppColors.cardColor,
+      elevation: 0,
       title: Text(
         title,
         style: context.textTheme.bodyLarge?.copyWith(
-            fontWeight: FontWeight.w600, color: context.colorScheme.onPrimary),
+          fontWeight: FontWeight.w600,fontSize: 18,
+          color: titleColor ?? context.colorScheme.onPrimary,
+        ),
       ),
       automaticallyImplyLeading: false,
-      leading: backArrow == true
-          ? Navigator.of(context).canPop()
-              ? IconButton(
-                  onPressed: () {
-                    NavRouter.pop(context);
-                  },
-                  style: ButtonStyle(
-                    padding:
-                        MaterialStateProperty.all<EdgeInsets>(EdgeInsets.zero),
-                  ),
-                  icon: SvgPicture.asset(
-                    'assets/images/svg/ic_back.svg',
-                    height: 24,
-                    width: 24,
-                  ),
-                )
-              : null
+      leading: showBackButton && backArrow && Navigator.of(context).canPop()
+          ? IconButton(
+              onPressed: () => NavRouter.pop(context),
+              icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
+              padding: EdgeInsets.zero,
+            )
           : null,
       actions: actions,
       bottom: bottom,
@@ -56,5 +48,6 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => Size.fromHeight(
+      kToolbarHeight + (bottom?.preferredSize.height ?? 0));
 }
