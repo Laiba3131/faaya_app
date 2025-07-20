@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import '../../../constants/app_colors.dart';
 import '../../../constants/asset_paths.dart';
 import '../../../ui/widgets/custom_appbar.dart';
+import '../widgets/bottom_sheet/room_bottom_sheet.dart';
 import '../widgets/room_info_button.dart';
 import '../widgets/session_lable.dart';
 
@@ -90,7 +91,7 @@ class RoomScreen extends StatelessWidget {
                           children: [
                             Row(
                               children: [
-                               SvgPicture.asset(AssetPaths.prince),
+                                SvgPicture.asset(AssetPaths.prince),
                                 w0P5,
                                 Text(
                                   host['name']!,
@@ -165,10 +166,14 @@ class RoomScreen extends StatelessWidget {
                             children: [
                               Container(
                                 padding: const EdgeInsets.all(3),
-                                decoration:  (s['isHost'] == true)?BoxDecoration(
-                                  border: Border.all(color: AppColors.green,width: 1.5,
-                                  ),shape: BoxShape.circle
-                                ):const BoxDecoration(),
+                                decoration: (s['isHost'] == true)
+                                    ? BoxDecoration(
+                                        border: Border.all(
+                                          color: AppColors.green,
+                                          width: 1.5,
+                                        ),
+                                        shape: BoxShape.circle)
+                                    : const BoxDecoration(),
                                 child: CircleAvatar(
                                   radius: 24,
                                   backgroundImage:
@@ -182,15 +187,18 @@ class RoomScreen extends StatelessWidget {
                                   child: Icon(Icons.star,
                                       color: Color(0xFFF05ED0), size: 18),
                                 ),
-                               Positioned(
+                              Positioned(
                                 bottom: -2,
                                 right: -2,
                                 child: Container(
                                   padding: const EdgeInsets.all(2),
-                                  decoration: const BoxDecoration(color: AppColors.white,
-                                  shape: BoxShape.circle
+                                  decoration: const BoxDecoration(
+                                      color: AppColors.white,
+                                      shape: BoxShape.circle),
+                                  child: SvgPicture.asset(
+                                    AssetPaths.mic,
+                                    color: AppColors.red,
                                   ),
-                                  child: SvgPicture.asset(AssetPaths.mic,color: AppColors.red,),
                                 ),
                               ),
                             ],
@@ -262,7 +270,7 @@ class RoomScreen extends StatelessWidget {
                           context: context,
                           isScrollControlled: true,
                           backgroundColor: Colors.transparent,
-                          builder: (context) => _RoomBottomSheet(),
+                          builder: (context) => RoomBottomSheet(),
                         );
                       },
                       child: const Text(
@@ -280,301 +288,6 @@ class RoomScreen extends StatelessWidget {
             ),
           ),
         ),
-      ),
-    );
-  }
-}
-
-class _RoomBottomSheet extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return DraggableScrollableSheet(
-      initialChildSize: 0.85,
-      minChildSize: 0.5,
-      maxChildSize: 0.95,
-      builder: (context, scrollController) {
-        return Container(
-          decoration: const BoxDecoration(
-            color: Color(0xFF18121E),
-            borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
-          ),
-          child: Column(
-            children: [
-              Container(
-                margin: const EdgeInsets.symmetric(vertical: 8),
-                height: 4,
-                width: 40,
-                decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.2),
-                  borderRadius: BorderRadius.circular(2),
-                ),
-              ),
-              Expanded(
-                child: ListView(
-                  controller: scrollController,
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  children: [
-                    // Comments
-                    _CommentTile(
-                      avatar: AssetPaths.avatarImage,
-                      name: 'Audrey Blue',
-                      time: '1h ago',
-                      comment: 'Love this Topic',
-                    ),
-                    _CommentTile(
-                      avatar: AssetPaths.avatarImage,
-                      name: 'Mark Albert',
-                      time: '1h ago',
-                      comment: 'Love this Topic',
-                    ),
-                    const Divider(color: Colors.white24, height: 32),
-                    // Coin Buttons
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        _CoinButton(label: '3s', coins: 5, color: Color(0xFF3B3BFF)),
-                        _CoinButton(label: '6s', coins: 20, color: Color(0xFF2ECC71)),
-                        _CoinButton(label: '10s', coins: 50, color: Color(0xFFFF3B3B)),
-                      ],
-                    ),
-                    const SizedBox(height: 16),
-                    // Emoji Row
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                      decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.08),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Text('👏'),
-                          Text('💪'),
-                          Text('👌'),
-                          Text('🥳'),
-                          Text('😊'),
-                          Text('😍'),
-                          Text('😎'),
-                          Text('🔥'),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                    // Request to Speak Button
-                    SizedBox(
-                      width: double.infinity,
-                      height: 48,
-                      child: ElevatedButton.icon(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Color(0xFFF05ED0),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(14),
-                          ),
-                        ),
-                        onPressed: () {},
-                        icon: const Icon(Icons.mic, color: Colors.white),
-                        label: const Text(
-                          'Request to Speak',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w600,
-                            fontSize: 16,
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                    // Reply Bar
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-                      decoration: BoxDecoration(
-                        color: Color(0xFF7B3FA0).withOpacity(0.2),
-                        borderRadius: BorderRadius.circular(12),
-                        border: Border.all(color: Color(0xFFF05ED0), width: 1),
-                      ),
-                      child: Row(
-                        children: [
-                          const CircleAvatar(
-                            radius: 14,
-                            backgroundImage: AssetImage(AssetPaths.avatarImage),
-                          ),
-                          const SizedBox(width: 8),
-                          const Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Replying to Abigail Johnson',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 13,
-                                  ),
-                                ),
-                                Text(
-                                  'Sure thing, I\'ll have a look today.',
-                                  style: TextStyle(
-                                    color: Colors.white70,
-                                    fontSize: 12,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Icon(Icons.close, color: Colors.white70),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                    // Message Input
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                            decoration: BoxDecoration(
-                              color: Colors.white.withOpacity(0.08),
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            child: Row(
-                              children: [
-                                Expanded(
-                                  child: TextField(
-                                    decoration: InputDecoration(
-                                      hintText: 'Type a thought here.',
-                                      hintStyle: TextStyle(color: Colors.white54),
-                                      border: InputBorder.none,
-                                    ),
-                                    style: TextStyle(color: Colors.white),
-                                  ),
-                                ),
-                                Icon(Icons.send, color: Colors.white),
-                              ],
-                            ),
-                          ),
-                        ),
-                        const SizedBox(width: 8),
-                        Icon(Icons.emoji_emotions, color: Colors.white, size: 32),
-                        const SizedBox(width: 8),
-                        Icon(Icons.pan_tool, color: Colors.pinkAccent, size: 32),
-                      ],
-                    ),
-                    const SizedBox(height: 16),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        );
-      },
-    );
-  }
-}
-
-class _CommentTile extends StatelessWidget {
-  final String avatar;
-  final String name;
-  final String time;
-  final String comment;
-  const _CommentTile({required this.avatar, required this.name, required this.time, required this.comment});
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          CircleAvatar(
-            radius: 16,
-            backgroundImage: AssetImage(avatar),
-          ),
-          const SizedBox(width: 10),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    Text(
-                      name,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w600,
-                        fontSize: 14,
-                      ),
-                    ),
-                    const SizedBox(width: 8),
-                    Text(
-                      time,
-                      style: const TextStyle(
-                        color: Colors.white54,
-                        fontSize: 12,
-                      ),
-                    ),
-                    const Spacer(),
-                    Icon(Icons.more_vert, color: Colors.white54, size: 18),
-                  ],
-                ),
-                const SizedBox(height: 2),
-                Text(
-                  comment,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 13,
-                  ),
-                ),
-                const SizedBox(height: 2),
-                Text(
-                  'Reply',
-                  style: const TextStyle(
-                    color: Colors.white54,
-                    fontSize: 12,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _CoinButton extends StatelessWidget {
-  final String label;
-  final int coins;
-  final Color color;
-  const _CoinButton({required this.label, required this.coins, required this.color});
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
-      decoration: BoxDecoration(
-        color: color,
-        borderRadius: BorderRadius.circular(14),
-      ),
-      child: Row(
-        children: [
-          Text(
-            label,
-            style: const TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.w600,
-              fontSize: 15,
-            ),
-          ),
-          const SizedBox(width: 6),
-          Icon(Icons.monetization_on, color: Colors.yellowAccent, size: 20),
-          const SizedBox(width: 2),
-          Text(
-            coins.toString(),
-            style: const TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.w600,
-              fontSize: 15,
-            ),
-          ),
-        ],
       ),
     );
   }

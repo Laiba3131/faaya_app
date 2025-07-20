@@ -1,4 +1,5 @@
 import 'package:bkmc/constants/asset_paths.dart';
+import 'package:bkmc/ui/widgets/on_click.dart';
 import 'package:bkmc/utils/extensions/extended_context.dart';
 import 'package:bkmc/utils/heights_and_widths.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +15,7 @@ class LiveRoomCard extends StatelessWidget {
   final int peopleCount;
   final int micCount;
   final int chatCount;
+  final VoidCallback? onTap;
 
   LiveRoomCard({
     super.key,
@@ -24,6 +26,7 @@ class LiveRoomCard extends StatelessWidget {
     required this.peopleCount,
     required this.micCount,
     required this.chatCount,
+    this.onTap,
   });
 
   @override
@@ -126,12 +129,15 @@ class LiveRoomCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                "View Room",
-                style: context.textTheme.bodyMedium!.copyWith(
-                    color: AppColors.primaryColor,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600),
+              OnClick(
+                onTap: onTap??(){},
+                child: Text(
+                  "View Room",
+                  style: context.textTheme.bodyMedium!.copyWith(
+                      color: AppColors.primaryColor,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600),
+                ),
               ),
             ],
           ),

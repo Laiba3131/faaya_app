@@ -14,6 +14,8 @@ import '../widgets/live_card_room.dart';
 import '../widgets/room_card.dart';
 
 class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,6 +63,9 @@ class HomeScreen extends StatelessWidget {
                 peopleCount: 11,
                 micCount: 3,
                 chatCount: 3,
+                onTap: (){
+                  NavRouter.push(context, RoomsCategoryScreen());
+                },
               ),
               h2,
               _buildRoomGrid(),
@@ -133,7 +138,7 @@ class HomeScreen extends StatelessWidget {
       child: ElevatedButton.icon(
         onPressed: () {
           if (label == "Category") {
-            NavRouter.push(context, RoomsCategoryScreen());
+            NavRouter.push(context, const RoomsCategoryScreen());
           }
         },
         icon: const Icon(Icons.filter_list),
