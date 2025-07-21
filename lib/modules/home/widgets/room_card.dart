@@ -1,5 +1,6 @@
 import 'package:bkmc/constants/app_colors.dart';
 import 'package:bkmc/constants/asset_paths.dart';
+import 'package:bkmc/ui/widgets/on_click.dart';
 import 'package:bkmc/utils/extensions/extended_context.dart';
 import 'package:bkmc/utils/heights_and_widths.dart';
 import 'package:flutter/material.dart';
@@ -12,16 +13,17 @@ class RoomCard extends StatelessWidget {
   final int peopleCount;
   final int micCount;
   final String timeAgo;
+  final VoidCallback onTap;
 
-  const RoomCard({
-    super.key,
-    required this.title,
-    required this.subtitle,
-    required this.imagePath,
-    required this.peopleCount,
-    required this.micCount,
-    required this.timeAgo,
-  });
+  const RoomCard(
+      {super.key,
+      required this.title,
+      required this.subtitle,
+      required this.imagePath,
+      required this.peopleCount,
+      required this.micCount,
+      required this.timeAgo,
+      required this.onTap});
 
   @override
   Widget build(BuildContext context) {

@@ -2,7 +2,10 @@ import 'package:bkmc/config/config.dart';
 import 'package:bkmc/constants/app_colors.dart';
 import 'package:bkmc/constants/asset_paths.dart';
 import 'package:bkmc/modules/home/pages/notification_screen.dart';
+import 'package:bkmc/modules/home/pages/room_screen.dart';
 import 'package:bkmc/modules/home/pages/rooms_category_screen.dart';
+import 'package:bkmc/modules/home/widgets/custom_dropdown.dart';
+import 'package:bkmc/ui/button/primary_button.dart';
 import 'package:bkmc/ui/input/input_field.dart';
 import 'package:bkmc/ui/widgets/on_click.dart';
 import 'package:bkmc/utils/extensions/extended_context.dart';
@@ -10,14 +13,67 @@ import 'package:bkmc/utils/heights_and_widths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../widgets/dummy_live_room.dart';
 import '../widgets/live_card_room.dart';
 import '../widgets/room_card.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
   @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  String selectedRegion = "Africa";
+
+  List<String> regionList = [
+    'Africa',
+    'South America',
+    'North America',
+    'Asia',
+    'Europe',
+  ];
+  final List<LiveRoom> allRooms = [
+    LiveRoom(
+      title: "Music Vibes",
+      description: "Talk about music",
+      host: "Ali",
+      timeAgo: "2h ago",
+      peopleCount: 100,
+      micCount: 4,
+      chatCount: 10,
+    ),
+    LiveRoom(
+      title: "Tech Talks",
+      description: "Discuss latest tech",
+      host: "Sara",
+      timeAgo: "1h ago",
+      peopleCount: 70,
+      micCount: 3,
+      chatCount: 5,
+    ),
+    LiveRoom(
+      title: "Gaming Room",
+      description: "Game lovers hangout",
+      host: "Wasif",
+      timeAgo: "30m ago",
+      peopleCount: 50,
+      micCount: 2,
+      chatCount: 7,
+    ),
+  ];
+  TextEditingController searchController = TextEditingController();
+  String searchQuery = '';
+  @override
   Widget build(BuildContext context) {
+    final List<LiveRoom> filteredRooms = searchQuery.isEmpty
+        ? []
+        : allRooms
+            .where((room) =>
+                room.title.toLowerCase().contains(searchQuery.toLowerCase()))
+            .toList();
+
     return Scaffold(
         appBar: AppBar(
           backgroundColor: AppColors.transparent,
@@ -25,13 +81,18 @@ class HomeScreen extends StatelessWidget {
           title: Container(
               padding: const EdgeInsets.symmetric(vertical: 12),
               child: InputField(
-                controller: TextEditingController(),
+                controller: searchController,
                 label: 'Search rooms',
                 borderRadius: 20,
                 suffixIcon: SvgPicture.asset(AssetPaths.search),
                 fillColor: Color(0xFF936f9b),
                 labelColor: AppColors.white,
                 boxConstraints: 20,
+                onChange: (value) {
+                  setState(() {
+                    searchQuery = value.trim();
+                  });
+                },
               )),
           actions: [
             OnClick(
@@ -48,29 +109,51 @@ class HomeScreen extends StatelessWidget {
         backgroundColor: AppColors.transparent,
         body: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _buildStoryAvatars(context),
-              h2,
-              _buildFilterButtons(context),
-              h2,
-              LiveRoomCard(
-                title: "Culture Topic",
-                description: "Lets Discuss the culture of the north America.",
-                host: "Alyan Alee Khan",
-                timeAgo: "2 Hours Ago",
-                peopleCount: 11,
-                micCount: 3,
-                chatCount: 3,
-                onTap: (){
-                  NavRouter.push(context, RoomsCategoryScreen());
-                },
-              ),
-              h2,
-              _buildRoomGrid(),
-            ],
-          ),
+          child: searchQuery.isNotEmpty
+              ? Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: filteredRooms.map((room) {
+                    return Padding(
+                      padding: const EdgeInsets.only(bottom: 16.0),
+                      child: LiveRoomCard(
+                        title: room.title,
+                        description: room.description,
+                        host: room.host,
+                        timeAgo: room.timeAgo,
+                        peopleCount: room.peopleCount,
+                        micCount: room.micCount,
+                        chatCount: room.chatCount,
+                        onTap: () {
+                          NavRouter.push(context, RoomScreen());
+                        },
+                      ),
+                    );
+                  }).toList(),
+                )
+              : Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _buildStoryAvatars(context),
+                    h2,
+                    _buildFilterButtons(context),
+                    h2,
+                    LiveRoomCard(
+                      title: "Culture Topic",
+                      description:
+                          "Lets Discuss the culture of the north America.",
+                      host: "Alyan Alee Khan",
+                      timeAgo: "2 Hours Ago",
+                      peopleCount: 11,
+                      micCount: 3,
+                      chatCount: 3,
+                      onTap: () {
+                        NavRouter.push(context, RoomScreen());
+                      },
+                    ),
+                    h2,
+                    _buildRoomGrid(),
+                  ],
+                ),
         ));
   }
 
@@ -126,29 +209,38 @@ class HomeScreen extends StatelessWidget {
   Widget _buildFilterButtons(context) {
     return Row(
       children: [
-        _buildFilterChip("Region", context),
+        Expanded(
+          child: CustomDropdown(
+            title: 'Region',
+            items: regionList,
+            selectedItem: selectedRegion,
+            onItemSelected: (value) {
+              setState(() {
+                selectedRegion = value;
+              });
+            },
+          ),
+        ),
         const SizedBox(width: 10),
-        _buildFilterChip("Category", context),
+        Expanded(child: _buildFilterChip("Category", context)),
       ],
     );
   }
 
   Widget _buildFilterChip(String label, context) {
-    return Expanded(
-      child: ElevatedButton.icon(
-        onPressed: () {
-          if (label == "Category") {
-            NavRouter.push(context, const RoomsCategoryScreen());
-          }
-        },
-        icon: const Icon(Icons.filter_list),
-        label: Text(label),
-        style: ElevatedButton.styleFrom(
-          backgroundColor: const Color(0xFFF05ED0),
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-        ),
-      ),
+    return PrefixIconButton(
+      onPressed: () {
+        if (label == "Category") {
+          NavRouter.push(context, const RoomsCategoryScreen());
+        }
+      },
+      title: 'Category',
+      prefixIconPath: AssetPaths.prince,
+      height: 42,
+      width: 200,
+      backgroundColor: AppColors.primaryColor,
+      borderColor: AppColors.transparent,
+      borderRadius: 8,
     );
   }
 
@@ -165,6 +257,9 @@ class HomeScreen extends StatelessWidget {
       ),
       itemBuilder: (_, index) {
         return RoomCard(
+          onTap: () {
+            NavRouter.push(context, RoomScreen());
+          },
           title: index % 2 == 0 ? "Culture" : "Music",
           subtitle: index % 2 == 0
               ? "Let's Discuss the culture..."

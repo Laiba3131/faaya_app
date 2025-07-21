@@ -20,7 +20,7 @@ class AppColors {
   static const black = Color(0xFF000000);
   static const red = Color(0xFFFF0000);
   static const textGrey = Color(0xFF707070);
-  static const bgGrey = Color(0xFFE5E5E5);
+  static const bgGrey = Color(0xFFbebebe);
   static const transparent = Colors.transparent;
   static const lightPink = Color(0xffFFE4E4);
   static const purple = Color(0xff8442FF);

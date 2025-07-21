@@ -138,7 +138,7 @@ class RoomBottomSheetState extends State<RoomBottomSheet> {
                         )),
                     const Divider(color: Colors.white24, height: 32),
                     // Coin Buttons
-                     const Row(
+                    const Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         CoinButton(
@@ -281,5 +281,3 @@ class RoomBottomSheetState extends State<RoomBottomSheet> {
     );
   }
 }
-
-

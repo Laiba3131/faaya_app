@@ -5,7 +5,10 @@ class CoinButton extends StatelessWidget {
   final int coins;
   final Color color;
   const CoinButton(
-      {super.key, required this.label, required this.coins, required this.color});
+      {super.key,
+      required this.label,
+      required this.coins,
+      required this.color});
   @override
   Widget build(BuildContext context) {
     return Container(
