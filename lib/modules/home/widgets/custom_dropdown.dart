@@ -29,7 +29,7 @@ class _CustomDropdownState extends State<CustomDropdown> {
     return GestureDetector(
       onTap: _showCustomDialog,
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 9),
         decoration: BoxDecoration(
           color: AppColors.primaryColor,
           borderRadius: BorderRadius.circular(12),

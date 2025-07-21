@@ -5,21 +5,22 @@ import 'package:bkmc/utils/extensions/extended_context.dart';
 import '../../constants/app_colors.dart';
 
 class PrimaryButton extends StatelessWidget {
-  const PrimaryButton(
-      {Key? key,
-      required this.onPressed,
-      required this.title,
-      this.hMargin = 16,
-      this.vMargin = 10,
-      this.height = 50,
-      this.width = double.infinity,
-      this.backgroundColor = Colors.black,
-      this.titleColor = Colors.white,
-      this.fontWeight = FontWeight.w500,
-      this.fontSize = 16,
-      this.fontWidget,
-      this.borderRadius = 6})
-      : super(key: key);
+  const PrimaryButton({
+    Key? key,
+    required this.onPressed,
+    required this.title,
+    this.hMargin = 16,
+    this.vMargin = 10,
+    this.height = 50,
+    this.width = double.infinity,
+    this.backgroundColor = Colors.black,
+    this.titleColor = Colors.white,
+    this.fontWeight = FontWeight.w500,
+    this.fontSize = 16,
+    this.fontWidget,
+    this.borderRadius = 6,
+    this.borderColor, // NEW
+  }) : super(key: key);
 
   final String title;
   final VoidCallback onPressed;
@@ -33,37 +34,37 @@ class PrimaryButton extends StatelessWidget {
   final FontWeight fontWeight;
   final double? fontSize;
   final Widget? fontWidget;
+  final Color? borderColor; // NEW
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: height,
       width: width,
-      margin: EdgeInsets.symmetric(horizontal: hMargin, vertical: 10),
+      margin: EdgeInsets.symmetric(horizontal: hMargin, vertical: vMargin),
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
           padding: const EdgeInsets.symmetric(horizontal: 12),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(borderRadius),
+            side: borderColor != null
+                ? BorderSide(color: borderColor!)
+                : BorderSide(color: AppColors.transparent!),
           ),
           backgroundColor: backgroundColor,
+          elevation: 0,
         ),
-        child: Stack(
-          fit: StackFit.expand,
-          children: [
-            Center(
-              child: Text(
-                title,
-                textAlign: TextAlign.center,
-                style: context.textTheme.titleLarge!.copyWith(
-                  fontWeight: fontWeight,
-                  color: titleColor ?? Colors.white,
-                  fontSize: fontSize,
-                ),
-              ),
+        child: Center(
+          child: Text(
+            title,
+            textAlign: TextAlign.center,
+            style: context.textTheme.titleLarge!.copyWith(
+              fontWeight: fontWeight,
+              color: titleColor ?? Colors.white,
+              fontSize: fontSize,
             ),
-          ],
+          ),
         ),
       ),
     );
@@ -154,6 +155,7 @@ class PrefixIconButton extends StatelessWidget {
       this.borderRadius = 6,
       this.foregroundColor,
       this.width,
+      this.iconColor,
       this.mainAxisAlignment = MainAxisAlignment.center,
       this.titleGap = 14});
 
@@ -169,6 +171,7 @@ class PrefixIconButton extends StatelessWidget {
   final double prefixIconSize;
   final double hPadding;
   final Color titleColor;
+  final Color? iconColor;
   final MainAxisAlignment mainAxisAlignment;
   final Color? borderColor;
   final double titleGap;
@@ -198,6 +201,7 @@ class PrefixIconButton extends StatelessWidget {
             SvgPicture.asset(
               height: prefixIconSize,
               prefixIconPath!,
+              color: iconColor,
             ),
             SizedBox(
               width: titleGap,

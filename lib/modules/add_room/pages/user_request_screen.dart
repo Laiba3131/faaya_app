@@ -6,14 +6,14 @@ import 'package:bkmc/utils/heights_and_widths.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class NotificationScreen extends StatelessWidget {
-  const NotificationScreen({super.key});
+class UserRequestScreen extends StatelessWidget {
+  const UserRequestScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomAppbar(
-        title: 'Notifications',
+        title: 'User Requests',
         backArrow: true,
         titleColor: AppColors.white,
       ),
@@ -68,7 +68,6 @@ class NotificationScreen extends StatelessWidget {
               ),
               h2,
               RequestCard(
-                showButtons: false,
                 userName: 'John Doe',
                 time: '20 min',
                 message: 'John Doe wants to join your stream',
@@ -77,7 +76,7 @@ class NotificationScreen extends StatelessWidget {
               ),
               h2,
               RequestCard( avatar:const AssetImage(AssetPaths.listen),
-                showButtons: false,
+             
                 userName: 'John Doe',
                 time: '20 min',
                 message: 'John Doe wants to join your stream',
