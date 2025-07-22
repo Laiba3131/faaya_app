@@ -140,26 +140,32 @@ class RoomBottomSheetState extends State<RoomBottomSheet> {
                         )),
                     const Divider(color: Colors.white24, height: 32),
                     // Coin Buttons
-                    const Row(
+                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        CoinButton(
-                          label: '3s',
-                          coins: 5,
-                          color: Color(0xFF3B3BFF),
-                          insideContainerColor: AppColors.lightBlue,
-                        ),
-                        CoinButton(
-                          label: '6s',
-                          coins: 20,
-                          color: Color(0xFF2ECC71),
-                          insideContainerColor: AppColors.lightGreen,
-                        ),
-                        CoinButton(
-                          label: '10s',
-                          coins: 50,
-                          color: Color(0xFFFF3B3B),
-                          insideContainerColor: AppColors.lightRed,
+                        const Expanded(
+                          child: CoinButton(
+                            label: '3s',
+                            coins: 5,
+                            color: Color(0xFF3B3BFF),
+                            insideContainerColor: AppColors.lightBlue,
+                          ),
+                        ),w1,
+                        const Expanded(
+                          child: CoinButton(
+                            label: '6s',
+                            coins: 20,
+                            color: Color(0xFF2ECC71),
+                            insideContainerColor: AppColors.lightGreen,
+                          ),
+                        ),w1,
+                        const Expanded(
+                          child: CoinButton(
+                            label: '10s',
+                            coins: 50,
+                            color: Color(0xFFFF3B3B),
+                            insideContainerColor: AppColors.lightRed,
+                          ),
                         ),
                       ],
                     ),
@@ -228,7 +234,7 @@ class RoomBottomSheetState extends State<RoomBottomSheet> {
                       onPressed: () {
                         showDialog(
                           context: context,
-                          builder: (context) => const MicPermissionDialog(),
+                          builder: (context) =>  MicPermissionDialog(),
                         );
                       },
                       title: 'Request to Speak',

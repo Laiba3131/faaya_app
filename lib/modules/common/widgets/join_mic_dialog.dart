@@ -1,8 +1,6 @@
 import 'package:bkmc/config/config.dart';
 import 'package:bkmc/constants/app_colors.dart';
 import 'package:bkmc/constants/asset_paths.dart';
-import 'package:bkmc/modules/common/widgets/custom_reason_dropdown.dart';
-import 'package:bkmc/modules/common/widgets/join_mic_dialog.dart';
 import 'package:bkmc/ui/button/primary_button.dart';
 import 'package:bkmc/utils/extensions/extended_context.dart';
 import 'package:flutter/material.dart';
@@ -10,23 +8,8 @@ import 'package:flutter_svg/svg.dart';
 
 import '../../../utils/heights_and_widths.dart';
 
-class MicPermissionDialog extends StatefulWidget {
-   MicPermissionDialog({super.key});
-
-  @override
-  State<MicPermissionDialog> createState() => _MicPermissionDialogState();
-}
-
-class _MicPermissionDialogState extends State<MicPermissionDialog> {
-  String selectedRegion = "Africa";
-
-  List<String> regionList = [
-    'Africa',
-    'South America',
-    'North America',
-    'Asia',
-    'Europe',
-  ];
+class JoinMicDialog extends StatelessWidget {
+  const JoinMicDialog({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -65,8 +48,7 @@ class _MicPermissionDialogState extends State<MicPermissionDialog> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                     
-                      Container(
+                       Container(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 10, vertical: 4),
                         decoration: BoxDecoration(
@@ -95,7 +77,6 @@ class _MicPermissionDialogState extends State<MicPermissionDialog> {
                             fontSize: 14,
                             fontWeight: FontWeight.w600),
                       ),
-                      
                     ],
                   ),
                 ),
@@ -110,53 +91,7 @@ class _MicPermissionDialogState extends State<MicPermissionDialog> {
                   fontWeight: FontWeight.w400),
             ),
             h1,
-            Row(
-              children: [
-                Expanded(
-                  child: PrimaryButton(
-                    onPressed: () {
-                    CustomReasonDropdown.show(
-  context,
-  items: regionList,
-  selectedItem: selectedRegion, // can be null
-  onItemSelected: (selected) {
-    setState(() {
-      selectedRegion = selected; // or use your controller/logic
-    });
-  },
-);
-
-                    },
-                    title: 'Deny',
-                    backgroundColor: AppColors.transparent,
-                    borderRadius: 8,
-                    width: 124,
-                    height: 50,
-                    hMargin: 0,
-                    borderColor: AppColors.primaryColor,
-                    titleColor: AppColors.primaryColor,
-                  ),
-                ),
-                const SizedBox(width: 8),
-                Expanded(
-                  child: PrimaryButton(
-                    onPressed: () {
-                      NavRouter.pop(context);
-                      showDialog(context: context, builder: (context) {
-                        return const JoinMicDialog();
-                      });
-                    },
-                    title: 'Join Mic',
-                    backgroundColor: AppColors.primaryColor,
-                    borderRadius: 8,
-                    width: 124,
-                    height: 50,
-                    hMargin: 0,
-                  ),
-                ),
-              ],
-            )
-          ],
+            ],
         ),
       ),
     );

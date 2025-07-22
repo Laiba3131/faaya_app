@@ -1,4 +1,5 @@
 import 'package:bkmc/constants/asset_paths.dart';
+import 'package:bkmc/utils/heights_and_widths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -16,7 +17,7 @@ class CoinButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 8),
       decoration: BoxDecoration(
         color: color,
         borderRadius: BorderRadius.circular(12),
@@ -28,11 +29,12 @@ class CoinButton extends StatelessWidget {
             style: const TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.w600,
-              fontSize: 15,
+              fontSize: 12,
             ),
           ),
-          const SizedBox(width: 6),
+          w4,
           Container(
+            width: 60,
             padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
             decoration: BoxDecoration(
               color: insideContainerColor,
@@ -43,13 +45,13 @@ class CoinButton extends StatelessWidget {
                 SvgPicture.asset(
                   AssetPaths.dollarSign,
                 ),
-                const SizedBox(width: 2),
+               w0P5,
                 Text(
                   coins.toString(),
                   style: const TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.w600,
-                    fontSize: 15,
+                    fontSize: 13,
                   ),
                 ),
               ],
