@@ -1,4 +1,6 @@
 import 'package:bkmc/modules/home/model/comment_model.dart';
+import 'package:bkmc/modules/home/widgets/action_dropdown_menu.dart';
+import 'package:bkmc/ui/widgets/on_click.dart';
 import 'package:flutter/material.dart';
 
 class NestedCommentTile extends StatelessWidget {
@@ -13,6 +15,31 @@ class NestedCommentTile extends StatelessWidget {
     this.depth = 0,
     super.key,
   });
+
+  void _showMenu(BuildContext context, Offset position) {
+    final overlay = Overlay.of(context).context.findRenderObject() as RenderBox;
+    showMenu(
+      context: context,
+      position: RelativeRect.fromRect(
+        Rect.fromPoints(position, position),
+        Offset.zero & overlay.size,
+      ),
+      color: Colors.transparent,
+      elevation: 0,
+      items: [
+        PopupMenuItem(
+          padding: EdgeInsets.zero,
+          child: ActionDropdownMenu(
+            onReply: () => print("Reply clicked"),
+            onCopy: () => print("Copy clicked"),
+            onReport: () => print("Report clicked"),
+            onDelete: () => print("Delete clicked"),
+          ),
+        ),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -51,7 +78,19 @@ class NestedCommentTile extends StatelessWidget {
                           ),
                         ),
                         const Spacer(),
-                        Icon(Icons.more_vert, color: Colors.white54, size: 18),
+                        Builder(
+                          builder: (iconContext) => OnClick(
+                            onTap: () async {
+                              final RenderBox button =
+                                  iconContext.findRenderObject() as RenderBox;
+                              final Offset position =
+                                  button.localToGlobal(Offset.zero);
+                              _showMenu(iconContext, position);
+                            },
+                            child: const Icon(Icons.more_vert,
+                                color: Colors.white54, size: 18),
+                          ),
+                        ),
                       ],
                     ),
                     const SizedBox(height: 2),

@@ -59,6 +59,11 @@ class AssetPaths {
   static const String prince = 'assets/images/svg/solar_crown-bold.svg';
   static const String dollarSign = 'assets/images/svg/dollar_sign.svg';
 
+  static const String reply = 'assets/images/svg/material-symbols_reply.svg';
+  static const String copy = 'assets/images/svg/solar_copy-bold.svg';
+  static const String report = 'assets/images/svg/material-symbols_report.svg';
+  static const String delete = 'assets/images/svg/material-symbols_delete.svg';
+
   //png
   static const String avatarImage = 'assets/images/png/Inner Oval (1).png';
   static const String culture = 'assets/images/png/culture.png';

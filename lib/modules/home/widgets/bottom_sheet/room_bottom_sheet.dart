@@ -8,6 +8,7 @@ import 'package:bkmc/utils/heights_and_widths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import '../../../../constants/app_colors.dart';
+import '../../../common/widgets/mic_permission_dialog.dart';
 
 class RoomBottomSheet extends StatefulWidget {
   @override
@@ -146,7 +147,7 @@ class RoomBottomSheetState extends State<RoomBottomSheet> {
                           label: '3s',
                           coins: 5,
                           color: Color(0xFF3B3BFF),
-                          insideContainerColor: AppColors.lightRed,
+                          insideContainerColor: AppColors.lightBlue,
                         ),
                         CoinButton(
                           label: '6s',
@@ -158,7 +159,7 @@ class RoomBottomSheetState extends State<RoomBottomSheet> {
                           label: '10s',
                           coins: 50,
                           color: Color(0xFFFF3B3B),
-                          insideContainerColor: AppColors.lightBlue,
+                          insideContainerColor: AppColors.lightRed,
                         ),
                       ],
                     ),
@@ -225,7 +226,10 @@ class RoomBottomSheetState extends State<RoomBottomSheet> {
                     h2,
                     SuffixIconButton(
                       onPressed: () {
-                        // NavRouter.push(context, LoginScreen());
+                        showDialog(
+                          context: context,
+                          builder: (context) => const MicPermissionDialog(),
+                        );
                       },
                       title: 'Request to Speak',
                       suffixIconWidget: Container(
