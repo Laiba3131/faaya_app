@@ -57,6 +57,7 @@ class AssetPaths {
   static const String mic = 'assets/images/svg/material-symbols_mic.svg';
   static const String liveIcon = 'assets/images/svg/fluent_live-20-filled.svg';
   static const String prince = 'assets/images/svg/solar_crown-bold.svg';
+  static const String dollarSign = 'assets/images/svg/dollar_sign.svg';
 
   //png
   static const String avatarImage = 'assets/images/png/Inner Oval (1).png';

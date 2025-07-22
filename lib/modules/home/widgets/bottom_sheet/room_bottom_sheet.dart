@@ -3,9 +3,10 @@ import 'package:bkmc/modules/home/model/comment_model.dart';
 import 'package:bkmc/modules/home/widgets/coin_button.dart';
 import 'package:bkmc/modules/home/widgets/nested_comment_tile.dart';
 import 'package:bkmc/ui/button/primary_button.dart';
+import 'package:bkmc/utils/extensions/extended_context.dart';
 import 'package:bkmc/utils/heights_and_widths.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_svg/svg.dart';
 import '../../../../constants/app_colors.dart';
 
 class RoomBottomSheet extends StatefulWidget {
@@ -142,11 +143,23 @@ class RoomBottomSheetState extends State<RoomBottomSheet> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         CoinButton(
-                            label: '3s', coins: 5, color: Color(0xFF3B3BFF)),
+                          label: '3s',
+                          coins: 5,
+                          color: Color(0xFF3B3BFF),
+                          insideContainerColor: AppColors.lightRed,
+                        ),
                         CoinButton(
-                            label: '6s', coins: 20, color: Color(0xFF2ECC71)),
+                          label: '6s',
+                          coins: 20,
+                          color: Color(0xFF2ECC71),
+                          insideContainerColor: AppColors.lightGreen,
+                        ),
                         CoinButton(
-                            label: '10s', coins: 50, color: Color(0xFFFF3B3B)),
+                          label: '10s',
+                          coins: 50,
+                          color: Color(0xFFFF3B3B),
+                          insideContainerColor: AppColors.lightBlue,
+                        ),
                       ],
                     ),
                     h2,
@@ -172,20 +185,62 @@ class RoomBottomSheetState extends State<RoomBottomSheet> {
                         ],
                       ),
                     ),
+                    h1,
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 5, horizontal: 15),
+                      decoration: BoxDecoration(
+                          border: Border.all(color: AppColors.primaryColor),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(16))),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Replying to Abigail Johnson ',
+                                style: context.textTheme.bodyMedium!.copyWith(
+                                    color: AppColors.white,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w500),
+                              ),
+                              Text(
+                                "Sure thing, I’ll have a look today.",
+                                style: context.textTheme.bodyMedium!.copyWith(
+                                    color: AppColors.white,
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.w300),
+                              )
+                            ],
+                          ),
+                          const Icon(
+                            Icons.close,
+                            color: AppColors.primaryColor,
+                          )
+                        ],
+                      ),
+                    ),
                     h2,
                     SuffixIconButton(
                       onPressed: () {
                         // NavRouter.push(context, LoginScreen());
                       },
                       title: 'Request to Speak',
-                      suffixIconWidget: const Icon(
-                        Icons.arrow_forward,
-                        color: AppColors.white,
+                      suffixIconWidget: Container(
+                        padding: const EdgeInsets.all(2),
+                        decoration: const BoxDecoration(
+                            color: AppColors.white, shape: BoxShape.circle),
+                        child: SvgPicture.asset(
+                          AssetPaths.mic,
+                          color: AppColors.primaryColor,
+                        ),
                       ),
                       backgroundColor: AppColors.primaryColor,
                       height: 55,
                       borderColor: Colors.transparent,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       hPadding: 18,
                       borderRadius: 16,
                     ),
@@ -263,7 +318,7 @@ class RoomBottomSheetState extends State<RoomBottomSheet> {
                           ),
                         ),
                         w1,
-                        Icon(Icons.emoji_emotions,
+                        const Icon(Icons.emoji_emotions,
                             color: Colors.white, size: 32),
                         w1,
                         Icon(Icons.pan_tool,
