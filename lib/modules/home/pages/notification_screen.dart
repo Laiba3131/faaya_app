@@ -59,7 +59,7 @@ class NotificationScreen extends StatelessWidget {
               ),
               h2,
               RequestCard(
-                avatar:const AssetImage(AssetPaths.youngMan),
+                avatar: const AssetImage(AssetPaths.youngMan),
                 userName: 'John Doe',
                 time: '20 min',
                 message: 'John Doe wants to join your stream',
@@ -76,7 +76,8 @@ class NotificationScreen extends StatelessWidget {
                 onReject: () {},
               ),
               h2,
-              RequestCard( avatar:const AssetImage(AssetPaths.listen),
+              RequestCard(
+                avatar: const AssetImage(AssetPaths.listen),
                 showButtons: false,
                 userName: 'John Doe',
                 time: '20 min',

@@ -1,5 +1,6 @@
 import 'package:bkmc/constants/app_colors.dart';
 import 'package:bkmc/constants/asset_paths.dart';
+import 'package:bkmc/ui/button/primary_button.dart';
 import 'package:bkmc/utils/extensions/extended_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -18,10 +19,13 @@ class MicPermissionDialog extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.all(12),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Container(
                   width: 53,
@@ -76,19 +80,44 @@ class MicPermissionDialog extends StatelessWidget {
                           ],
                         ),
                       ),
-                      const SizedBox(height: 6),
-                      Text(
-                        'Admin is Inviting you to join the mic option.',
-                        style: context.textTheme.bodyMedium!.copyWith(
-                            color: AppColors.white,
-                            fontSize: 13,
-                            fontWeight: FontWeight.w300),
-                      ),
                     ],
                   ),
                 ),
               ],
             ),
+            const SizedBox(height: 6),
+            Text(
+              'Admin is Inviting you to join the mic option.',
+              style: context.textTheme.bodyMedium!.copyWith(
+                  color: AppColors.black,
+                  fontSize: 13,
+                  fontWeight: FontWeight.w300),
+            ),
+            h1,
+            Row(
+              children: [
+                PrimaryButton(
+                  onPressed: () {},
+                  title: 'Reject',
+                  backgroundColor: AppColors.transparent,
+                  borderRadius: 8,
+                  width: 124,
+                  height: 35,
+                  hMargin: 0,
+                  borderColor: AppColors.white,
+                ),
+                const SizedBox(width: 8),
+                PrimaryButton(
+                  onPressed: () {},
+                  title: 'Accept',
+                  backgroundColor: AppColors.primaryColor,
+                  borderRadius: 8,
+                  width: 124,
+                  height: 35,
+                  hMargin: 0,
+                ),
+              ],
+            )
           ],
         ),
       ),
