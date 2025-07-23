@@ -1,6 +1,8 @@
 import 'package:bkmc/modules/home/pages/home_screen.dart';
 import 'package:flutter/material.dart';
 
+import '../add_room/pages/create_room_screen.dart';
+import '../home/pages/rooms_category_screen.dart';
 import '../profile/profile_screen.dart';
 
 class BaseView extends StatefulWidget {
@@ -13,7 +15,7 @@ class _BaseViewState extends State<BaseView> {
 
   final List<Widget> _pages = [
     HomeScreen(),
-    AddRoomPage(),
+    CreateRoomScreen(),
     ProfileScreen(),
   ];
 

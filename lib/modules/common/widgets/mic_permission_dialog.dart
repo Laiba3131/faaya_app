@@ -11,7 +11,7 @@ import 'package:flutter_svg/svg.dart';
 import '../../../utils/heights_and_widths.dart';
 
 class MicPermissionDialog extends StatefulWidget {
-   MicPermissionDialog({super.key});
+  MicPermissionDialog({super.key});
 
   @override
   State<MicPermissionDialog> createState() => _MicPermissionDialogState();
@@ -55,28 +55,32 @@ class _MicPermissionDialogState extends State<MicPermissionDialog> {
                     ),
                   ),
                   child: const CircleAvatar(
-                                  radius: 24,
-                                  backgroundImage:
-                                      AssetImage(AssetPaths.youngMan,),
-                                ),
+                    radius: 24,
+                    backgroundImage: AssetImage(
+                      AssetPaths.youngMan,
+                    ),
+                  ),
                 ),
                 w1,
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                     
                       Container(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 10, vertical: 4),
                         decoration: BoxDecoration(
-                          color:AppColors.primaryColor,
+                          color: AppColors.primaryColor,
                           borderRadius: BorderRadius.circular(16),
                         ),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            SvgPicture.asset(AssetPaths.prince,height: 20,width: 20,),
+                            SvgPicture.asset(
+                              AssetPaths.prince,
+                              height: 20,
+                              width: 20,
+                            ),
                             w1,
                             Text(
                               'Admin',
@@ -87,15 +91,15 @@ class _MicPermissionDialogState extends State<MicPermissionDialog> {
                             ),
                           ],
                         ),
-                      ),const SizedBox(height: 4),
-                       Text(
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
                         'Julia Andrew',
                         style: context.textTheme.bodyMedium!.copyWith(
                             color: AppColors.black,
                             fontSize: 14,
                             fontWeight: FontWeight.w600),
                       ),
-                      
                     ],
                   ),
                 ),
@@ -115,17 +119,17 @@ class _MicPermissionDialogState extends State<MicPermissionDialog> {
                 Expanded(
                   child: PrimaryButton(
                     onPressed: () {
-                    CustomReasonDropdown.show(
-  context,
-  items: regionList,
-  selectedItem: selectedRegion, // can be null
-  onItemSelected: (selected) {
-    setState(() {
-      selectedRegion = selected; // or use your controller/logic
-    });
-  },
-);
-
+                      CustomReasonDropdown.show(
+                        context,
+                        items: regionList,
+                        selectedItem: selectedRegion, // can be null
+                        onItemSelected: (selected) {
+                          setState(() {
+                            selectedRegion =
+                                selected; // or use your controller/logic
+                          });
+                        },
+                      );
                     },
                     title: 'Deny',
                     backgroundColor: AppColors.transparent,
@@ -142,9 +146,11 @@ class _MicPermissionDialogState extends State<MicPermissionDialog> {
                   child: PrimaryButton(
                     onPressed: () {
                       NavRouter.pop(context);
-                      showDialog(context: context, builder: (context) {
-                        return const JoinMicDialog();
-                      });
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return const JoinMicDialog();
+                          });
                     },
                     title: 'Join Mic',
                     backgroundColor: AppColors.primaryColor,
