@@ -134,7 +134,8 @@ class _CreateRoomScreenState extends State<CreateRoomScreen> {
                   ),
                 ),
                 h0P5,
-                InputField(fontSize: 12,
+                InputField(
+                  fontSize: 12,
                   boxConstraints: 20,
                   controller: _nameController,
                   label: "Enter name",
@@ -200,7 +201,7 @@ class _CreateRoomScreenState extends State<CreateRoomScreen> {
                       SvgPicture.asset(AssetPaths.option),
                       const SizedBox(width: 8),
                       const Text('Enable Bad Words Filter',
-                          style: TextStyle(color: Colors.white,fontSize: 12)),
+                          style: TextStyle(color: Colors.white, fontSize: 12)),
                       const Spacer(),
                       Switch(
                         thumbColor: WidgetStateProperty.all(AppColors.white),
@@ -228,7 +229,8 @@ class _CreateRoomScreenState extends State<CreateRoomScreen> {
                 h0P5,
                 Stack(
                   children: [
-                    InputField(fontSize: 12,
+                    InputField(
+                      fontSize: 12,
                       labelColor: AppColors.white.withOpacity(0.5),
                       boxConstraints: 20,
                       maxLines: 2,
@@ -430,47 +432,51 @@ class _CreateRoomScreenState extends State<CreateRoomScreen> {
             color: AppColors.white,
           ),
         ),
-      Row(
-  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  children: [
-    Expanded( // 👈 Wrap SliderTheme in Expanded
-      child: SliderTheme(
-        data: SliderTheme.of(context).copyWith(
-          trackShape: const RectangularSliderTrackShape(),
-          trackHeight: 4,
-          thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 8),
-          overlayShape: const RoundSliderOverlayShape(overlayRadius: 0),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Expanded(
+              // 👈 Wrap SliderTheme in Expanded
+              child: SliderTheme(
+                data: SliderTheme.of(context).copyWith(
+                  trackShape: const RectangularSliderTrackShape(),
+                  trackHeight: 8,
+                  thumbShape:
+                      const RoundSliderThumbShape(enabledThumbRadius: 10),
+                  overlayShape: const RoundSliderOverlayShape(overlayRadius: 0),
+                ),
+                child: Slider(
+                  value: value,
+                  min: min,
+                  max: max,
+                  // divisions: (max - min).toInt(),
+                  activeColor: AppColors.primaryColor,
+                  thumbColor: AppColors.white,
+                  inactiveColor: Colors.white,
+                  onChanged: onChanged,
+                ),
+              ),
+            ),
+            const SizedBox(
+                width: 8),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Text(
+                value.toInt().toString(),
+                style: const TextStyle(
+                  color: Colors.black,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+          ],
         ),
-        child: Slider(
-          value: value,
-          min: min,
-          max: max,
-          // divisions: (max - min).toInt(),
-          activeColor: AppColors.primaryColor,
-          thumbColor: AppColors.white,
-          inactiveColor: Colors.white24,
-          onChanged: onChanged,
-        ),
-      ),
-    ),
-    const SizedBox(width: 8), // optional spacing between slider and value
-    Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-      decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.12),
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Text(
-        value.toInt().toString(),
-        style: const TextStyle(
-          color: Colors.white,
-          fontWeight: FontWeight.w600,
-        ),
-      ),
-    ),
-  ],
-),
-  Row(
+        Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(min.toInt().toString(),
