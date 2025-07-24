@@ -38,27 +38,32 @@ class JoinMicDialog extends StatelessWidget {
                     ),
                   ),
                   child: const CircleAvatar(
-                                  radius: 24,
-                                  backgroundImage:
-                                      AssetImage(AssetPaths.youngMan,),
-                                ),
+                    radius: 24,
+                    backgroundImage: AssetImage(
+                      AssetPaths.youngMan,
+                    ),
+                  ),
                 ),
                 w1,
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                       Container(
+                      Container(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 10, vertical: 4),
                         decoration: BoxDecoration(
-                          color:AppColors.primaryColor,
+                          color: AppColors.primaryColor,
                           borderRadius: BorderRadius.circular(16),
                         ),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            SvgPicture.asset(AssetPaths.prince,height: 20,width: 20,),
+                            SvgPicture.asset(
+                              AssetPaths.prince,
+                              height: 20,
+                              width: 20,
+                            ),
                             w1,
                             Text(
                               'Admin',
@@ -69,8 +74,9 @@ class JoinMicDialog extends StatelessWidget {
                             ),
                           ],
                         ),
-                      ),const SizedBox(height: 4),
-                       Text(
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
                         'Julia Andrew',
                         style: context.textTheme.bodyMedium!.copyWith(
                             color: AppColors.black,
@@ -91,7 +97,7 @@ class JoinMicDialog extends StatelessWidget {
                   fontWeight: FontWeight.w400),
             ),
             h1,
-            ],
+          ],
         ),
       ),
     );

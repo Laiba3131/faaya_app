@@ -23,17 +23,17 @@ class ActionDropdownWithourIcon extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(
-          color:AppColors.white,
+          color: AppColors.white,
           borderRadius: BorderRadius.circular(16),
           border: Border.all(color: AppColors.primaryColor, width: 1),
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            _buildItem( "Invite", invite??(){}),
-            _buildItem("Kick", kick??(){}),
-            _buildItem("Ban", ban??(){}),
-            _buildItem("Report", report??(){}),
+            _buildItem("Invite", invite ?? () {}),
+            _buildItem("Kick", kick ?? () {}),
+            _buildItem("Ban", ban ?? () {}),
+            _buildItem("Report", report ?? () {}),
           ],
         ),
       ),

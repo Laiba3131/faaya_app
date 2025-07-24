@@ -30,16 +30,17 @@ class _SignupScreenState extends State<SignupScreen> {
         resizeToAvoidBottomInset: true,
         body: Container(
           decoration: const BoxDecoration(
-    gradient: RadialGradient(
-      center: Alignment(1.0, -0.74), // 100% X, 12.99% Y → approximate as (1.0, -0.74)
-      radius: 2.0, // 188.4% width → radius > 1.0
-      colors: [
-        Color(0xFFC637E5), // Start color
-        Color(0xFF161616), // End color
-      ],
-      stops: [0.0, 1.0],
-    ),
-  ),
+            gradient: RadialGradient(
+              center: Alignment(
+                  1.0, -0.74), // 100% X, 12.99% Y → approximate as (1.0, -0.74)
+              radius: 2.0, // 188.4% width → radius > 1.0
+              colors: [
+                Color(0xFFC637E5), // Start color
+                Color(0xFF161616), // End color
+              ],
+              stops: [0.0, 1.0],
+            ),
+          ),
           padding: const EdgeInsets.symmetric(horizontal: 18.0),
           child: SingleChildScrollView(
             child: ConstrainedBox(
@@ -232,8 +233,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         decoration: TextDecoration.none,
                       ),
                       children: const [
-                        TextSpan(
-                            text: "By Tapping Sign up you Agree to our "),
+                        TextSpan(text: "By Tapping Sign up you Agree to our "),
                         TextSpan(
                           text: "Terms of Services",
                           style: TextStyle(

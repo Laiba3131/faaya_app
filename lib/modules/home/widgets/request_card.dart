@@ -38,7 +38,7 @@ class RequestCard extends StatelessWidget {
               backgroundImage:
                   avatar ?? const AssetImage(AssetPaths.avatarImage),
             ),
-           w4,
+            w4,
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

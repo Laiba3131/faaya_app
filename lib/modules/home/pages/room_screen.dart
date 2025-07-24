@@ -39,29 +39,31 @@ class RoomScreen extends StatelessWidget {
       {'name': 'Rendra', 'image': AssetPaths.avatarImage},
     ];
 
-     void _showMenu(BuildContext context, Offset position) {
-    final overlay = Overlay.of(context).context.findRenderObject() as RenderBox;
-    showMenu(
-      context: context,
-      position: RelativeRect.fromRect(
-        Rect.fromPoints(position, position),
-        Offset.zero & overlay.size,
-      ),
-      color: Colors.transparent,
-      elevation: 0,
-      items: [
-        PopupMenuItem(
-          padding: EdgeInsets.zero,
-          child: ActionDropdownWithourIcon(
-            invite: () => print("Reply clicked"),
-            kick: () => print("Copy clicked"),
-            ban: () => print("Report clicked"),
-            report: () => print("Delete clicked"),
-          ),
+    void _showMenu(BuildContext context, Offset position) {
+      final overlay =
+          Overlay.of(context).context.findRenderObject() as RenderBox;
+      showMenu(
+        context: context,
+        position: RelativeRect.fromRect(
+          Rect.fromPoints(position, position),
+          Offset.zero & overlay.size,
         ),
-      ],
-    );
-  }
+        color: Colors.transparent,
+        elevation: 0,
+        items: [
+          PopupMenuItem(
+            padding: EdgeInsets.zero,
+            child: ActionDropdownWithourIcon(
+              invite: () => print("Reply clicked"),
+              kick: () => print("Copy clicked"),
+              ban: () => print("Report clicked"),
+              report: () => print("Delete clicked"),
+            ),
+          ),
+        ],
+      );
+    }
+
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: const CustomAppbar(
@@ -245,20 +247,20 @@ class RoomScreen extends StatelessWidget {
                               ],
                             ),
                           ),
-                        Builder(
-                          builder: (iconContext) => OnClick(
-                            onTap: () async {
-                              final RenderBox button =
-                                  iconContext.findRenderObject() as RenderBox;
-                              final Offset position =
-                                  button.localToGlobal(Offset.zero);
-                              _showMenu(iconContext, position);
-                            },
-                            child: const Icon(Icons.more_vert,
-                                color: Colors.white54, size: 18),
+                          Builder(
+                            builder: (iconContext) => OnClick(
+                              onTap: () async {
+                                final RenderBox button =
+                                    iconContext.findRenderObject() as RenderBox;
+                                final Offset position =
+                                    button.localToGlobal(Offset.zero);
+                                _showMenu(iconContext, position);
+                              },
+                              child: const Icon(Icons.more_vert,
+                                  color: Colors.white54, size: 18),
+                            ),
                           ),
-                        ),
-                         ],
+                        ],
                       );
                     },
                   ),
@@ -301,20 +303,20 @@ class RoomScreen extends StatelessWidget {
                                 ),
                               ],
                             ),
-                          ),   Builder(
-                          builder: (iconContext) => OnClick(
-                            onTap: () async {
-                              final RenderBox button =
-                                  iconContext.findRenderObject() as RenderBox;
-                              final Offset position =
-                                  button.localToGlobal(Offset.zero);
-                              _showMenu(iconContext, position);
-                            },
-                            child: const Icon(Icons.more_vert,
-                                color: Colors.white54, size: 18),
                           ),
-                        ),
-                        
+                          Builder(
+                            builder: (iconContext) => OnClick(
+                              onTap: () async {
+                                final RenderBox button =
+                                    iconContext.findRenderObject() as RenderBox;
+                                final Offset position =
+                                    button.localToGlobal(Offset.zero);
+                                _showMenu(iconContext, position);
+                              },
+                              child: const Icon(Icons.more_vert,
+                                  color: Colors.white54, size: 18),
+                            ),
+                          ),
                         ],
                       );
                     },
@@ -322,16 +324,21 @@ class RoomScreen extends StatelessWidget {
                 ),
                 // Join Room Button
                 Padding(
-                  padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
-                  child:PrimaryButton(onPressed: (){
-                     showModalBottomSheet(
+                    padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
+                    child: PrimaryButton(
+                      onPressed: () {
+                        showModalBottomSheet(
                           context: context,
                           isScrollControlled: true,
                           backgroundColor: Colors.transparent,
                           builder: (context) => RoomBottomSheet(),
                         );
-                  }, title: 'Join Room',backgroundColor: AppColors.primaryColor,borderRadius: 16,hMargin: 0,)
-                ),
+                      },
+                      title: 'Join Room',
+                      backgroundColor: AppColors.primaryColor,
+                      borderRadius: 16,
+                      hMargin: 0,
+                    )),
               ],
             ),
           ),

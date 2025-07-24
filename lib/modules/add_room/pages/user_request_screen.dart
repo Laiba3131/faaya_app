@@ -59,7 +59,7 @@ class UserRequestScreen extends StatelessWidget {
               ),
               h2,
               RequestCard(
-                avatar:const AssetImage(AssetPaths.youngMan),
+                avatar: const AssetImage(AssetPaths.youngMan),
                 userName: 'John Doe',
                 time: '20 min',
                 message: 'John Doe wants to join your stream',
@@ -75,8 +75,8 @@ class UserRequestScreen extends StatelessWidget {
                 onReject: () {},
               ),
               h2,
-              RequestCard( avatar:const AssetImage(AssetPaths.listen),
-             
+              RequestCard(
+                avatar: const AssetImage(AssetPaths.listen),
                 userName: 'John Doe',
                 time: '20 min',
                 message: 'John Doe wants to join your stream',

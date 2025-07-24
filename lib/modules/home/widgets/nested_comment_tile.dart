@@ -108,7 +108,8 @@ class NestedCommentTile extends StatelessWidget {
                           onTap: () => onLike(comment.id),
                           child: Row(
                             children: [
-                              const Icon(Icons.favorite, color: Colors.red, size: 16),
+                              const Icon(Icons.favorite,
+                                  color: Colors.red, size: 16),
                               const SizedBox(width: 2),
                               Text(
                                 comment.likes.toString(),

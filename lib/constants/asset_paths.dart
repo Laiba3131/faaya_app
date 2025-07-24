@@ -63,6 +63,8 @@ class AssetPaths {
   static const String copy = 'assets/images/svg/solar_copy-bold.svg';
   static const String report = 'assets/images/svg/material-symbols_report.svg';
   static const String delete = 'assets/images/svg/material-symbols_delete.svg';
+  static const String galary = 'assets/images/svg/gallery_add.svg';
+  static const String option = 'assets/images/svg/octicon.svg';
 
   //png
   static const String avatarImage = 'assets/images/png/Inner Oval (1).png';

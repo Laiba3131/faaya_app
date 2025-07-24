@@ -12,6 +12,7 @@ class AppColors {
   static const primaryGreenDarker = Color(0xff207888);
   static const secondary = Color(0xffc08827);
   static const inputFieldFillColor = Color(0xFFae5cc0);
+  static const containerColor = Color(0xFF81568b);
 
   static const grey = Color(0xFFF6F6F6);
   static const greyColor = Color(0xFFd9d9d9);
@@ -32,5 +33,4 @@ class AppColors {
   static const lightRed = Color(0xffE53737);
   static const lightGreen = Color(0xff37E5AE);
   static const lightBlue = Color(0xff374BE5);
-
 }

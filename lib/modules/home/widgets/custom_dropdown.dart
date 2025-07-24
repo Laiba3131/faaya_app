@@ -9,6 +9,9 @@ class CustomDropdown extends StatefulWidget {
   final String title;
   final List<String> items;
   final String selectedItem;
+  final String hintText;
+  final bool isPrefixIconVisible;
+  final double height;
   final ValueChanged<String> onItemSelected;
 
   const CustomDropdown({
@@ -17,6 +20,9 @@ class CustomDropdown extends StatefulWidget {
     required this.items,
     required this.selectedItem,
     required this.onItemSelected,
+    required this.hintText,
+    required this.height,
+    this.isPrefixIconVisible = true,
   });
 
   @override
@@ -29,19 +35,22 @@ class _CustomDropdownState extends State<CustomDropdown> {
     return GestureDetector(
       onTap: _showCustomDialog,
       child: Container(
+        height: widget.height,
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 9),
         decoration: BoxDecoration(
           color: AppColors.primaryColor,
           borderRadius: BorderRadius.circular(12),
         ),
-        child: const Row(
+        child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Row(
               children: [
-                Icon(Icons.public, color: Colors.white),
+                widget.isPrefixIconVisible
+                    ? Icon(Icons.public, color: Colors.white)
+                    : SizedBox.shrink(),
                 SizedBox(width: 8),
-                Text("Region", style: TextStyle(color: Colors.white)),
+                Text(widget.hintText, style: TextStyle(color: Colors.white)),
               ],
             ),
             Icon(Icons.keyboard_arrow_down, color: Colors.white),

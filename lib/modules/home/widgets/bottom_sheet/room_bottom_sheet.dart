@@ -140,7 +140,7 @@ class RoomBottomSheetState extends State<RoomBottomSheet> {
                         )),
                     const Divider(color: Colors.white24, height: 32),
                     // Coin Buttons
-                     Row(
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         const Expanded(
@@ -150,7 +150,8 @@ class RoomBottomSheetState extends State<RoomBottomSheet> {
                             color: Color(0xFF3B3BFF),
                             insideContainerColor: AppColors.lightBlue,
                           ),
-                        ),w1,
+                        ),
+                        w1,
                         const Expanded(
                           child: CoinButton(
                             label: '6s',
@@ -158,7 +159,8 @@ class RoomBottomSheetState extends State<RoomBottomSheet> {
                             color: Color(0xFF2ECC71),
                             insideContainerColor: AppColors.lightGreen,
                           ),
-                        ),w1,
+                        ),
+                        w1,
                         const Expanded(
                           child: CoinButton(
                             label: '10s',
@@ -234,7 +236,7 @@ class RoomBottomSheetState extends State<RoomBottomSheet> {
                       onPressed: () {
                         showDialog(
                           context: context,
-                          builder: (context) =>  MicPermissionDialog(),
+                          builder: (context) => MicPermissionDialog(),
                         );
                       },
                       title: 'Request to Speak',

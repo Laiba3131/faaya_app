@@ -75,9 +75,8 @@ class _CustomReasonDropdownState extends State<CustomReasonDropdown> {
               onChange: (value) {
                 setState(() {
                   filteredItems = widget.items
-                      .where((item) => item
-                          .toLowerCase()
-                          .contains(value.toLowerCase()))
+                      .where((item) =>
+                          item.toLowerCase().contains(value.toLowerCase()))
                       .toList();
                 });
               },
