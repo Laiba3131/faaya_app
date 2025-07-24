@@ -18,45 +18,38 @@ class _SplashPageState extends State<SplashPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
+        width: double.infinity,
+        height: double.infinity,
         decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.centerLeft,
-            end: Alignment.centerRight,
+          gradient: RadialGradient(
+            center: Alignment(-1.1, 0),
+            radius: 1.5,
             colors: [
-              Color(0xFFE94057),
-              Color(0xFF6A0DAD),
+              Color(0xFFC637E5),
+              Color(0xFF161616),
+              Color(0xFF161616),
             ],
+            stops: [0.0, 0.75, 1.0],
           ),
         ),
-        child: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [
-                Color(0xFFC637E5),
-                Color(0xFF161616),
-                Color(0xFF161616),
-              ],
-            ),
-          ),
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Image.asset('assets/images/png/splash_image.png'),
-              h2,
-              Text(
-                'Audio Live',
-                style: context.textTheme.bodyMedium!.copyWith(
-                  fontSize: 28,
-                  fontWeight: FontWeight.w700,
-                  color: AppColors.white,
-                ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Image.asset('assets/images/png/splash_image.png'),
+            h2,
+            Text(
+              'Audio Live',
+              style: context.textTheme.bodyMedium!.copyWith(
+                fontSize: 28,
+                fontWeight: FontWeight.w700,
+                color: AppColors.white,
               ),
-              h5,
-              SuffixIconButton(
+            ),
+            h5,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 18.0),
+              child: SuffixIconButton(
                 onPressed: () {
                   NavRouter.push(context, LoginScreen());
                 },
@@ -72,8 +65,8 @@ class _SplashPageState extends State<SplashPage> {
                 hPadding: 18,
                 borderRadius: 16,
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

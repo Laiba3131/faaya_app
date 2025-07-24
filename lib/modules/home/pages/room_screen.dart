@@ -1,4 +1,6 @@
+import 'package:bkmc/modules/home/widgets/action_dropdown_withour_icon.dart';
 import 'package:bkmc/ui/button/primary_button.dart';
+import 'package:bkmc/ui/widgets/on_click.dart';
 import 'package:bkmc/utils/heights_and_widths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -36,6 +38,30 @@ class RoomScreen extends StatelessWidget {
       {'name': 'Tomas Euna', 'image': AssetPaths.avatarImage},
       {'name': 'Rendra', 'image': AssetPaths.avatarImage},
     ];
+
+     void _showMenu(BuildContext context, Offset position) {
+    final overlay = Overlay.of(context).context.findRenderObject() as RenderBox;
+    showMenu(
+      context: context,
+      position: RelativeRect.fromRect(
+        Rect.fromPoints(position, position),
+        Offset.zero & overlay.size,
+      ),
+      color: Colors.transparent,
+      elevation: 0,
+      items: [
+        PopupMenuItem(
+          padding: EdgeInsets.zero,
+          child: ActionDropdownWithourIcon(
+            invite: () => print("Reply clicked"),
+            kick: () => print("Copy clicked"),
+            ban: () => print("Report clicked"),
+            report: () => print("Delete clicked"),
+          ),
+        ),
+      ],
+    );
+  }
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: const CustomAppbar(
@@ -84,7 +110,7 @@ class RoomScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      w1,
+                      w3,
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -159,59 +185,80 @@ class RoomScreen extends StatelessWidget {
                     separatorBuilder: (_, __) => const SizedBox(width: 18),
                     itemBuilder: (context, i) {
                       final s = speakers[i];
-                      return Column(
+                      return Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Stack(
-                            clipBehavior: Clip.none,
-                            children: [
-                              Container(
-                                padding: const EdgeInsets.all(3),
-                                decoration: (s['isHost'] == true)
-                                    ? BoxDecoration(
-                                        border: Border.all(
-                                          color: AppColors.green,
-                                          width: 1.5,
+                          Padding(
+                            padding: const EdgeInsets.only(top: 3.0),
+                            child: Column(
+                              children: [
+                                Stack(
+                                  clipBehavior: Clip.none,
+                                  children: [
+                                    Container(
+                                      padding: const EdgeInsets.all(3),
+                                      decoration: (s['isHost'] == true)
+                                          ? BoxDecoration(
+                                              border: Border.all(
+                                                color: AppColors.green,
+                                                width: 1.5,
+                                              ),
+                                              shape: BoxShape.circle)
+                                          : const BoxDecoration(),
+                                      child: CircleAvatar(
+                                        radius: 24,
+                                        backgroundImage:
+                                            AssetImage(s['image']!.toString()),
+                                      ),
+                                    ),
+                                    if (s['isHost'] == true)
+                                      const Positioned(
+                                        top: -2,
+                                        left: -2,
+                                        child: Icon(Icons.star,
+                                            color: Color(0xFFF05ED0), size: 18),
+                                      ),
+                                    Positioned(
+                                      bottom: -2,
+                                      right: -2,
+                                      child: Container(
+                                        padding: const EdgeInsets.all(2),
+                                        decoration: const BoxDecoration(
+                                            color: AppColors.white,
+                                            shape: BoxShape.circle),
+                                        child: SvgPicture.asset(
+                                          AssetPaths.mic,
+                                          color: AppColors.red,
                                         ),
-                                        shape: BoxShape.circle)
-                                    : const BoxDecoration(),
-                                child: CircleAvatar(
-                                  radius: 24,
-                                  backgroundImage:
-                                      AssetImage(s['image']!.toString()),
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                              ),
-                              if (s['isHost'] == true)
-                                const Positioned(
-                                  top: -2,
-                                  left: -2,
-                                  child: Icon(Icons.star,
-                                      color: Color(0xFFF05ED0), size: 18),
-                                ),
-                              Positioned(
-                                bottom: -2,
-                                right: -2,
-                                child: Container(
-                                  padding: const EdgeInsets.all(2),
-                                  decoration: const BoxDecoration(
+                                const SizedBox(height: 4),
+                                Text(
+                                  s['name']!.toString(),
+                                  style: context.textTheme.bodyMedium!.copyWith(
                                       color: AppColors.white,
-                                      shape: BoxShape.circle),
-                                  child: SvgPicture.asset(
-                                    AssetPaths.mic,
-                                    color: AppColors.red,
-                                  ),
+                                      fontSize: 10,
+                                      fontWeight: FontWeight.w400),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                          const SizedBox(height: 4),
-                          Text(
-                            s['name']!.toString(),
-                            style: context.textTheme.bodyMedium!.copyWith(
-                                color: AppColors.white,
-                                fontSize: 10,
-                                fontWeight: FontWeight.w400),
+                        Builder(
+                          builder: (iconContext) => OnClick(
+                            onTap: () async {
+                              final RenderBox button =
+                                  iconContext.findRenderObject() as RenderBox;
+                              final Offset position =
+                                  button.localToGlobal(Offset.zero);
+                              _showMenu(iconContext, position);
+                            },
+                            child: const Icon(Icons.more_vert,
+                                color: Colors.white54, size: 18),
                           ),
-                        ],
+                        ),
+                         ],
                       );
                     },
                   ),
@@ -232,21 +279,42 @@ class RoomScreen extends StatelessWidget {
                     ),
                     itemBuilder: (context, i) {
                       final a = audience[i];
-                      return Column(
+                      return Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          CircleAvatar(
-                            radius: 24,
-                            backgroundImage: AssetImage(a['image']!),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 3.0),
+                            child: Column(
+                              children: [
+                                CircleAvatar(
+                                  radius: 24,
+                                  backgroundImage: AssetImage(a['image']!),
+                                ),
+                                const SizedBox(height: 4),
+                                Text(
+                                  a['name']!,
+                                  style: context.textTheme.bodyMedium!.copyWith(
+                                      color: AppColors.white,
+                                      fontSize: 10,
+                                      fontWeight: FontWeight.w400),
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ],
+                            ),
+                          ),   Builder(
+                          builder: (iconContext) => OnClick(
+                            onTap: () async {
+                              final RenderBox button =
+                                  iconContext.findRenderObject() as RenderBox;
+                              final Offset position =
+                                  button.localToGlobal(Offset.zero);
+                              _showMenu(iconContext, position);
+                            },
+                            child: const Icon(Icons.more_vert,
+                                color: Colors.white54, size: 18),
                           ),
-                          const SizedBox(height: 4),
-                          Text(
-                            a['name']!,
-                            style: context.textTheme.bodyMedium!.copyWith(
-                                color: AppColors.white,
-                                fontSize: 10,
-                                fontWeight: FontWeight.w400),
-                            overflow: TextOverflow.ellipsis,
-                          ),
+                        ),
+                        
                         ],
                       );
                     },
@@ -255,34 +323,14 @@ class RoomScreen extends StatelessWidget {
                 // Join Room Button
                 Padding(
                   padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
-                  child: SizedBox(
-                    width: double.infinity,
-                    height: 54,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Color(0xFFF05ED0),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(14),
-                        ),
-                      ),
-                      onPressed: () {
-                        showModalBottomSheet(
+                  child:PrimaryButton(onPressed: (){
+                     showModalBottomSheet(
                           context: context,
                           isScrollControlled: true,
                           backgroundColor: Colors.transparent,
                           builder: (context) => RoomBottomSheet(),
                         );
-                      },
-                      child: const Text(
-                        'Join Room',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 18,
-                        ),
-                      ),
-                    ),
-                  ),
+                  }, title: 'Join Room',backgroundColor: AppColors.primaryColor,borderRadius: 16,hMargin: 0,)
                 ),
               ],
             ),

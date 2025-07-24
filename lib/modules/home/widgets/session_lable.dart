@@ -17,8 +17,8 @@ class SectionLabel extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
         gradient: const LinearGradient(
-          begin: Alignment.centerLeft, // Left side
-          end: Alignment.centerRight, // Right side
+          begin: Alignment.centerLeft,
+          end: Alignment.centerRight, 
           colors: [
             AppColors.primaryColor,
             Color(0xFF4B2663),
