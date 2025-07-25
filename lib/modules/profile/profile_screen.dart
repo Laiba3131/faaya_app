@@ -17,7 +17,8 @@ class ProfileScreen extends StatelessWidget {
       appBar: CustomAppbar(
           title: 'Profile', backArrow: true, titleColor: AppColors.white),
       backgroundColor: AppColors.transparent,
-      body: Container( width: double.infinity,
+      body: Container(
+        width: double.infinity,
         height: double.infinity,
         decoration: const BoxDecoration(
           gradient: RadialGradient(
@@ -37,36 +38,35 @@ class ProfileScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               h2,
-             Container(
-            width: 90,
-            height: 90,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12), // Match this
-              border: Border.all(color: AppColors.primaryColor, width: 2),
-            ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(12), // With this
-              child: Image.asset(
-                AssetPaths.youngMan,
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-          h1,
-           Text(
-                    'Julia Andrew',
-                    style: context.textTheme.bodyMedium!.copyWith(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                      color: AppColors.white,
-                    ),
+              Container(
+                width: 90,
+                height: 90,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12), // Match this
+                  border: Border.all(color: AppColors.primaryColor, width: 2),
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(12), // With this
+                  child: Image.asset(
+                    AssetPaths.youngMan,
+                    fit: BoxFit.cover,
                   ),
-          
+                ),
+              ),
+              h1,
+              Text(
+                'Julia Andrew',
+                style: context.textTheme.bodyMedium!.copyWith(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.white,
+                ),
+              ),
               h4,
-               Column(
+              Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                 Text(
+                  Text(
                     'Name',
                     style: context.textTheme.bodyMedium!.copyWith(
                       fontSize: 12,
@@ -75,33 +75,33 @@ class ProfileScreen extends StatelessWidget {
                     ),
                   ),
                   h0P5,
-               InputField(
-                          controller: TextEditingController(text: 'Julia Andrew'),
-                          label: "Search",
-                          fillColor: AppColors.primaryColor,
-                          borderColor: AppColors.primaryColor,
-                          borderRadius: 16,
-                          boxConstraints: 20,
-                          labelColor: AppColors.white,
-                          
-                        ),
-                        h2,
-                         PrefixIconButton(
-                onPressed: () {
-                  NavRouter.pushAndRemoveUntil(context, LoginScreen());
-                },
-                title: 'Sign Out',
-                prefixIconPath: AssetPaths.prince,
-                iconColor:AppColors.primaryColor,
-                titleColor: AppColors.primaryColor,
-                backgroundColor: AppColors.white,
-                height: 55,
-                borderColor: Colors.transparent,
-                mainAxisAlignment: MainAxisAlignment.center,
-                hPadding: 18,
-                borderRadius: 16,
-              ),
-               ],)
+                  InputField(
+                    controller: TextEditingController(text: 'Julia Andrew'),
+                    label: "Search",
+                    fillColor: AppColors.primaryColor,
+                    borderColor: AppColors.primaryColor,
+                    borderRadius: 16,
+                    boxConstraints: 20,
+                    labelColor: AppColors.white,
+                  ),
+                  h2,
+                  PrefixIconButton(
+                    onPressed: () {
+                      NavRouter.pushAndRemoveUntil(context, LoginScreen());
+                    },
+                    title: 'Sign Out',
+                    prefixIconPath: AssetPaths.prince,
+                    iconColor: AppColors.primaryColor,
+                    titleColor: AppColors.primaryColor,
+                    backgroundColor: AppColors.white,
+                    height: 55,
+                    borderColor: Colors.transparent,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    hPadding: 18,
+                    borderRadius: 16,
+                  ),
+                ],
+              )
             ],
           ),
         ),

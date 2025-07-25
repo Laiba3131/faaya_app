@@ -1,4 +1,6 @@
+import 'package:bkmc/config/config.dart';
 import 'package:bkmc/constants/app_colors.dart';
+import 'package:bkmc/ui/button/primary_button.dart';
 import 'package:bkmc/ui/input/input_field.dart';
 import 'package:bkmc/ui/widgets/on_click.dart';
 import 'package:bkmc/utils/extensions/extended_context.dart';
@@ -64,25 +66,15 @@ class _CustomReasonDropdownState extends State<CustomReasonDropdown> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            InputField(
-              controller: searchController,
-              label: "Search",
-              fillColor: AppColors.white,
-              borderColor: AppColors.primaryColor,
-              borderRadius: 16,
-              boxConstraints: 20,
-              labelColor: AppColors.primaryColor,
-              onChange: (value) {
-                setState(() {
-                  filteredItems = widget.items
-                      .where((item) => item
-                          .toLowerCase()
-                          .contains(value.toLowerCase()))
-                      .toList();
-                });
-              },
+            Text(
+              'How can you describe this report?',
+              style: context.textTheme.bodyMedium!.copyWith(
+                color: AppColors.primaryColor,
+                fontSize: 14,
+                fontWeight: FontWeight.w600,
+              ),
             ),
-            h2,
+            h3,
             Flexible(
               child: ListView.builder(
                 shrinkWrap: true,
@@ -90,6 +82,7 @@ class _CustomReasonDropdownState extends State<CustomReasonDropdown> {
                 itemBuilder: (_, index) {
                   final item = filteredItems[index];
                   final isSelected = item == widget.selectedItem;
+                  final isLast = index == filteredItems.length - 1;
 
                   return Column(
                     children: [
@@ -104,9 +97,9 @@ class _CustomReasonDropdownState extends State<CustomReasonDropdown> {
                             Text(
                               item,
                               style: context.textTheme.bodyMedium!.copyWith(
-                                color: AppColors.primaryColor,
-                                fontSize: 12,
-                                fontWeight: FontWeight.w600,
+                                color: AppColors.black,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
                               ),
                             ),
                             isSelected
@@ -117,16 +110,55 @@ class _CustomReasonDropdownState extends State<CustomReasonDropdown> {
                           ],
                         ),
                       ),
-                      h1,
-                      h0P3,
-                      const Divider(color: AppColors.bgGrey),
-                      h1,
-                      h0P3,
+                      if (!isLast) ...[
+                        h1,
+                        const Divider(color: AppColors.bgGrey),
+                        h1,
+                      ],
                     ],
                   );
                 },
               ),
             ),
+            h1,
+            Row(
+              children: [
+                Expanded(
+                  child: PrimaryButton(
+                    onPressed: () {
+                      NavRouter.pop(context);
+                    },
+                    title: 'Cancel',
+                    backgroundColor: AppColors.transparent,
+                    borderRadius: 8,
+                    width: 124,
+                    height: 50,
+                    hMargin: 0,
+                    borderColor: AppColors.primaryColor,
+                    titleColor: AppColors.primaryColor,
+                  ),
+                ),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: PrimaryButton(
+                    onPressed: () {
+                      NavRouter.pop(context);
+                      // showDialog(
+                      //     context: context,
+                      //     builder: (context) {
+                      //       return const JoinMicDialog();
+                      //     });
+                    },
+                    title: 'Confirm',
+                    backgroundColor: AppColors.primaryColor,
+                    borderRadius: 8,
+                    width: 124,
+                    height: 50,
+                    hMargin: 0,
+                  ),
+                ),
+              ],
+            )
           ],
         ),
       ),

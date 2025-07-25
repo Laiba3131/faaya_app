@@ -213,7 +213,9 @@ class _HomeScreenState extends State<HomeScreen> {
         Expanded(
           flex: 2,
           child: CustomDropdown(
+            height: 40,
             title: 'Region',
+            hintText: 'Region',
             items: regionList,
             selectedItem: selectedRegion,
             onItemSelected: (value) {

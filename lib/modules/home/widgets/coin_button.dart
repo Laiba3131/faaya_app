@@ -45,7 +45,7 @@ class CoinButton extends StatelessWidget {
                 SvgPicture.asset(
                   AssetPaths.dollarSign,
                 ),
-               w0P5,
+                w0P5,
                 Text(
                   coins.toString(),
                   style: const TextStyle(

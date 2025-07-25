@@ -1,5 +1,5 @@
 import 'package:bkmc/constants/app_colors.dart';
-import 'package:bkmc/modules/add_room/widgets/word_filter_text_field.dart';
+import 'package:bkmc/modules/home/widgets/custom_dropdown.dart';
 import 'package:bkmc/ui/button/primary_button.dart';
 import 'package:bkmc/ui/input/input_field.dart';
 import 'package:bkmc/utils/extensions/extended_context.dart';
@@ -37,6 +37,17 @@ class _CreateRoomScreenState extends State<CreateRoomScreen> {
     super.dispose();
   }
 
+  String selectedRegion = "Africa";
+
+  List<String> regionList = [
+    'Automatic Selection',
+    'Africa',
+    'Asia',
+    'Australia',
+    'Europe',
+    'North America',
+    'South America',
+  ];
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -54,10 +65,15 @@ class _CreateRoomScreenState extends State<CreateRoomScreen> {
       extendBodyBehindAppBar: true,
       body: Container(
         decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Color(0xFF6A3DE8), Color(0xFF1B143A)],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
+          gradient: RadialGradient(
+            center: Alignment(-1.1, 0),
+            radius: 1.5,
+            colors: [
+              Color(0xFFC637E5),
+              Color(0xFF161616),
+              Color(0xFF161616),
+            ],
+            stops: [0.0, 0.75, 1.0],
           ),
         ),
         child: SafeArea(
@@ -67,11 +83,11 @@ class _CreateRoomScreenState extends State<CreateRoomScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 10),
-                const Text('Add Room photo',
-                    style: TextStyle(
+                Text('Add Room photo',
+                    style: context.textTheme.bodyMedium?.copyWith(
                         color: Colors.white,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600)),
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500)),
                 const SizedBox(height: 12),
                 Row(
                   children: [
@@ -83,63 +99,72 @@ class _CreateRoomScreenState extends State<CreateRoomScreen> {
                         borderRadius: BorderRadius.circular(12),
                         border: Border.all(color: Colors.white24),
                       ),
-                      child: const Center(
-                        child: Icon(Icons.add, color: Colors.white, size: 32),
-                      ),
-                    ),
-                    const SizedBox(width: 16),
-                    Expanded(
-                      child: PrefixIconButton(
-                        onPressed: () {},
-                        title: 'Upload Images',
-                        prefixIconPath: AssetPaths.mic,
-                        backgroundColor: AppColors.primaryColor,
-                        height: 55,
-                        borderColor: Colors.transparent,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        hPadding: 18,
-                        borderRadius: 16,
-                      ),
+                      child: Center(
+                          child: Container(
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(color: Colors.white, width: 2),
+                          color: Colors.transparent,
+                        ),
+                        child: const Icon(Icons.add,
+                            color: Colors.white, size: 20),
+                      )),
                     ),
                   ],
                 ),
                 h2,
+                PrefixIconButton(
+                  onPressed: () {},
+                  title: 'Upload Images',
+                  prefixIconPath: AssetPaths.galary,
+                  backgroundColor: AppColors.primaryColor,
+                  height: 55,
+                  borderColor: Colors.transparent,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  hPadding: 18,
+                  borderRadius: 16,
+                ),
+                h2,
                 Text(
-                    'Email',
-                    style: context.textTheme.bodyMedium!.copyWith(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w400,
-                      color: AppColors.white,
-                    ),
+                  'Room Name',
+                  style: context.textTheme.bodyMedium!.copyWith(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w400,
+                    color: AppColors.white,
                   ),
-                  h0P5,
+                ),
+                h0P5,
                 InputField(
+                  fontSize: 12,
                   boxConstraints: 20,
                   controller: _nameController,
                   label: "Enter name",
+                  labelColor: AppColors.white.withOpacity(0.5),
                   borderRadius: 16,
-                  fillColor: AppColors.primaryColor.withOpacity(0.25),
+                  fillColor: AppColors.primaryColor.withOpacity(0.5),
                   borderColor: AppColors.transparent,
                 ),
                 h1,
                 Text(
-                    'Email',
-                    style: context.textTheme.bodyMedium!.copyWith(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w400,
-                      color: AppColors.white,
-                    ),
+                  'Room Description',
+                  style: context.textTheme.bodyMedium!.copyWith(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w400,
+                    color: AppColors.white,
                   ),
-                  h0P5,
+                ),
+                h0P5,
                 Stack(
                   children: [
                     InputField(
+                      labelColor: AppColors.white.withOpacity(0.5),
                       boxConstraints: 20,
                       maxLines: 2,
+                      fontSize: 12,
                       controller: _descController,
                       label: "Enter description up to 70 characters max.",
                       borderRadius: 16,
-                      fillColor: AppColors.primaryColor.withOpacity(0.25),
+                      fillColor: AppColors.primaryColor.withOpacity(0.5),
                       borderColor: AppColors.transparent,
                     ),
                     const Positioned(
@@ -157,47 +182,62 @@ class _CreateRoomScreenState extends State<CreateRoomScreen> {
                 ),
                 h2,
                 Text(
-                    'Email',
-                    style: context.textTheme.bodyMedium!.copyWith(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w400,
-                      color: AppColors.white,
-                    ),
+                  'Filter Words',
+                  style: context.textTheme.bodyMedium!.copyWith(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w400,
+                    color: AppColors.white,
                   ),
-                  h0P5,
+                ),
+                h0P5,
                 Container(
                   height: 55,
-                  padding: EdgeInsets.all(12),
+                  padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
-                      color: AppColors.primaryColor.withOpacity(0.25),
+                      color: AppColors.primaryColor.withOpacity(0.5),
                       borderRadius: BorderRadius.circular(16)),
                   child: Row(
                     children: [
-                      const Icon(Icons.shield, color: Colors.white54, size: 20),
+                      SvgPicture.asset(AssetPaths.option),
                       const SizedBox(width: 8),
                       const Text('Enable Bad Words Filter',
-                          style: TextStyle(color: Colors.white)),
+                          style: TextStyle(color: Colors.white, fontSize: 12)),
                       const Spacer(),
                       Switch(
+                        thumbColor: WidgetStateProperty.all(AppColors.white),
                         value: _badWordsFilter,
                         onChanged: (val) =>
                             setState(() => _badWordsFilter = val),
-                        activeColor: AppColors.primaryColor.withOpacity(0.25),
+                        activeColor: AppColors.primaryColor,
+                        inactiveThumbColor: AppColors.white,
+                        activeTrackColor: AppColors.primaryColor,
+                        inactiveTrackColor:
+                            AppColors.primaryColor.withOpacity(0.25),
                       ),
                     ],
                   ),
                 ),
                 h1,
-                h1,
+                Text(
+                  'Enter Filter Words',
+                  style: context.textTheme.bodyMedium!.copyWith(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w400,
+                    color: AppColors.white,
+                  ),
+                ),
+                h0P5,
                 Stack(
                   children: [
                     InputField(
+                      fontSize: 12,
+                      labelColor: AppColors.white.withOpacity(0.5),
                       boxConstraints: 20,
                       maxLines: 2,
                       controller: _filterWordsController,
                       label: 'Enter the words you want to filter.',
                       borderRadius: 16,
-                      fillColor: AppColors.primaryColor.withOpacity(0.25),
+                      fillColor: AppColors.primaryColor.withOpacity(0.5),
                       borderColor: AppColors.transparent,
                     ),
                     const Positioned(
@@ -214,22 +254,60 @@ class _CreateRoomScreenState extends State<CreateRoomScreen> {
                   ],
                 ),
                 h1,
-                _buildDropdown(
-                  label: 'Category',
-                  value: _selectedCategory,
-                  items: const ['Music', 'Culture', 'Sports', 'Education'],
-                  onChanged: (val) => setState(() => _selectedCategory = val),
+                Text(
+                  'Category',
+                  style: context.textTheme.bodyMedium!.copyWith(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w400,
+                    color: AppColors.white,
+                  ),
+                ),
+                h0P5,
+                CustomDropdown(
+                  height: 50,
+                  hintText: 'Select Category ',
+                  isPrefixIconVisible: false,
+                  title: 'Select Category  ',
+                  items: regionList,
+                  selectedItem: selectedRegion,
+                  onItemSelected: (value) {
+                    setState(() {
+                      selectedRegion = value;
+                    });
+                  },
+                ),
+                h1,
+                Text(
+                  'Region',
+                  style: context.textTheme.bodyMedium!.copyWith(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w400,
+                    color: AppColors.white,
+                  ),
+                ),
+                h0P5,
+                CustomDropdown(
+                  height: 50,
+                  hintText: 'Select Region',
+                  isPrefixIconVisible: false,
+                  title: 'Select Category  ',
+                  items: regionList,
+                  selectedItem: selectedRegion,
+                  onItemSelected: (value) {
+                    setState(() {
+                      selectedRegion = value;
+                    });
+                  },
                 ),
                 h2,
-                RegionDropdown(
-                  selectedRegion: _selectedRegion,
-                  onRegionSelected: (val) =>
-                      setState(() => _selectedRegion = val),
+                Text(
+                  'Select Mic Options',
+                  style: context.textTheme.bodyMedium!.copyWith(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w400,
+                    color: AppColors.white,
+                  ),
                 ),
-                h2,
-                const Text('Select Mic Options',
-                    style: TextStyle(
-                        color: Colors.white, fontWeight: FontWeight.w500)),
                 h1,
                 Row(
                   children: [
@@ -245,9 +323,14 @@ class _CreateRoomScreenState extends State<CreateRoomScreen> {
                   ],
                 ),
                 h2,
-                const Text('Privacy settings',
-                    style: TextStyle(
-                        color: Colors.white, fontWeight: FontWeight.w500)),
+                Text(
+                  'Privacy settings',
+                  style: context.textTheme.bodyMedium!.copyWith(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w400,
+                    color: AppColors.white,
+                  ),
+                ),
                 h1,
                 Row(
                   children: [
@@ -264,27 +347,18 @@ class _CreateRoomScreenState extends State<CreateRoomScreen> {
                 ),
                 h2,
                 _buildSlider('Speaker Limit', _speakerLimit, 0, 20,
-                    (val) => setState(() => _speakerLimit = val)),
+                    (val) => setState(() => _speakerLimit = val), context),
                 h1,
                 _buildSlider('Audience Limit', _audienceLimit, 0, 100,
-                    (val) => setState(() => _audienceLimit = val)),
+                    (val) => setState(() => _audienceLimit = val), context),
                 const SizedBox(height: 24),
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFFB13EFF),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12)),
-                      padding: const EdgeInsets.symmetric(vertical: 18),
-                    ),
-                    onPressed: () {},
-                    child: const Text('Start Room',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w600,
-                            fontSize: 16)),
-                  ),
+                PrimaryButton(
+                  onPressed: () {},
+                  title: 'Start Room',
+                  backgroundColor: AppColors.primaryColor,
+                  height: 55,
+                  hMargin: 0,
+                  borderRadius: 16,
                 ),
                 h2,
               ],
@@ -295,84 +369,6 @@ class _CreateRoomScreenState extends State<CreateRoomScreen> {
     );
   }
 
-  Widget _buildTextField({
-    required TextEditingController controller,
-    required String label,
-    required String hint,
-    int? maxLength,
-    int minLines = 1,
-    int maxLines = 1,
-  }) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(label,
-            style: const TextStyle(
-                color: Colors.white, fontWeight: FontWeight.w500)),
-        const SizedBox(height: 6),
-        TextField(
-          controller: controller,
-          maxLength: maxLength,
-          minLines: minLines,
-          maxLines: maxLines,
-          style: const TextStyle(color: Colors.white),
-          decoration: InputDecoration(
-            hintText: hint,
-            hintStyle: const TextStyle(color: Colors.white54),
-            filled: true,
-            fillColor: Colors.white.withOpacity(0.08),
-            counterStyle: const TextStyle(color: Colors.white38, fontSize: 12),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide.none,
-            ),
-            contentPadding:
-                const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildDropdown({
-    required String label,
-    required String? value,
-    required List<String> items,
-    required ValueChanged<String?> onChanged,
-  }) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(label,
-            style: const TextStyle(
-                color: Colors.white, fontWeight: FontWeight.w500)),
-        const SizedBox(height: 6),
-        Container(
-          decoration: BoxDecoration(
-            color: const Color(0xFFB13EFF),
-            borderRadius: BorderRadius.circular(12),
-          ),
-          padding: const EdgeInsets.symmetric(horizontal: 12),
-          child: DropdownButton<String>(
-            value: value,
-            isExpanded: true,
-            dropdownColor: const Color(0xFFB13EFF),
-            icon: const Icon(Icons.keyboard_arrow_down, color: Colors.white),
-            underline: const SizedBox(),
-            style: const TextStyle(
-                color: Colors.white, fontWeight: FontWeight.w600),
-            hint: Text('Select $label',
-                style: const TextStyle(color: Colors.white70)),
-            items: items
-                .map((e) => DropdownMenuItem(value: e, child: Text(e)))
-                .toList(),
-            onChanged: onChanged,
-          ),
-        ),
-      ],
-    );
-  }
-
   Widget _buildRadioTile(
       String label, String groupValue, ValueChanged<String> onChanged) {
     return GestureDetector(
@@ -380,311 +376,127 @@ class _CreateRoomScreenState extends State<CreateRoomScreen> {
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 14),
         decoration: BoxDecoration(
-          color: groupValue == label
-              ? Colors.white.withOpacity(0.12)
-              : Colors.white.withOpacity(0.08),
+          color: AppColors.containerColor,
           borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: Colors.white24),
+          border: Border.all(color: AppColors.primaryColor),
         ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              label,
-              style: const TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.w600,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                label,
+                style: context.textTheme.bodyMedium!.copyWith(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w500,
+                  color: AppColors.white,
+                ),
               ),
-            ),
-            const SizedBox(width: 8),
-            Container(
-              width: 18,
-              height: 18,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(color: Colors.white, width: 2),
-              ),
-              child: groupValue == label
-                  ? Center(
-                      child: Container(
-                        width: 10,
-                        height: 10,
-                        decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Color(0xFFB13EFF),
+              const SizedBox(width: 8),
+              Container(
+                width: 18,
+                height: 18,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(color: Colors.white, width: 2),
+                ),
+                child: groupValue == label
+                    ? Center(
+                        child: Container(
+                          width: 10,
+                          height: 10,
+                          decoration: const BoxDecoration(
+                              shape: BoxShape.circle, color: AppColors.white),
                         ),
-                      ),
-                    )
-                  : null,
-            ),
-          ],
+                      )
+                    : null,
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 
   Widget _buildSlider(String label, double value, double min, double max,
-      ValueChanged<double> onChanged) {
+      ValueChanged<double> onChanged, BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
-          children: [
-            Text(label,
-                style: const TextStyle(
-                    color: Colors.white, fontWeight: FontWeight.w500)),
-            const Spacer(),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-              decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.12),
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Text(value.toInt().toString(),
-                  style: const TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.w600)),
-            ),
-          ],
-        ),
-        Slider(
-          value: value,
-          min: min,
-          max: max,
-          divisions: (max - min).toInt(),
-          activeColor: const Color(0xFFB13EFF),
-          inactiveColor: Colors.white24,
-          onChanged: onChanged,
+        Text(
+          label,
+          style: context.textTheme.bodyMedium!.copyWith(
+            fontSize: 12,
+            fontWeight: FontWeight.w400,
+            color: AppColors.white,
+          ),
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(min.toInt().toString(),
-                style: const TextStyle(color: Colors.white54)),
-            Text(max.toInt().toString(),
-                style: const TextStyle(color: Colors.white54)),
-          ],
-        ),
-      ],
-    );
-  }
-}
-
-class RegionDropdown extends StatefulWidget {
-  final String? selectedRegion;
-  final ValueChanged<String> onRegionSelected;
-  RegionDropdown(
-      {required this.selectedRegion, required this.onRegionSelected, Key? key})
-      : super(key: key);
-
-  final List<String> regions = const [
-    'Automatic Selection',
-    'Africa',
-    'Asia',
-    'Australia',
-    'Europe',
-    'North America',
-    'South America',
-  ];
-
-  @override
-  State<RegionDropdown> createState() => _RegionDropdownState();
-}
-
-class _RegionDropdownState extends State<RegionDropdown> {
-  final LayerLink _layerLink = LayerLink();
-  OverlayEntry? _overlayEntry;
-  bool _isOpen = false;
-  String _search = '';
-
-  void _toggleDropdown() {
-    if (_isOpen) {
-      _removeDropdown();
-    } else {
-      _showDropdown();
-    }
-  }
-
-  void _showDropdown() {
-    _overlayEntry = _createOverlayEntry();
-    Overlay.of(context).insert(_overlayEntry!);
-    setState(() => _isOpen = true);
-  }
-
-  void _removeDropdown() {
-    _overlayEntry?.remove();
-    setState(() => _isOpen = false);
-  }
-
-  OverlayEntry _createOverlayEntry() {
-    RenderBox renderBox = context.findRenderObject() as RenderBox;
-    final size = renderBox.size;
-    final offset = renderBox.localToGlobal(Offset.zero);
-    final filtered = widget.regions
-        .where((r) => r.toLowerCase().contains(_search.toLowerCase()))
-        .toList();
-    return OverlayEntry(
-      builder: (context) => GestureDetector(
-        behavior: HitTestBehavior.translucent,
-        onTap: _removeDropdown,
-        child: Stack(
-          children: [
-            Positioned(
-              left: offset.dx,
-              top: offset.dy + size.height + 4,
-              width: size.width,
-              child: CompositedTransformFollower(
-                link: _layerLink,
-                showWhenUnlinked: false,
-                offset: Offset(0, size.height + 4),
-                child: Material(
-                  color: Colors.transparent,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFDB8CFF),
-                      borderRadius: BorderRadius.circular(16),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.15),
-                          blurRadius: 12,
-                          offset: const Offset(0, 4),
-                        ),
-                      ],
-                    ),
-                    constraints: const BoxConstraints(maxHeight: 320),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.2),
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          margin: const EdgeInsets.all(12),
-                          child: TextField(
-                            onChanged: (val) => setState(() => _search = val),
-                            style: const TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w600),
-                            decoration: const InputDecoration(
-                              hintText: 'Search',
-                              hintStyle: TextStyle(color: Colors.white54),
-                              border: InputBorder.none,
-                              contentPadding: EdgeInsets.symmetric(
-                                  horizontal: 16, vertical: 14),
-                            ),
-                          ),
-                        ),
-                        Flexible(
-                          child: ListView.separated(
-                            shrinkWrap: true,
-                            itemCount: filtered.length,
-                            separatorBuilder: (_, __) =>
-                                const SizedBox(height: 4),
-                            itemBuilder: (context, i) {
-                              final region = filtered[i];
-                              return Material(
-                                color: Colors.transparent,
-                                child: InkWell(
-                                  borderRadius: BorderRadius.circular(10),
-                                  onTap: () {
-                                    widget.onRegionSelected(region);
-                                    _removeDropdown();
-                                    setState(() => _search = '');
-                                  },
-                                  child: Container(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 8, vertical: 10),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      color: Colors.transparent,
-                                    ),
-                                    child: Row(
-                                      children: [
-                                        Expanded(
-                                          child: Text(
-                                            region,
-                                            style: const TextStyle(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.w600),
-                                          ),
-                                        ),
-                                        Radio<String>(
-                                          value: region,
-                                          groupValue: widget.selectedRegion,
-                                          onChanged: (val) {
-                                            widget.onRegionSelected(region);
-                                            _removeDropdown();
-                                            setState(() => _search = '');
-                                          },
-                                          activeColor: Colors.white,
-                                          fillColor: MaterialStateProperty.all(
-                                              Colors.white),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              );
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+            Expanded(
+              // 👈 Wrap SliderTheme in Expanded
+              child: SliderTheme(
+                data: SliderTheme.of(context).copyWith(
+                  trackShape: const RectangularSliderTrackShape(),
+                  trackHeight: 8,
+                  thumbShape:
+                      const RoundSliderThumbShape(enabledThumbRadius: 10),
+                  overlayShape: const RoundSliderOverlayShape(overlayRadius: 0),
+                ),
+                child: Slider(
+                  value: value,
+                  min: min,
+                  max: max,
+                  // divisions: (max - min).toInt(),
+                  activeColor: AppColors.primaryColor,
+                  thumbColor: AppColors.white,
+                  inactiveColor: Colors.white,
+                  onChanged: onChanged,
+                ),
+              ),
+            ),
+            const SizedBox(
+                width: 8),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Text(
+                value.toInt().toString(),
+                style: const TextStyle(
+                  color: Colors.black,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Text('Region',
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500)),
-        const SizedBox(height: 6),
-        CompositedTransformTarget(
-          link: _layerLink,
-          child: GestureDetector(
-            onTap: _toggleDropdown,
-            child: Container(
-              width: double.infinity,
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 18),
-              decoration: BoxDecoration(
-                color: const Color(0xFFB13EFF),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Text(
-                      widget.selectedRegion ?? 'Select Region',
-                      style: const TextStyle(
-                          color: Colors.white, fontWeight: FontWeight.w600),
-                    ),
-                  ),
-                  Icon(
-                      _isOpen
-                          ? Icons.keyboard_arrow_up
-                          : Icons.keyboard_arrow_down,
-                      color: Colors.white),
-                ],
-              ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(min.toInt().toString(),
+                style: context.textTheme.bodyMedium!.copyWith(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w500,
+                  color: AppColors.white,
+                )),
+            Padding(
+              padding: const EdgeInsets.only(right: 65.0),
+              child: Text(max.toInt().toString(),
+                  style: context.textTheme.bodyMedium!.copyWith(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w500,
+                    color: AppColors.white,
+                  )),
             ),
-          ),
+          ],
         ),
       ],
     );
-  }
-
-  @override
-  void dispose() {
-    _removeDropdown();
-    super.dispose();
   }
 }
