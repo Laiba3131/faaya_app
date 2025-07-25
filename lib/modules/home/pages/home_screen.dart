@@ -208,8 +208,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _buildFilterButtons(context) {
     return Row(
+      spacing: 12.0,
       children: [
         Expanded(
+          flex: 2,
           child: CustomDropdown(
             title: 'Region',
             items: regionList,
@@ -221,8 +223,9 @@ class _HomeScreenState extends State<HomeScreen> {
             },
           ),
         ),
-        const SizedBox(width: 10),
-        Expanded(child: _buildFilterChip("Category", context)),
+        Expanded(
+            flex: 2,child: _buildFilterChip("Category", context)),
+        Expanded(child: SizedBox(),)
       ],
     );
   }
@@ -235,7 +238,7 @@ class _HomeScreenState extends State<HomeScreen> {
         }
       },
       title: 'Category',
-      prefixIconPath: AssetPaths.prince,
+      prefixIconPath: AssetPaths.category,
       height: 42,
       width: 200,
       backgroundColor: AppColors.primaryColor,

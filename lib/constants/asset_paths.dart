@@ -7,6 +7,7 @@ class AssetPaths {
   ///* ================ Png ================ *///
 
   static const String pngLogo = 'assets/images/png/logo.png';
+  static const String category = "assets/images/svg/category.svg";
   static const String backGroundImageForSplash =
       'assets/images/png/Mask group (1).png';
   static const String backGroundImage = 'assets/images/png/Mask group.png';
