@@ -1,3 +1,5 @@
+import 'package:bkmc/config/routes/nav_router.dart';
+import 'package:bkmc/modules/common/widgets/custom_reason_dropdown.dart';
 import 'package:bkmc/modules/home/widgets/action_dropdown_withour_icon.dart';
 import 'package:bkmc/ui/button/primary_button.dart';
 import 'package:bkmc/ui/widgets/on_click.dart';
@@ -12,11 +14,28 @@ import '../widgets/bottom_sheet/room_bottom_sheet.dart';
 import '../widgets/room_info_button.dart';
 import '../widgets/session_lable.dart';
 
-class RoomScreen extends StatelessWidget {
+class RoomScreen extends StatefulWidget {
   const RoomScreen({Key? key}) : super(key: key);
 
   @override
+  State<RoomScreen> createState() => _RoomScreenState();
+}
+
+class _RoomScreenState extends State<RoomScreen> {
+  @override
   Widget build(BuildContext context) {
+    String selectedRegion = "Africa";
+
+    List<String> reasonList = [
+      'Bullying',
+      'Inappropriate content',
+      'Harassment',
+      'Abuse',
+      'Profanity',
+      'Child Abuse',
+      'Religious abuse',
+      'Nudity',
+    ];
     final host = {
       'name': 'Julia Andrew',
       'role': 'Culture',
@@ -53,11 +72,29 @@ class RoomScreen extends StatelessWidget {
         items: [
           PopupMenuItem(
             padding: EdgeInsets.zero,
-            child: ActionDropdownWithourIcon(
-              invite: () => print("Reply clicked"),
-              kick: () => print("Copy clicked"),
-              ban: () => print("Report clicked"),
-              report: () => print("Delete clicked"),
+            child: ActionDropdownWithoutIcon(
+              actions: [
+                DropdownAction(
+                    label: "Report",
+                    onTap: () {
+                      NavRouter.pop(context);
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return CustomReasonDropdown(
+                              onItemSelected: (p0) {
+                                setState(() {
+                                  selectedRegion = p0;
+                                });
+                              },
+                              selectedItem: selectedRegion,
+                              items: reasonList,
+                            );
+                          });
+                    }),
+                // DropdownAction(label: "Kick", onTap: () => print("Kick")),
+                // You can pass only 1, 2, 3, or 4
+              ],
             ),
           ),
         ],
@@ -281,40 +318,54 @@ class RoomScreen extends StatelessWidget {
                     ),
                     itemBuilder: (context, i) {
                       final a = audience[i];
-                      return Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                      return Stack(
                         children: [
                           Padding(
                             padding: const EdgeInsets.only(top: 3.0),
                             child: Column(
+                              mainAxisSize: MainAxisSize.min,
                               children: [
                                 CircleAvatar(
                                   radius: 24,
                                   backgroundImage: AssetImage(a['image']!),
                                 ),
                                 const SizedBox(height: 4),
-                                Text(
-                                  a['name']!,
-                                  style: context.textTheme.bodyMedium!.copyWith(
+                                SizedBox(
+                                  width:
+                                      60, // restrict width for proper ellipsis
+                                  child: Text(
+                                    a['name']!,
+                                    textAlign: TextAlign.center,
+                                    style:
+                                        context.textTheme.bodyMedium!.copyWith(
                                       color: AppColors.white,
                                       fontSize: 10,
-                                      fontWeight: FontWeight.w400),
-                                  overflow: TextOverflow.ellipsis,
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
                                 ),
                               ],
                             ),
                           ),
-                          Builder(
-                            builder: (iconContext) => OnClick(
-                              onTap: () async {
-                                final RenderBox button =
-                                    iconContext.findRenderObject() as RenderBox;
-                                final Offset position =
-                                    button.localToGlobal(Offset.zero);
-                                _showMenu(iconContext, position);
-                              },
-                              child: const Icon(Icons.more_vert,
-                                  color: Colors.white54, size: 18),
+                          Positioned(
+                            top: 0,
+                            right: 12,
+                            child: Builder(
+                              builder: (iconContext) => OnClick(
+                                onTap: () async {
+                                  final RenderBox button = iconContext
+                                      .findRenderObject() as RenderBox;
+                                  final Offset position =
+                                      button.localToGlobal(Offset.zero);
+                                  _showMenu(iconContext, position);
+                                },
+                                child: const Icon(
+                                  Icons.more_vert,
+                                  color: Colors.white54,
+                                  size: 18,
+                                ),
+                              ),
                             ),
                           ),
                         ],

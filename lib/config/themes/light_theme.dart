@@ -129,12 +129,12 @@ ThemeData _getTheme() {
     ),
 
     /// ************************************** DialogTheme **************************************
-    dialogTheme: DialogTheme(
-      backgroundColor: colorScheme.background,
-      surfaceTintColor: colorScheme.background,
+    // dialogTheme: DialogTheme(
+    //   backgroundColor: colorScheme.background,
+    //   surfaceTintColor: colorScheme.background,
 
-      /// titleTextStyle: textTheme.titleLarge,
-    ),
+    //   /// titleTextStyle: textTheme.titleLarge,
+    // ),
 
     /// ************************************** DividerTheme **************************************
     dividerTheme: const DividerThemeData(

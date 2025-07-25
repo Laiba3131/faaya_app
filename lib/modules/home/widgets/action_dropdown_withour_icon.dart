@@ -1,20 +1,21 @@
 import 'package:bkmc/constants/app_colors.dart';
-import 'package:bkmc/constants/asset_paths.dart';
 import 'package:flutter/material.dart';
 
-class ActionDropdownWithourIcon extends StatelessWidget {
-  final VoidCallback? invite;
-  final VoidCallback? kick;
-  final VoidCallback? ban;
-  final VoidCallback? report;
+class DropdownAction {
+  final String label;
+  final VoidCallback onTap;
 
-  const ActionDropdownWithourIcon({
+  DropdownAction({required this.label, required this.onTap});
+}
+
+class ActionDropdownWithoutIcon extends StatelessWidget {
+  final List<DropdownAction> actions;
+
+  const ActionDropdownWithoutIcon({
     super.key,
-    required this.invite,
-    required this.kick,
-    required this.ban,
-    required this.report,
-  });
+    required this.actions,
+  }) : assert(actions.length >= 1 && actions.length <= 4,
+            'Actions must be between 1 and 4');
 
   @override
   Widget build(BuildContext context) {
@@ -29,12 +30,9 @@ class ActionDropdownWithourIcon extends StatelessWidget {
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
-          children: [
-            _buildItem("Invite", invite ?? () {}),
-            _buildItem("Kick", kick ?? () {}),
-            _buildItem("Ban", ban ?? () {}),
-            _buildItem("Report", report ?? () {}),
-          ],
+          children: actions
+              .map((action) => _buildItem(action.label, action.onTap))
+              .toList(),
         ),
       ),
     );
@@ -53,11 +51,14 @@ class ActionDropdownWithourIcon extends StatelessWidget {
             borderRadius: const BorderRadius.all(Radius.circular(12)),
           ),
           child: Center(
-            child: Text(label,
-                style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 12,
-                    fontWeight: FontWeight.w600)),
+            child: Text(
+              label,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 12,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
           ),
         ),
       ),
