@@ -4,7 +4,7 @@ class CommentModel {
   final String name;
   final String time;
   final String comment;
-  int likes;
+  int likes;bool isExpanded;
   List<CommentModel> replies;
   CommentModel({
     required this.id,
@@ -14,5 +14,6 @@ class CommentModel {
     required this.comment,
     this.likes = 0,
     this.replies = const [],
+     this.isExpanded = false,
   });
 }

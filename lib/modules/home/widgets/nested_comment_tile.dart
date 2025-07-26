@@ -1,13 +1,14 @@
 import 'package:bkmc/modules/home/model/comment_model.dart';
 import 'package:bkmc/modules/home/widgets/action_dropdown_menu.dart';
 import 'package:bkmc/ui/widgets/on_click.dart';
+import 'package:bkmc/utils/heights_and_widths.dart';
 import 'package:flutter/material.dart';
-
-class NestedCommentTile extends StatelessWidget {
+class NestedCommentTile extends StatefulWidget {
   final CommentModel comment;
   final void Function(int id) onLike;
   final void Function(int id, String userName) onReply;
   final int depth;
+
   const NestedCommentTile({
     required this.comment,
     required this.onLike,
@@ -16,6 +17,11 @@ class NestedCommentTile extends StatelessWidget {
     super.key,
   });
 
+  @override
+  State<NestedCommentTile> createState() => _NestedCommentTileState();
+}
+
+class _NestedCommentTileState extends State<NestedCommentTile> {
   void _showMenu(BuildContext context, Offset position) {
     final overlay = Overlay.of(context).context.findRenderObject() as RenderBox;
     showMenu(
@@ -42,11 +48,15 @@ class NestedCommentTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final comment = widget.comment;
+
     return Padding(
-      padding: EdgeInsets.only(left: depth * 24.0, bottom: 8.0),
+      padding: EdgeInsets.only( bottom: 8.0),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+         h2,
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -105,9 +115,16 @@ class NestedCommentTile extends StatelessWidget {
                     Row(
                       children: [
                         GestureDetector(
-                          onTap: () => onLike(comment.id),
+                          onTap: () => widget.onLike(comment.id),
                           child: Row(
                             children: [
+                               const Text(
+                                'Like',
+                                style: TextStyle(
+                                  color: Colors.white54,
+                                  fontSize: 12,
+                                ),
+                              ),const SizedBox(width: 2),
                               const Icon(Icons.favorite,
                                   color: Colors.red, size: 16),
                               const SizedBox(width: 2),
@@ -121,9 +138,15 @@ class NestedCommentTile extends StatelessWidget {
                             ],
                           ),
                         ),
-                        const SizedBox(width: 12),
+                        const SizedBox(width: 6),
+                        Container(
+      height: 12,
+      width: 1,
+      color: Colors.white30,
+    ), const SizedBox(width: 6),
                         GestureDetector(
-                          onTap: () => onReply(comment.id, comment.name),
+                          onTap: () =>
+                              widget.onReply(comment.id, comment.name),
                           child: const Text(
                             'Reply',
                             style: TextStyle(
@@ -132,6 +155,13 @@ class NestedCommentTile extends StatelessWidget {
                             ),
                           ),
                         ),
+                         const SizedBox(width: 4),
+                              Text(
+                                comment.likes.toString(),
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 12,
+                                ),)
                       ],
                     ),
                   ],
@@ -139,13 +169,50 @@ class NestedCommentTile extends StatelessWidget {
               ),
             ],
           ),
-          // Render replies
-          ...comment.replies.map((r) => NestedCommentTile(
-                comment: r,
-                onLike: onLike,
-                onReply: onReply,
-                depth: depth + 1,
-              )),
+
+          // Show toggle if has replies
+          if (comment.replies.isNotEmpty)
+            Padding(
+              padding: const EdgeInsets.only(left: 34.0, top: 4),
+              child: comment.isExpanded
+                  ? Column(
+                      children: [
+                        ...comment.replies.map((r) => NestedCommentTile(
+                              comment: r,
+                              onLike: widget.onLike,
+                              onReply: widget.onReply,
+                              depth: widget.depth + 1,
+                            )),
+                        // TextButton(
+                        //   onPressed: () {
+                        //     setState(() {
+                        //       comment.isExpanded = false;
+                        //     });
+                        //   },
+                        //   child: const Text(
+                        //     "Hide replies",
+                        //     style: TextStyle(color: Colors.purpleAccent),
+                        //   ),
+                        // )
+                      ],
+                    )
+                  : 
+                  InkWell(
+                    onTap: () {
+                        setState(() {
+                          comment.isExpanded = true;
+                        });
+                      },
+                      
+                      child: Text(
+                        "View ${comment.replies.length} ${comment.replies.length == 1 ? "reply" : "replies"}",
+                         style: TextStyle(
+                              color: Colors.white54,
+                              fontSize: 12,
+                            ),
+                      ),
+                    ),
+            ),
         ],
       ),
     );

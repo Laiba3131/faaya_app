@@ -24,7 +24,7 @@ class ProfileScreen extends StatelessWidget {
             center: Alignment(-1.1, 0),
             radius: 1.5,
             colors: [
-              Color(0xFFC637E5),
+             AppColors.primaryColor,
               Color(0xFF161616),
               Color(0xFF161616),
             ],
@@ -77,11 +77,11 @@ class ProfileScreen extends StatelessWidget {
                   Container(
                     width: double.infinity,
                     decoration: BoxDecoration(
-                        color: Color(0xffC637E5),
+                        color:AppColors.primaryColor,
                         borderRadius: BorderRadius.circular(
                           12.0,
                         )),
-                    padding: EdgeInsets.all(16.0),
+                    padding: const EdgeInsets.all(16.0),
                     child: Text(
                       "Julia Andrew",
                       style: context.textTheme.bodyMedium?.copyWith(

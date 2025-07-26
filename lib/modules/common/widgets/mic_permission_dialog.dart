@@ -119,14 +119,15 @@ class _MicPermissionDialogState extends State<MicPermissionDialog> {
                 Expanded(
                   child: PrimaryButton(
                     onPressed: () {
+                      NavRouter.pop(context);
                       CustomReasonDropdown.show(
                         context,
                         items: regionList,
-                        selectedItem: selectedRegion, // can be null
+                        selectedItem: selectedRegion, 
                         onItemSelected: (selected) {
                           setState(() {
                             selectedRegion =
-                                selected; // or use your controller/logic
+                                selected; 
                           });
                         },
                       );
