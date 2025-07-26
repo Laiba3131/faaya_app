@@ -128,7 +128,6 @@ ThemeData _getTheme() {
       ),
     ),
 
-
     /// ************************************** DividerTheme **************************************
     dividerTheme: const DividerThemeData(
       color: _divider,

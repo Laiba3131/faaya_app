@@ -224,10 +224,12 @@ class _HomeScreenState extends State<HomeScreen> {
               });
             },
           ),
-        ),w1,
+        ),
+        w1,
+        Expanded(flex: 3, child: _buildFilterChip("Category", context)),
         Expanded(
-            flex: 3,child: _buildFilterChip("Category", context)),
-        Expanded(child: SizedBox(),)
+          child: SizedBox(),
+        )
       ],
     );
   }

@@ -54,7 +54,7 @@ class _CreateRoomScreenState extends State<CreateRoomScreen> {
     'South America',
   ];
 
-   File? _pickedImage;
+  File? _pickedImage;
 
   Future<void> _pickImage() async {
     final ImagePicker picker = ImagePicker();
@@ -66,6 +66,7 @@ class _CreateRoomScreenState extends State<CreateRoomScreen> {
       });
     }
   }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -110,35 +111,36 @@ class _CreateRoomScreenState extends State<CreateRoomScreen> {
                 Row(
                   children: [
                     Container(
-            width: 64,
-            height: 64,
-            decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.1),
-              borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: Colors.white24),
-            ),
-            child: Center(
-              child: _pickedImage == null
-                  ? Container(
+                      width: 64,
+                      height: 64,
                       decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(color: Colors.white, width: 2),
-                        color: Colors.transparent,
+                        color: Colors.white.withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(color: Colors.white24),
                       ),
-                      child: const Icon(Icons.add,
-                          color: Colors.white, size: 20),
-                    )
-                  : ClipRRect(
-                      borderRadius: BorderRadius.circular(8),
-                      child: Image.file(
-                        _pickedImage!,
-                        width: 64,
-                        height: 64,
-                        fit: BoxFit.cover,
+                      child: Center(
+                        child: _pickedImage == null
+                            ? Container(
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  border:
+                                      Border.all(color: Colors.white, width: 2),
+                                  color: Colors.transparent,
+                                ),
+                                child: const Icon(Icons.add,
+                                    color: Colors.white, size: 20),
+                              )
+                            : ClipRRect(
+                                borderRadius: BorderRadius.circular(8),
+                                child: Image.file(
+                                  _pickedImage!,
+                                  width: 64,
+                                  height: 64,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
                       ),
                     ),
-            ),
-          ),
                   ],
                 ),
                 h2,
@@ -383,7 +385,6 @@ class _CreateRoomScreenState extends State<CreateRoomScreen> {
                 const SizedBox(height: 24),
                 PrimaryButton(
                   onPressed: () {
-
                     NavRouter.push(context, const AdminViewRoomScreen());
                   },
                   title: 'Start Room',
@@ -489,8 +490,7 @@ class _CreateRoomScreenState extends State<CreateRoomScreen> {
                 ),
               ),
             ),
-            const SizedBox(
-                width: 8),
+            const SizedBox(width: 8),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
               decoration: BoxDecoration(

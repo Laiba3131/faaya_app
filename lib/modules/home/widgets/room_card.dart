@@ -28,10 +28,10 @@ class RoomCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-       color: Colors.transparent, 
+      color: Colors.transparent,
       child: InkWell(
         splashColor: Colors.transparent, // Remove ripple color
-    highlightColor: Colors.transparent,
+        highlightColor: Colors.transparent,
         onTap: onTap,
         child: Container(
           decoration: BoxDecoration(

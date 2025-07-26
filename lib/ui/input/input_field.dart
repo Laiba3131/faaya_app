@@ -99,11 +99,11 @@ class _InputFieldState extends State<InputField> {
           maxLines: widget.maxLines,
           focusNode: widget.focusNode,
           onChanged: widget.onChange,
-          cursorColor:AppColors.white,
+          cursorColor: AppColors.white,
           decoration: InputDecoration(
             hintText: widget.label,
             labelStyle: TextStyle(
-color: Colors.white,
+                color: Colors.white,
                 fontSize: widget.fontSize,
                 fontWeight: widget.fontWeight,
                 fontFamily: AssetPaths.roboto),
