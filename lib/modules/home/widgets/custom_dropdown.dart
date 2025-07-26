@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 class CustomDropdown extends StatefulWidget {
   final String title;
   final List<String> items;
-  final String selectedItem;
+  final String? selectedItem;
   final String hintText;
   final bool isPrefixIconVisible;
   final double height;

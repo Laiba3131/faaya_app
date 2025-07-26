@@ -25,7 +25,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  String selectedRegion = "Africa";
+  String? selectedRegion;
 
   List<String> regionList = [
     'Africa',
@@ -215,7 +215,7 @@ class _HomeScreenState extends State<HomeScreen> {
           child: CustomDropdown(
             height: 40,
             title: 'Region',
-            hintText: 'Region',
+            hintText: selectedRegion ?? 'Region',
             items: regionList,
             selectedItem: selectedRegion,
             onItemSelected: (value) {
@@ -226,9 +226,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
         w1,
-        Expanded(flex: 3, child: _buildFilterChip("Category", context)),
-        Expanded(
-          child: SizedBox(),
+        Expanded(flex: 3, child: _buildFilterChip("Category", context)
         )
       ],
     );

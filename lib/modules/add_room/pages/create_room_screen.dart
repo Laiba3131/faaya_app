@@ -27,9 +27,6 @@ class _CreateRoomScreenState extends State<CreateRoomScreen> {
   final TextEditingController _filterWordsController = TextEditingController();
 
   bool _badWordsFilter = false;
-  String? _selectedCategory;
-  String? _selectedRegion = 'Automatic Selection';
-  String _micOption = 'Mic & Comments';
   String _privacy = 'Private';
   double _speakerLimit = 17;
   double _audienceLimit = 45;
@@ -42,7 +39,8 @@ class _CreateRoomScreenState extends State<CreateRoomScreen> {
     super.dispose();
   }
 
-  String selectedRegion = "Africa";
+  String? selectedRegion;
+  String? selectedCategory;
 
   List<String> regionList = [
     'Automatic Selection',
@@ -52,6 +50,12 @@ class _CreateRoomScreenState extends State<CreateRoomScreen> {
     'Europe',
     'North America',
     'South America',
+  ];
+
+    List<String> categoryList = [
+    'Entertainment',
+    'Culture',
+    'Music',
   ];
 
   File? _pickedImage;
@@ -296,14 +300,14 @@ class _CreateRoomScreenState extends State<CreateRoomScreen> {
                 h0P5,
                 CustomDropdown(
                   height: 50,
-                  hintText: 'Select Category ',
+                  hintText: selectedCategory??'Select Category ',
                   isPrefixIconVisible: false,
                   title: 'Select Category  ',
-                  items: regionList,
-                  selectedItem: selectedRegion,
+                  items: categoryList,
+                  selectedItem: selectedCategory,
                   onItemSelected: (value) {
                     setState(() {
-                      selectedRegion = value;
+                      selectedCategory = value;
                     });
                   },
                 ),
@@ -319,9 +323,9 @@ class _CreateRoomScreenState extends State<CreateRoomScreen> {
                 h0P5,
                 CustomDropdown(
                   height: 50,
-                  hintText: 'Select Region',
+                  hintText: selectedRegion?? 'Select Category',
                   isPrefixIconVisible: false,
-                  title: 'Select Category  ',
+                  title:selectedRegion?? 'Select Category',
                   items: regionList,
                   selectedItem: selectedRegion,
                   onItemSelected: (value) {
