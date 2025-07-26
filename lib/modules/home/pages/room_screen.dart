@@ -24,7 +24,7 @@ class RoomScreen extends StatefulWidget {
 class _RoomScreenState extends State<RoomScreen> {
   @override
   Widget build(BuildContext context) {
-    String selectedRegion = "Africa";
+    String selectedReason = "Abuse";
 
     List<String> reasonList = [
       'Bullying',
@@ -84,10 +84,10 @@ class _RoomScreenState extends State<RoomScreen> {
                             return CustomReasonDropdown(
                               onItemSelected: (p0) {
                                 setState(() {
-                                  selectedRegion = p0;
+                                  selectedReason = p0;
                                 });
                               },
-                              selectedItem: selectedRegion,
+                              selectedItem: selectedReason,
                               items: reasonList,
                             );
                           });
@@ -207,7 +207,6 @@ class _RoomScreenState extends State<RoomScreen> {
                     const RoomInfoButton(label: 'Public Room'),
                     w1,
                     const RoomInfoButton(label: 'Mic & Comments'),
-                    const Spacer(),
                     const RoomInfoButton(label: '11/20'),
                   ],
                 ),

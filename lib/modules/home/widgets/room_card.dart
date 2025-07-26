@@ -27,83 +27,91 @@ class RoomCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: AppColors.cardColor.withOpacity(0.25),
-        borderRadius: BorderRadius.circular(12),
-      ),
-      padding: const EdgeInsets.all(8),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(12),
-              child: Image.asset(
-                imagePath,
-                fit: BoxFit.cover,
-                width: double.infinity,
-              ),
-            ),
+    return Material(
+       color: Colors.transparent, 
+      child: InkWell(
+        splashColor: Colors.transparent, // Remove ripple color
+    highlightColor: Colors.transparent,
+        onTap: onTap,
+        child: Container(
+          decoration: BoxDecoration(
+            color: AppColors.cardColor.withOpacity(0.25),
+            borderRadius: BorderRadius.circular(12),
           ),
-          const SizedBox(height: 8),
-          Text(
-            title,
-            style: context.textTheme.bodyMedium!.copyWith(
-                color: AppColors.white,
-                fontSize: 12,
-                fontWeight: FontWeight.w600),
-          ),
-          Text(
-            subtitle,
-            maxLines: 1,
-            style: context.textTheme.bodyMedium!.copyWith(
-                color: AppColors.white,
-                fontSize: 10,
-                fontWeight: FontWeight.w300),
-          ),
-          const SizedBox(height: 4),
-          Row(
+          padding: const EdgeInsets.all(8),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SvgPicture.asset(
-                AssetPaths.name,
-                height: 14,
-                width: 14,
+              Expanded(
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(12),
+                  child: Image.asset(
+                    imagePath,
+                    fit: BoxFit.cover,
+                    width: double.infinity,
+                  ),
+                ),
               ),
-              w0P2,
+              const SizedBox(height: 8),
               Text(
-                '$peopleCount',
+                title,
                 style: context.textTheme.bodyMedium!.copyWith(
                     color: AppColors.white,
                     fontSize: 12,
-                    fontWeight: FontWeight.w400),
+                    fontWeight: FontWeight.w600),
               ),
-              w1,
-              SvgPicture.asset(
-                AssetPaths.mic,
-                height: 14,
-                width: 14,
-              ),
-              w0P2,
               Text(
-                '$micCount',
-                style: context.textTheme.bodyMedium!.copyWith(
-                    color: AppColors.white,
-                    fontSize: 12,
-                    fontWeight: FontWeight.w400),
-              ),
-              const Spacer(),
-              const SizedBox(width: 2),
-              Text(
-                timeAgo,
+                subtitle,
+                maxLines: 1,
                 style: context.textTheme.bodyMedium!.copyWith(
                     color: AppColors.white,
                     fontSize: 10,
-                    fontWeight: FontWeight.w500),
+                    fontWeight: FontWeight.w300),
+              ),
+              const SizedBox(height: 4),
+              Row(
+                children: [
+                  SvgPicture.asset(
+                    AssetPaths.name,
+                    height: 14,
+                    width: 14,
+                  ),
+                  w0P2,
+                  Text(
+                    '$peopleCount',
+                    style: context.textTheme.bodyMedium!.copyWith(
+                        color: AppColors.white,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w400),
+                  ),
+                  w1,
+                  SvgPicture.asset(
+                    AssetPaths.mic,
+                    height: 14,
+                    width: 14,
+                  ),
+                  w0P2,
+                  Text(
+                    '$micCount',
+                    style: context.textTheme.bodyMedium!.copyWith(
+                        color: AppColors.white,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w400),
+                  ),
+                  const Spacer(),
+                  const SizedBox(width: 2),
+                  Text(
+                    timeAgo,
+                    style: context.textTheme.bodyMedium!.copyWith(
+                        color: AppColors.white,
+                        fontSize: 10,
+                        fontWeight: FontWeight.w500),
+                  ),
+                ],
               ),
             ],
           ),
-        ],
+        ),
       ),
     );
   }

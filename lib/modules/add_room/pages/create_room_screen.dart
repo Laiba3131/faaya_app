@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:bkmc/constants/app_colors.dart';
 import 'package:bkmc/modules/admin_view_room/pages/admin_view_room_screen.dart';
 import 'package:bkmc/modules/home/widgets/custom_dropdown.dart';
@@ -7,6 +9,7 @@ import 'package:bkmc/utils/extensions/extended_context.dart';
 import 'package:bkmc/utils/heights_and_widths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../../config/routes/nav_router.dart';
 import '../../../constants/asset_paths.dart';
@@ -50,6 +53,19 @@ class _CreateRoomScreenState extends State<CreateRoomScreen> {
     'North America',
     'South America',
   ];
+
+   File? _pickedImage;
+
+  Future<void> _pickImage() async {
+    final ImagePicker picker = ImagePicker();
+    final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+
+    if (image != null) {
+      setState(() {
+        _pickedImage = File(image.path);
+      });
+    }
+  }
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -94,29 +110,40 @@ class _CreateRoomScreenState extends State<CreateRoomScreen> {
                 Row(
                   children: [
                     Container(
-                      width: 64,
-                      height: 64,
+            width: 64,
+            height: 64,
+            decoration: BoxDecoration(
+              color: Colors.white.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(color: Colors.white24),
+            ),
+            child: Center(
+              child: _pickedImage == null
+                  ? Container(
                       decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.1),
-                        borderRadius: BorderRadius.circular(12),
-                        border: Border.all(color: Colors.white24),
+                        shape: BoxShape.circle,
+                        border: Border.all(color: Colors.white, width: 2),
+                        color: Colors.transparent,
                       ),
-                      child: Center(
-                          child: Container(
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(color: Colors.white, width: 2),
-                          color: Colors.transparent,
-                        ),
-                        child: const Icon(Icons.add,
-                            color: Colors.white, size: 20),
-                      )),
+                      child: const Icon(Icons.add,
+                          color: Colors.white, size: 20),
+                    )
+                  : ClipRRect(
+                      borderRadius: BorderRadius.circular(8),
+                      child: Image.file(
+                        _pickedImage!,
+                        width: 64,
+                        height: 64,
+                        fit: BoxFit.cover,
+                      ),
                     ),
+            ),
+          ),
                   ],
                 ),
                 h2,
                 PrefixIconButton(
-                  onPressed: () {},
+                  onPressed: _pickImage,
                   title: 'Upload Images',
                   prefixIconPath: AssetPaths.galary,
                   backgroundColor: AppColors.primaryColor,
