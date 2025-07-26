@@ -3,10 +3,12 @@ import 'package:bkmc/modules/home/model/comment_model.dart';
 import 'package:bkmc/modules/home/widgets/coin_button.dart';
 import 'package:bkmc/modules/home/widgets/nested_comment_tile.dart';
 import 'package:bkmc/ui/button/primary_button.dart';
+import 'package:bkmc/ui/input/input_field.dart';
 import 'package:bkmc/utils/extensions/extended_context.dart';
 import 'package:bkmc/utils/heights_and_widths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+
 import '../../../../constants/app_colors.dart';
 import '../../../common/widgets/mic_permission_dialog.dart';
 
@@ -141,32 +143,42 @@ class RoomBottomSheetState extends State<RoomBottomSheet> {
                     const Divider(color: Colors.white24, height: 32),
                     // Coin Buttons
                     Row(
+                      spacing: 8.0,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Expanded(
+                        Expanded(
                           child: CoinButton(
                             label: '3s',
                             coins: 5,
-                            color: Color(0xFF3B3BFF),
-                            insideContainerColor: AppColors.lightBlue,
+                            coinBoxColor: Color(0xFF3B3BFF),
+                            mainBoxColors: [
+                              Color(0xff344BFB).withOpacity(0.6),
+                              Color(0xff374BE5),
+                            ],
                           ),
                         ),
                         w1,
-                        const Expanded(
+                        Expanded(
                           child: CoinButton(
                             label: '6s',
                             coins: 20,
-                            color: Color(0xFF2ECC71),
-                            insideContainerColor: AppColors.lightGreen,
+                            coinBoxColor: Color(0xFF2ECC71),
+                            mainBoxColors: [
+                              Color(0xff00CE56).withOpacity(0.6),
+                              Color(0xff37E5AE),
+                            ],
                           ),
                         ),
                         w1,
-                        const Expanded(
+                        Expanded(
                           child: CoinButton(
                             label: '10s',
                             coins: 50,
-                            color: Color(0xFFFF3B3B),
-                            insideContainerColor: AppColors.lightRed,
+                            coinBoxColor: Color(0xFFFF3B3B),
+                            mainBoxColors: [
+                              Color(0xffFB3434).withOpacity(0.6),
+                              Color(0xffE53737),
+                            ],
                           ),
                         ),
                       ],
@@ -301,6 +313,37 @@ class RoomBottomSheetState extends State<RoomBottomSheet> {
                       ),
                     h2,
                     // Message Input
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: const Color(0xff888888).withOpacity(
+                                0.3,
+                              ),
+                            ),
+                            padding: EdgeInsets.symmetric(horizontal: 12.0),
+                            child: Row(
+                              children: [
+                                Image.asset(AssetPaths.giftIcon),
+                                w2,
+                                Image.asset(AssetPaths.divider),
+                                w1,
+                                Expanded(
+                                  child: InputField(
+                                      boxConstraints: 12,
+                                      controller: TextEditingController(),
+                                      label: "Type a thought here"),
+                                ),
+                                w1,
+                                Image.asset(AssetPaths.sendMessage),
+                              ],
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                    h2,
                     Row(
                       children: [
                         Expanded(

@@ -7,13 +7,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class NotificationScreen extends StatelessWidget {
-  const NotificationScreen({super.key});
+  const NotificationScreen({super.key, this.isUserRequestPage = false});
+
+  final bool isUserRequestPage;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppbar(
-        title: 'Notifications',
+      appBar: CustomAppbar(
+        title: isUserRequestPage ? 'User Requests' : 'Notifications',
         backArrow: true,
         titleColor: AppColors.white,
       ),
@@ -66,25 +68,27 @@ class NotificationScreen extends StatelessWidget {
                 onAccept: () {},
                 onReject: () {},
               ),
-              h2,
-              RequestCard(
-                showButtons: false,
-                userName: 'John Doe',
-                time: '20 min',
-                message: 'John Doe wants to join your stream',
-                onAccept: () {},
-                onReject: () {},
-              ),
-              h2,
-              RequestCard(
-                avatar: const AssetImage(AssetPaths.listen),
-                showButtons: false,
-                userName: 'John Doe',
-                time: '20 min',
-                message: 'John Doe wants to join your stream',
-                onAccept: () {},
-                onReject: () {},
-              ),
+              if (!isUserRequestPage) ...[
+                h2,
+                RequestCard(
+                  showButtons: false,
+                  userName: 'John Doe',
+                  time: '20 min',
+                  message: 'John Doe wants to join your stream',
+                  onAccept: () {},
+                  onReject: () {},
+                ),
+                h2,
+                RequestCard(
+                  avatar: const AssetImage(AssetPaths.listen),
+                  showButtons: false,
+                  userName: 'John Doe',
+                  time: '20 min',
+                  message: 'John Doe wants to join your stream',
+                  onAccept: () {},
+                  onReject: () {},
+                ),
+              ],
             ],
           ),
         ),

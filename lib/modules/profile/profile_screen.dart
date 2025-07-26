@@ -2,7 +2,6 @@ import 'package:bkmc/config/routes/nav_router.dart';
 import 'package:bkmc/constants/constants.dart';
 import 'package:bkmc/modules/auth/pages/login_screen.dart';
 import 'package:bkmc/ui/button/primary_button.dart';
-import 'package:bkmc/ui/input/input_field.dart';
 import 'package:bkmc/ui/widgets/custom_appbar.dart';
 import 'package:bkmc/utils/extensions/extended_context.dart';
 import 'package:bkmc/utils/heights_and_widths.dart';
@@ -75,22 +74,30 @@ class ProfileScreen extends StatelessWidget {
                     ),
                   ),
                   h0P5,
-                  InputField(
-                    controller: TextEditingController(text: 'Julia Andrew'),
-                    label: "Search",
-                    fillColor: AppColors.primaryColor,
-                    borderColor: AppColors.primaryColor,
-                    borderRadius: 16,
-                    boxConstraints: 20,
-                    labelColor: AppColors.white,
+                  Container(
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                        color: Color(0xffC637E5),
+                        borderRadius: BorderRadius.circular(
+                          12.0,
+                        )),
+                    padding: EdgeInsets.all(16.0),
+                    child: Text(
+                      "Julia Andrew",
+                      style: context.textTheme.bodyMedium?.copyWith(
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.white,
+                      ),
+                    ),
                   ),
-                  h2,
+                  h3,
                   PrefixIconButton(
                     onPressed: () {
                       NavRouter.pushAndRemoveUntil(context, LoginScreen());
                     },
                     title: 'Sign Out',
-                    prefixIconPath: AssetPaths.prince,
+                    prefixIconPath: AssetPaths.logout,
                     iconColor: AppColors.primaryColor,
                     titleColor: AppColors.primaryColor,
                     backgroundColor: AppColors.white,
@@ -98,6 +105,7 @@ class ProfileScreen extends StatelessWidget {
                     borderColor: Colors.transparent,
                     mainAxisAlignment: MainAxisAlignment.center,
                     hPadding: 18,
+                    fontSize: 14.0,
                     borderRadius: 16,
                   ),
                 ],

@@ -1,5 +1,4 @@
 import 'package:bkmc/constants/app_colors.dart';
-import 'package:bkmc/modules/admin_view_room/pages/admin_view_room_screen.dart';
 import 'package:bkmc/modules/home/widgets/custom_dropdown.dart';
 import 'package:bkmc/ui/button/primary_button.dart';
 import 'package:bkmc/ui/input/input_field.dart';
@@ -11,14 +10,14 @@ import 'package:flutter_svg/svg.dart';
 import '../../../config/routes/nav_router.dart';
 import '../../../constants/asset_paths.dart';
 
-class CreateRoomScreen extends StatefulWidget {
-  const CreateRoomScreen({Key? key}) : super(key: key);
+class EditCreateRoom extends StatefulWidget {
+  const EditCreateRoom({super.key});
 
   @override
-  State<CreateRoomScreen> createState() => _CreateRoomScreenState();
+  State<EditCreateRoom> createState() => _EditCreateRoomState();
 }
 
-class _CreateRoomScreenState extends State<CreateRoomScreen> {
+class _EditCreateRoomState extends State<EditCreateRoom> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _descController = TextEditingController();
   final TextEditingController _filterWordsController = TextEditingController();
@@ -50,6 +49,7 @@ class _CreateRoomScreenState extends State<CreateRoomScreen> {
     'North America',
     'South America',
   ];
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -61,7 +61,7 @@ class _CreateRoomScreenState extends State<CreateRoomScreen> {
           icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () => Navigator.of(context).pop(),
         ),
-        title: const Text('Create Room', style: TextStyle(color: Colors.white)),
+        title: const Text('Edit Room', style: TextStyle(color: Colors.white)),
         centerTitle: true,
       ),
       extendBodyBehindAppBar: true,
@@ -356,11 +356,21 @@ class _CreateRoomScreenState extends State<CreateRoomScreen> {
                 const SizedBox(height: 24),
                 PrimaryButton(
                   onPressed: () {
-
-                    NavRouter.push(context, const AdminViewRoomScreen());
+                    NavRouter.pop(context);
                   },
-                  title: 'Start Room',
+                  title: 'Confirm Changes',
                   backgroundColor: AppColors.primaryColor,
+                  height: 55,
+                  hMargin: 0,
+                  borderRadius: 16,
+                ),
+                PrimaryButton(
+                  onPressed: () {
+                    NavRouter.pop(context);
+                  },
+                  title: 'Cancel',
+                  titleColor: AppColors.primaryColor,
+                  backgroundColor: AppColors.white,
                   height: 55,
                   hMargin: 0,
                   borderRadius: 16,
@@ -462,8 +472,7 @@ class _CreateRoomScreenState extends State<CreateRoomScreen> {
                 ),
               ),
             ),
-            const SizedBox(
-                width: 8),
+            const SizedBox(width: 8),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
               decoration: BoxDecoration(

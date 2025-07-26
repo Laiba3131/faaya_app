@@ -8,6 +8,16 @@ class AssetPaths {
 
   static const String pngLogo = 'assets/images/png/logo.png';
   static const String category = "assets/images/svg/category.svg";
+  static const String pinIcon = "assets/images/svg/pin_icon.svg";
+  static const String starIcon = "assets/images/png/star_icon.png";
+  static const String reportIcon = "assets/images/svg/report_icon.svg";
+  static const String handEmoji = "assets/images/svg/hand_emoji.svg";
+  static const String thListIcon = "assets/images/svg/th-list.svg";
+  static const String logout = "assets/images/svg/logout.svg";
+  static const String divider = "assets/images/svg/divider.png";
+  static const String sendMessage = "assets/images/svg/send_message.png";
+  static const String giftIcon = "assets/images/svg/gift_icon.png";
+
   static const String backGroundImageForSplash =
       'assets/images/png/Mask group (1).png';
   static const String backGroundImage = 'assets/images/png/Mask group.png';
@@ -23,6 +33,7 @@ class AssetPaths {
       'assets/images/png/Group 1000003396.png';
   static const String sendNotificationImage =
       'assets/images/png/Group 1000003397.png';
+
   // static const String backGroundBottomImage = 'assets/images/png/Intersection 1.png';
   // static const String backGroundBottomImage = 'assets/images/png/Intersection 1.png';
   static const String nonVisible = 'assets/icons/svg/eye close.svg';
@@ -31,6 +42,7 @@ class AssetPaths {
   ///* ================ icons  ================ *///
   static const String downloadIcon = 'assets/icons/svg/Vector (2).svg';
   static const String notificationIcon = 'assets/icons/svg/Vector (1).svg';
+
   // static const String notification = 'assets/icons/svg/bellIcon.svg';
   static const String dropDownIcon = 'assets/icons/svg/Group 1000003355.svg';
   static const String calendarIcon = 'assets/icons/svg/Calendar.svg';

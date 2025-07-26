@@ -1,59 +1,68 @@
 import 'package:bkmc/constants/asset_paths.dart';
-import 'package:bkmc/utils/heights_and_widths.dart';
+import 'package:bkmc/utils/extensions/extended_context.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:svg_flutter/svg.dart';
 
 class CoinButton extends StatelessWidget {
   final String label;
   final int coins;
-  final Color color;
-  final Color insideContainerColor;
-  const CoinButton(
-      {super.key,
-      required this.label,
-      required this.coins,
-      required this.color,
-      required this.insideContainerColor});
+  final Color coinBoxColor;
+  final List<Color> mainBoxColors;
+
+  const CoinButton({
+    super.key,
+    required this.label,
+    required this.coins,
+    required this.coinBoxColor,
+    required this.mainBoxColors,
+  });
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 8),
+      padding: const EdgeInsets.symmetric(
+        vertical: 8.0,
+        horizontal: 12.0,
+      ),
       decoration: BoxDecoration(
-        color: color,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(12.0),
+        gradient: LinearGradient(
+          colors: mainBoxColors,
+        ),
       ),
       child: Row(
+        spacing: 6.0,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Text(
             label,
-            style: const TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.w600,
-              fontSize: 12,
-            ),
+            style: context.textTheme.bodyMedium?.copyWith(
+                fontSize: 12.0,
+                fontWeight: FontWeight.bold,
+                color: Colors.white),
           ),
-          w4,
           Container(
-            width: 60,
-            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
+            padding: const EdgeInsets.symmetric(
+              vertical: 6.0,
+              horizontal: 12.0,
+            ),
             decoration: BoxDecoration(
-              color: insideContainerColor,
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(8.0),
+              color: coinBoxColor,
             ),
             child: Row(
+              spacing: 8.0,
               children: [
                 SvgPicture.asset(
                   AssetPaths.dollarSign,
                 ),
-                w0P5,
                 Text(
-                  coins.toString(),
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w600,
-                    fontSize: 13,
-                  ),
-                ),
+                  "$coins",
+                  style: context.textTheme.bodyMedium?.copyWith(
+                      fontSize: 14.0,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white),
+                )
               ],
             ),
           )
