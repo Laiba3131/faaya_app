@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:bkmc/constants/app_colors.dart';
 import 'package:bkmc/modules/home/widgets/custom_dropdown.dart';
 import 'package:bkmc/ui/button/primary_button.dart';
@@ -6,6 +8,7 @@ import 'package:bkmc/utils/extensions/extended_context.dart';
 import 'package:bkmc/utils/heights_and_widths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../../config/routes/nav_router.dart';
 import '../../../constants/asset_paths.dart';
@@ -23,9 +26,18 @@ class _EditCreateRoomState extends State<EditCreateRoom> {
   final TextEditingController _filterWordsController = TextEditingController();
 
   bool _badWordsFilter = false;
-  String? _selectedCategory;
-  String? _selectedRegion = 'Automatic Selection';
-  String _micOption = 'Mic & Comments';
+  File? _pickedImage;
+
+  Future<void> _pickImage() async {
+    final ImagePicker picker = ImagePicker();
+    final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+
+    if (image != null) {
+      setState(() {
+        _pickedImage = File(image.path);
+      });
+    }
+  }
   String _privacy = 'Private';
   double _speakerLimit = 17;
   double _audienceLimit = 45;
@@ -38,7 +50,8 @@ class _EditCreateRoomState extends State<EditCreateRoom> {
     super.dispose();
   }
 
-  String selectedRegion = "Africa";
+ String? selectedRegion;
+  String? selectedCategory;
 
   List<String> regionList = [
     'Automatic Selection',
@@ -50,6 +63,12 @@ class _EditCreateRoomState extends State<EditCreateRoom> {
     'South America',
   ];
 
+    List<String> categoryList = [
+    'Entertainment',
+    'Culture',
+    'Music',
+  ];
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -58,7 +77,7 @@ class _EditCreateRoomState extends State<EditCreateRoom> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
           onPressed: () => Navigator.of(context).pop(),
         ),
         title: const Text('Edit Room', style: TextStyle(color: Colors.white)),
@@ -93,7 +112,7 @@ class _EditCreateRoomState extends State<EditCreateRoom> {
                 const SizedBox(height: 12),
                 Row(
                   children: [
-                    Container(
+                     Container(
                       width: 64,
                       height: 64,
                       decoration: BoxDecoration(
@@ -102,21 +121,34 @@ class _EditCreateRoomState extends State<EditCreateRoom> {
                         border: Border.all(color: Colors.white24),
                       ),
                       child: Center(
-                          child: Container(
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(color: Colors.white, width: 2),
-                          color: Colors.transparent,
-                        ),
-                        child: const Icon(Icons.add,
-                            color: Colors.white, size: 20),
-                      )),
+                        child: _pickedImage == null
+                            ? Container(
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  border:
+                                      Border.all(color: Colors.white, width: 2),
+                                  color: Colors.transparent,
+                                ),
+                                child: const Icon(Icons.add,
+                                    color: Colors.white, size: 20),
+                              )
+                            : ClipRRect(
+                                borderRadius: BorderRadius.circular(8),
+                                child: Image.file(
+                                  _pickedImage!,
+                                  width: 64,
+                                  height: 64,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                      ),
                     ),
+                 
                   ],
                 ),
                 h2,
                 PrefixIconButton(
-                  onPressed: () {},
+                  onPressed:_pickImage,
                   title: 'Upload Images',
                   prefixIconPath: AssetPaths.galary,
                   backgroundColor: AppColors.primaryColor,
@@ -265,16 +297,16 @@ class _EditCreateRoomState extends State<EditCreateRoom> {
                   ),
                 ),
                 h0P5,
-                CustomDropdown(
+                 CustomDropdown(
                   height: 50,
-                  hintText: 'Select Category ',
+                  hintText: selectedCategory??'Select Category ',
                   isPrefixIconVisible: false,
                   title: 'Select Category  ',
-                  items: regionList,
-                  selectedItem: selectedRegion,
+                  items: categoryList,
+                  selectedItem: selectedCategory,
                   onItemSelected: (value) {
                     setState(() {
-                      selectedRegion = value;
+                      selectedCategory = value;
                     });
                   },
                 ),
@@ -288,11 +320,11 @@ class _EditCreateRoomState extends State<EditCreateRoom> {
                   ),
                 ),
                 h0P5,
-                CustomDropdown(
+              CustomDropdown(
                   height: 50,
-                  hintText: 'Select Region',
+                  hintText: selectedRegion?? 'Select Category',
                   isPrefixIconVisible: false,
-                  title: 'Select Category  ',
+                  title:selectedRegion?? 'Select Category',
                   items: regionList,
                   selectedItem: selectedRegion,
                   onItemSelected: (value) {

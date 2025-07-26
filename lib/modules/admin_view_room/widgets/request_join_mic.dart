@@ -1,3 +1,4 @@
+import 'package:bkmc/config/config.dart';
 import 'package:bkmc/constants/constants.dart';
 import 'package:bkmc/ui/button/primary_button.dart';
 import 'package:flutter/material.dart';
@@ -72,7 +73,9 @@ class RequestJoinMic extends StatelessWidget {
               children: [
                 Expanded(
                   child: PrimaryButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      NavRouter.pop(context);
+                    },
                     hMargin: 0,
                     backgroundColor: Colors.transparent,
                     titleColor: Color(0xffC637E5),

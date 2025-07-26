@@ -1,6 +1,5 @@
 import 'package:bkmc/config/routes/nav_router.dart';
 import 'package:bkmc/modules/admin_view_room/pages/edit_create_room.dart';
-import 'package:bkmc/modules/admin_view_room/widgets/kick_dialogue.dart';
 import 'package:bkmc/modules/admin_view_room/widgets/request_join_mic.dart';
 import 'package:bkmc/modules/common/widgets/custom_reason_dropdown.dart';
 import 'package:bkmc/modules/home/pages/notification_screen.dart';
@@ -18,17 +17,17 @@ import '../../../ui/widgets/custom_appbar.dart';
 import '../../home/widgets/bottom_sheet/room_bottom_sheet.dart';
 import '../../home/widgets/session_lable.dart';
 
-class AdminViewRoomScreen extends StatefulWidget {
-  const AdminViewRoomScreen({super.key});
+class AdminRedCard extends StatefulWidget {
+  const AdminRedCard({super.key});
 
   @override
-  State<AdminViewRoomScreen> createState() => _AdminViewRoomScreenState();
+  State<AdminRedCard> createState() => _AdminRedCardState();
 }
 
-class _AdminViewRoomScreenState extends State<AdminViewRoomScreen> {
+class _AdminRedCardState extends State<AdminRedCard> {
   @override
   Widget build(BuildContext context) {
-    String selectedReason = "Bullying";
+    String selectedRegion = "Africa";
 
     List<String> reasonList = [
       'Bullying',
@@ -78,15 +77,7 @@ class _AdminViewRoomScreenState extends State<AdminViewRoomScreen> {
             padding: EdgeInsets.zero,
             child: ActionDropdownWithoutIcon(
               actions: [
-                DropdownAction(label: "Invite", onTap: () {
-                  NavRouter.pop(context);
-                  showDialog(
-                          context: context,
-                          builder: (context) {
-                            // return KickDialogue();
-                            return const RequestJoinMic();
-                          });
-                }),
+                DropdownAction(label: "Invite", onTap: () {}),
                 DropdownAction(
                     label: "Kick",
                     onTap: () {
@@ -94,8 +85,8 @@ class _AdminViewRoomScreenState extends State<AdminViewRoomScreen> {
                       showDialog(
                           context: context,
                           builder: (context) {
-                            return KickDialogue();
-                            // return const RequestJoinMic();
+                            // return KickDialogue();
+                            return const RequestJoinMic();
                           });
                     }),
                 DropdownAction(
@@ -128,10 +119,10 @@ class _AdminViewRoomScreenState extends State<AdminViewRoomScreen> {
                             return CustomReasonDropdown(
                               onItemSelected: (p0) {
                                 setState(() {
-                                  selectedReason = p0;
+                                  selectedRegion = p0;
                                 });
                               },
-                              selectedItem: selectedReason,
+                              selectedItem: selectedRegion,
                               items: reasonList,
                             );
                           });
@@ -164,7 +155,6 @@ class _AdminViewRoomScreenState extends State<AdminViewRoomScreen> {
                 DropdownAction(
                     label: "Edit",
                     onTap: () {
-                      NavRouter.pop(context);
                       NavRouter.push(context, const EditCreateRoom());
                     }),
 
@@ -269,48 +259,50 @@ class _AdminViewRoomScreenState extends State<AdminViewRoomScreen> {
                             ],
                           ),
                         ),
-                        Row(
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            InkWell(
-                              onTap: () {
-                                NavRouter.push(
-                                    context,
-                                    const NotificationScreen(
-                                      isUserRequestPage: true,
-                                    ));
-                              },
-                              child: Container(
-                                decoration: BoxDecoration(
-                                    color: const Color(0xffC637E5),
-                                    borderRadius:
-                                        BorderRadius.circular(12.0)),
-                                padding: const EdgeInsets.all(
-                                  6.0,
-                                ),
-                                child: SvgPicture.asset(
-                                  AssetPaths.thListIcon,
-                                ),
-                              ),
-                            ),
-                            Builder(
-                              builder: (iconContext) => OnClick(
-                                onTap: () async {
-                                  final RenderBox button = iconContext
-                                      .findRenderObject() as RenderBox;
-                                  final Offset position =
-                                      button.localToGlobal(Offset.zero);
-                                  _showAdminMenu(iconContext, position);
+                        Expanded(
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  NavRouter.push(
+                                      context,
+                                      const NotificationScreen(
+                                        isUserRequestPage: true,
+                                      ));
                                 },
-                                child: const Icon(
-                                  Icons.more_vert,
-                                  color: Colors.white,
-                                  size: 28,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      color: const Color(0xffC637E5),
+                                      borderRadius:
+                                          BorderRadius.circular(12.0)),
+                                  padding: const EdgeInsets.all(
+                                    6.0,
+                                  ),
+                                  child: SvgPicture.asset(
+                                    AssetPaths.thListIcon,
+                                  ),
                                 ),
                               ),
-                            )
-                          ],
+                              Builder(
+                                builder: (iconContext) => OnClick(
+                                  onTap: () async {
+                                    final RenderBox button = iconContext
+                                        .findRenderObject() as RenderBox;
+                                    final Offset position =
+                                        button.localToGlobal(Offset.zero);
+                                    _showAdminMenu(iconContext, position);
+                                  },
+                                  child: const Icon(
+                                    Icons.more_vert,
+                                    color: Colors.white,
+                                    size: 28,
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
                         )
                       ],
                     ),
@@ -355,9 +347,9 @@ class _AdminViewRoomScreenState extends State<AdminViewRoomScreen> {
                             SvgPicture.asset(AssetPaths.pinIcon),
                           ],
                         ),
-                        const ThreeSecondComment(),
+                        // const ThreeSecondComment(),
                         // const SixSecondsComment(),
-                        // const TenSecondsComment(),
+                        const TenSecondsComment(),
                       ],
                     ),
                   ),
@@ -446,7 +438,7 @@ class _AdminViewRoomScreenState extends State<AdminViewRoomScreen> {
                                 _showMenu(iconContext, position);
                               },
                               child: const Icon(Icons.more_vert,
-                                  color: Colors.white, size: 18),
+                                  color: Colors.white54, size: 18),
                             ),
                           ),
                         ],
@@ -502,7 +494,7 @@ class _AdminViewRoomScreenState extends State<AdminViewRoomScreen> {
                           ),
                           Positioned(
                             top: 0,
-                            right: 12,
+                            right: 20,
                             child: Builder(
                               builder: (iconContext) => OnClick(
                                 onTap: () async {
@@ -515,7 +507,7 @@ class _AdminViewRoomScreenState extends State<AdminViewRoomScreen> {
                                 child: const Icon(
                                   Icons.more_vert,
                                   color: Colors.white,
-                                  size: 18,
+                                  size: 22,
                                 ),
                               ),
                             ),

@@ -293,7 +293,7 @@ class _RoomScreenState extends State<RoomScreen> {
                                 _showMenu(iconContext, position);
                               },
                               child: const Icon(Icons.more_vert,
-                                  color: Colors.white54, size: 18),
+                                  color: Colors.white, size: 18),
                             ),
                           ),
                         ],
