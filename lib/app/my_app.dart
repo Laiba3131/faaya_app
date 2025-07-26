@@ -2,6 +2,7 @@ import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
+
 import '../config/routes/nav_router.dart';
 import '../config/themes/light_theme.dart';
 import '../modules/startup/pages/splash_page.dart';
@@ -20,7 +21,7 @@ class OxynDev extends StatelessWidget {
           return Sizer(builder: (context, orientation, deviceType) {
             return MaterialApp(
               navigatorKey: NavRouter.navigationKey,
-              title: 'Unique Employee Portal',
+              title: 'Onyx Dev',
               debugShowCheckedModeBanner: false,
               theme: lightTheme,
               themeMode: ThemeMode.light,

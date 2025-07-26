@@ -17,6 +17,9 @@ class AssetPaths {
   static const String divider = "assets/images/svg/divider.png";
   static const String sendMessage = "assets/images/svg/send_message.png";
   static const String giftIcon = "assets/images/svg/gift_icon.png";
+  static const String commentHand = "assets/images/svg/comment_hand.svg";
+  static const String smileEmoji = "assets/images/svg/fluent_emoji.svg";
+  static const String micRequest = "assets/images/svg/mic_request.svg";
 
   static const String backGroundImageForSplash =
       'assets/images/png/Mask group (1).png';

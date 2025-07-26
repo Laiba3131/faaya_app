@@ -150,10 +150,10 @@ class RoomBottomSheetState extends State<RoomBottomSheet> {
                           child: CoinButton(
                             label: '3s',
                             coins: 5,
-                            coinBoxColor: Color(0xFF3B3BFF),
+                            coinBoxColor: const Color(0xFF3B3BFF),
                             mainBoxColors: [
-                              Color(0xff344BFB).withOpacity(0.6),
-                              Color(0xff374BE5),
+                              const Color(0xff344BFB).withOpacity(0.6),
+                              const Color(0xff374BE5),
                             ],
                           ),
                         ),
@@ -162,10 +162,10 @@ class RoomBottomSheetState extends State<RoomBottomSheet> {
                           child: CoinButton(
                             label: '6s',
                             coins: 20,
-                            coinBoxColor: Color(0xFF2ECC71),
+                            coinBoxColor: const Color(0xFF2ECC71),
                             mainBoxColors: [
-                              Color(0xff00CE56).withOpacity(0.6),
-                              Color(0xff37E5AE),
+                              const Color(0xff00CE56).withOpacity(0.6),
+                              const Color(0xff37E5AE),
                             ],
                           ),
                         ),
@@ -174,10 +174,10 @@ class RoomBottomSheetState extends State<RoomBottomSheet> {
                           child: CoinButton(
                             label: '10s',
                             coins: 50,
-                            coinBoxColor: Color(0xFFFF3B3B),
+                            coinBoxColor: const Color(0xFFFF3B3B),
                             mainBoxColors: [
-                              Color(0xffFB3434).withOpacity(0.6),
-                              Color(0xffE53737),
+                              const Color(0xffFB3434).withOpacity(0.6),
+                              const Color(0xffE53737),
                             ],
                           ),
                         ),
@@ -275,10 +275,10 @@ class RoomBottomSheetState extends State<RoomBottomSheet> {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 12, vertical: 10),
                         decoration: BoxDecoration(
-                          color: Color(0xFF7B3FA0).withOpacity(0.2),
+                          color: const Color(0xFF7B3FA0).withOpacity(0.2),
                           borderRadius: BorderRadius.circular(12),
-                          border:
-                              Border.all(color: Color(0xFFF05ED0), width: 1),
+                          border: Border.all(
+                              color: const Color(0xFFF05ED0), width: 1),
                         ),
                         child: Row(
                           children: [
@@ -314,15 +314,20 @@ class RoomBottomSheetState extends State<RoomBottomSheet> {
                     h2,
                     // Message Input
                     Row(
+                      spacing: 4.0,
                       children: [
                         Expanded(
                           child: Container(
                             decoration: BoxDecoration(
-                              color: const Color(0xff888888).withOpacity(
-                                0.3,
-                              ),
+                                color: const Color(0xff888888).withOpacity(
+                                  0.3,
+                                ),
+                                borderRadius: BorderRadius.circular(
+                                  12.0,
+                                )),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 14.0,
                             ),
-                            padding: EdgeInsets.symmetric(horizontal: 12.0),
                             child: Row(
                               children: [
                                 Image.asset(AssetPaths.giftIcon),
@@ -340,44 +345,19 @@ class RoomBottomSheetState extends State<RoomBottomSheet> {
                               ],
                             ),
                           ),
-                        )
-                      ],
-                    ),
-                    h2,
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 12, vertical: 8),
-                            decoration: BoxDecoration(
-                              color: Colors.white.withOpacity(0.08),
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            child: const Row(
-                              children: [
-                                Expanded(
-                                  child: TextField(
-                                    decoration: InputDecoration(
-                                      hintText: 'Type a thought here.',
-                                      hintStyle:
-                                          TextStyle(color: Colors.white54),
-                                      border: InputBorder.none,
-                                    ),
-                                    style: TextStyle(color: Colors.white),
-                                  ),
-                                ),
-                                Icon(Icons.send, color: Colors.white),
-                              ],
-                            ),
-                          ),
                         ),
-                        w1,
-                        const Icon(Icons.emoji_emotions,
-                            color: Colors.white, size: 32),
-                        w1,
-                        Icon(Icons.pan_tool,
-                            color: Colors.pinkAccent, size: 32),
+                        SvgPicture.asset(
+                          AssetPaths.smileEmoji,
+                          height: 30.0,
+                        ),
+                        SvgPicture.asset(
+                          AssetPaths.commentHand,
+                          height: 30.0,
+                        ),
+                        SvgPicture.asset(
+                          AssetPaths.micRequest,
+                          height: 30.0,
+                        ),
                       ],
                     ),
                     h2,
