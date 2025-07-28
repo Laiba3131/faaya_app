@@ -10,6 +10,7 @@ class AssetPaths {
   static const String category = "assets/images/svg/category.svg";
   static const String pinIcon = "assets/images/svg/pin_icon.svg";
   static const String starIcon = "assets/images/png/star_icon.png";
+  static const String congratulations = "assets/images/svg/congratulation.json";
   static const String reportIcon = "assets/images/svg/report_icon.svg";
   static const String handEmoji = "assets/images/svg/hand_emoji.svg";
   static const String thListIcon = "assets/images/svg/th-list.svg";

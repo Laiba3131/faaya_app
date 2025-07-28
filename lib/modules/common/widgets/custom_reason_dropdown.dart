@@ -1,7 +1,7 @@
 import 'package:bkmc/config/config.dart';
 import 'package:bkmc/constants/app_colors.dart';
 import 'package:bkmc/ui/button/primary_button.dart';
-import 'package:bkmc/ui/input/input_field.dart';
+import 'package:bkmc/ui/widgets/congratulations_lottie.dart';
 import 'package:bkmc/ui/widgets/on_click.dart';
 import 'package:bkmc/utils/extensions/extended_context.dart';
 import 'package:bkmc/utils/heights_and_widths.dart';
@@ -143,6 +143,7 @@ class _CustomReasonDropdownState extends State<CustomReasonDropdown> {
                   child: PrimaryButton(
                     onPressed: () {
                       NavRouter.pop(context);
+                      showLottieDialog(context);
                       // showDialog(
                       //     context: context,
                       //     builder: (context) {

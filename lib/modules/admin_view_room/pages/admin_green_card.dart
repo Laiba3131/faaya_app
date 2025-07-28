@@ -524,7 +524,7 @@ class _AdminGreenCardState extends State<AdminGreenCard> {
                       onPressed: () {
                         showModalBottomSheet(
                           context: context,
-                          isScrollControlled: true,
+                          // isScrollControlled: true,
                           backgroundColor: Colors.transparent,
                           builder: (context) => RoomBottomSheet(),
                         );

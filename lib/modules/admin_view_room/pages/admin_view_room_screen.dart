@@ -78,15 +78,17 @@ class _AdminViewRoomScreenState extends State<AdminViewRoomScreen> {
             padding: EdgeInsets.zero,
             child: ActionDropdownWithoutIcon(
               actions: [
-                DropdownAction(label: "Invite", onTap: () {
-                  NavRouter.pop(context);
-                  showDialog(
+                DropdownAction(
+                    label: "Invite",
+                    onTap: () {
+                      NavRouter.pop(context);
+                      showDialog(
                           context: context,
                           builder: (context) {
                             // return KickDialogue();
                             return const RequestJoinMic();
                           });
-                }),
+                    }),
                 DropdownAction(
                     label: "Kick",
                     onTap: () {
@@ -284,8 +286,7 @@ class _AdminViewRoomScreenState extends State<AdminViewRoomScreen> {
                               child: Container(
                                 decoration: BoxDecoration(
                                     color: const Color(0xffC637E5),
-                                    borderRadius:
-                                        BorderRadius.circular(12.0)),
+                                    borderRadius: BorderRadius.circular(12.0)),
                                 padding: const EdgeInsets.all(
                                   6.0,
                                 ),
@@ -460,6 +461,8 @@ class _AdminViewRoomScreenState extends State<AdminViewRoomScreen> {
                 h2,
                 Expanded(
                   child: GridView.builder(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
                     itemCount: audience.length,
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
