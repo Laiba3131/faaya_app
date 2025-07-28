@@ -156,3 +156,314 @@ class _CustomDropdownState extends State<CustomDropdown> {
     );
   }
 }
+
+// class GenericCustomDropdown<T> extends StatefulWidget {
+//   final String title;
+//   final List<T> items;
+//   final T? selectedItem;
+//   final String hintText;
+//   final bool isPrefixIconVisible;
+//   final double height;
+//   final ValueChanged<T> onItemSelected;
+//   final String Function(T) displayFunction;
+//
+//   const GenericCustomDropdown({
+//     super.key,
+//     required this.title,
+//     required this.items,
+//     required this.selectedItem,
+//     required this.onItemSelected,
+//     required this.hintText,
+//     required this.height,
+//     required this.displayFunction,
+//     this.isPrefixIconVisible = true,
+//   });
+//
+//   @override
+//   State<GenericCustomDropdown> createState() =>
+//       _GenericCustomDropdownState<T>();
+// }
+//
+// class _GenericCustomDropdownState<T> extends State<GenericCustomDropdown<T>> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return GestureDetector(
+//       onTap: _showCustomDialog,
+//       child: Container(
+//         height: widget.height,
+//         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 9),
+//         decoration: BoxDecoration(
+//           color: AppColors.primaryColor,
+//           borderRadius: BorderRadius.circular(8),
+//         ),
+//         child: Row(
+//           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//           children: [
+//             Row(
+//               children: [
+//                 widget.isPrefixIconVisible
+//                     ? Icon(Icons.public, color: Colors.white)
+//                     : SizedBox.shrink(),
+//                 SizedBox(width: 8),
+//                 Text(widget.hintText, style: TextStyle(color: Colors.white)),
+//               ],
+//             ),
+//             Icon(Icons.keyboard_arrow_down, color: Colors.white),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+//
+//   void _showCustomDialog() {
+//     showDialog(
+//       context: context,
+//       builder: (context) {
+//         TextEditingController searchController = TextEditingController();
+//         List<T> filteredItems = List.from(widget.items);
+//
+//         return StatefulBuilder(
+//           builder: (context, setState) {
+//             return AlertDialog(
+//               backgroundColor: Colors.white,
+//               shape: RoundedRectangleBorder(
+//                 borderRadius: BorderRadius.circular(16),
+//               ),
+//               content: SizedBox(
+//                 width: double.maxFinite,
+//                 child: Column(
+//                   mainAxisSize: MainAxisSize.min,
+//                   children: [
+//                     InputField(
+//                       controller: searchController,
+//                       label: "Search",
+//                       fillColor: AppColors.white,
+//                       borderColor: AppColors.primaryColor,
+//                       borderRadius: 16,
+//                       boxConstraints: 20,
+//                       labelColor: AppColors.primaryColor,
+//                       onChange: (value) {
+//                         setState(() {
+//                           filteredItems = widget.items
+//                               .where((item) => widget
+//                                   .displayFunction(item)
+//                                   .toLowerCase()
+//                                   .contains(value.toLowerCase()))
+//                               .toList();
+//                         });
+//                       },
+//                     ),
+//                     h2,
+//                     Flexible(
+//                       child: ListView.builder(
+//                         shrinkWrap: true,
+//                         itemCount: filteredItems.length,
+//                         itemBuilder: (_, index) {
+//                           final item = filteredItems[index];
+//                           final isSelected = item == widget.selectedItem;
+//
+//                           return Column(
+//                             children: [
+//                               OnClick(
+//                                 onTap: () {
+//                                   Navigator.pop(context);
+//                                   widget.onItemSelected(item);
+//                                 },
+//                                 child: Row(
+//                                   mainAxisAlignment:
+//                                       MainAxisAlignment.spaceBetween,
+//                                   children: [
+//                                     Text(
+//                                       widget.displayFunction(item),
+//                                       style: context.textTheme.bodyMedium!
+//                                           .copyWith(
+//                                               color: AppColors.primaryColor,
+//                                               fontSize: 12,
+//                                               fontWeight: FontWeight.w600),
+//                                     ),
+//                                     isSelected
+//                                         ? const Icon(Icons.check_circle,
+//                                             color: AppColors.primaryColor)
+//                                         : const Icon(
+//                                             Icons.radio_button_unchecked,
+//                                             color: AppColors.primaryColor),
+//                                   ],
+//                                 ),
+//                               ),
+//                               h1,
+//                               h0P3,
+//                               const Divider(
+//                                 color: AppColors.bgGrey,
+//                               ),
+//                               h1,
+//                               h0P3,
+//                             ],
+//                           );
+//                         },
+//                       ),
+//                     ),
+//                   ],
+//                 ),
+//               ),
+//             );
+//           },
+//         );
+//       },
+//     );
+//   }
+// }
+
+class GenericDropdown<T> extends StatefulWidget {
+  final String title;
+  final List<T> items;
+  final T? selectedItem;
+  final String hintText;
+  final bool isPrefixIconVisible;
+  final double height;
+  final ValueChanged<T> onItemSelected;
+  final String Function(T) displayFunction;
+
+  const GenericDropdown({
+    super.key,
+    required this.title,
+    required this.items,
+    required this.selectedItem,
+    required this.onItemSelected,
+    required this.hintText,
+    required this.height,
+    required this.displayFunction,
+    this.isPrefixIconVisible = true,
+  });
+
+  @override
+  State<GenericDropdown> createState() => _GenericDropdownState<T>();
+}
+
+class _GenericDropdownState<T> extends State<GenericDropdown<T>> {
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: _showCustomDialog,
+      child: Container(
+        height: widget.height,
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 9),
+        decoration: BoxDecoration(
+          color: AppColors.primaryColor,
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              children: [
+                widget.isPrefixIconVisible
+                    ? Icon(Icons.public, color: Colors.white)
+                    : SizedBox.shrink(),
+                SizedBox(width: 8),
+                Text(widget.hintText, style: TextStyle(color: Colors.white)),
+              ],
+            ),
+            Icon(Icons.keyboard_arrow_down, color: Colors.white),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _showCustomDialog() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        TextEditingController searchController = TextEditingController();
+        List<T> filteredItems = List.from(widget.items);
+
+        return StatefulBuilder(
+          builder: (context, setState) {
+            return AlertDialog(
+              backgroundColor: Colors.white,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16),
+              ),
+              content: SizedBox(
+                width: double.maxFinite,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    InputField(
+                      controller: searchController,
+                      label: "Search",
+                      fillColor: AppColors.white,
+                      borderColor: AppColors.primaryColor,
+                      borderRadius: 16,
+                      boxConstraints: 20,
+                      labelColor: AppColors.primaryColor,
+                      onChange: (value) {
+                        setState(() {
+                          filteredItems = widget.items
+                              .where((item) => widget
+                                  .displayFunction(item)
+                                  .toLowerCase()
+                                  .contains(value.toLowerCase()))
+                              .toList();
+                        });
+                      },
+                    ),
+                    h2,
+                    Flexible(
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: filteredItems.length,
+                        itemBuilder: (_, index) {
+                          final item = filteredItems[index];
+                          final isSelected = item == widget.selectedItem;
+
+                          return Column(
+                            children: [
+                              OnClick(
+                                onTap: () {
+                                  Navigator.pop(context);
+                                  widget.onItemSelected(item);
+                                },
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      widget.displayFunction(item),
+                                      style: context.textTheme.bodyMedium!
+                                          .copyWith(
+                                              color: AppColors.primaryColor,
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w600),
+                                    ),
+                                    isSelected
+                                        ? const Icon(Icons.check_circle,
+                                            color: AppColors.primaryColor)
+                                        : const Icon(
+                                            Icons.radio_button_unchecked,
+                                            color: AppColors.primaryColor),
+                                  ],
+                                ),
+                              ),
+                              h1,
+                              h0P3,
+                              const Divider(
+                                color: AppColors.bgGrey,
+                              ),
+                              h1,
+                              h0P3,
+                            ],
+                          );
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+}

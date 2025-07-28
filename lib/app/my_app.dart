@@ -21,7 +21,7 @@ class OxynDev extends StatelessWidget {
           return Sizer(builder: (context, orientation, deviceType) {
             return MaterialApp(
               navigatorKey: NavRouter.navigationKey,
-              title: 'Onyx Dev',
+              title: 'Oxyn Dev',
               debugShowCheckedModeBanner: false,
               theme: lightTheme,
               themeMode: ThemeMode.light,

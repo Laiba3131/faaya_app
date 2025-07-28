@@ -13,9 +13,11 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppbar(
+      appBar: const CustomAppbar(
           title: 'Profile', backArrow: true, titleColor: AppColors.white),
       backgroundColor: AppColors.transparent,
+      // extendBodyBehindAppBar: true,
+
       body: Container(
         width: double.infinity,
         height: double.infinity,
@@ -24,7 +26,7 @@ class ProfileScreen extends StatelessWidget {
             center: Alignment(-1.1, 0),
             radius: 1.5,
             colors: [
-             AppColors.primaryColor,
+              AppColors.primaryColor,
               Color(0xFF161616),
               Color(0xFF161616),
             ],
@@ -77,7 +79,7 @@ class ProfileScreen extends StatelessWidget {
                   Container(
                     width: double.infinity,
                     decoration: BoxDecoration(
-                        color:AppColors.primaryColor,
+                        color: AppColors.primaryColor,
                         borderRadius: BorderRadius.circular(
                           12.0,
                         )),

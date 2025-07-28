@@ -13,6 +13,7 @@ import 'package:bkmc/utils/heights_and_widths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../../utils/country.dart';
 import '../widgets/dummy_live_room.dart';
 import '../widgets/live_card_room.dart';
 import '../widgets/room_card.dart';
@@ -26,6 +27,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   String? selectedRegion;
+  Country? selectedCountry;
 
   List<String> regionList = [
     'Africa',
@@ -65,6 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
   ];
   TextEditingController searchController = TextEditingController();
   String searchQuery = '';
+
   @override
   Widget build(BuildContext context) {
     final List<LiveRoom> filteredRooms = searchQuery.isEmpty
@@ -207,27 +210,44 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _buildFilterButtons(context) {
+    var countries = readCountriesFromList();
     return Row(
       // spacing: 2.0,
       children: [
+        // Expanded(
+        //   flex: 3,
+        //   child: CustomDropdown(
+        //     height: 40,
+        //     title: 'Region',
+        //     hintText: selectedRegion ?? 'Region',
+        //     items: regionList,
+        //     selectedItem: selectedRegion,
+        //     onItemSelected: (value) {
+        //       setState(() {
+        //         selectedRegion = value;
+        //       });
+        //     },
+        //   ),
+        // ),
         Expanded(
           flex: 3,
-          child: CustomDropdown(
+          child: GenericDropdown<Country>(
             height: 40,
-            title: 'Region',
-            hintText: selectedRegion ?? 'Region',
-            items: regionList,
-            selectedItem: selectedRegion,
+            title: 'Select Country',
+            hintText: truncateString(selectedCountry!.name, maxLength: 10) ??
+                'Country',
+            items: countries,
+            selectedItem: selectedCountry,
             onItemSelected: (value) {
               setState(() {
-                selectedRegion = value;
+                selectedCountry = value;
               });
             },
+            displayFunction: (v) => v.name,
           ),
         ),
         w1,
-        Expanded(flex: 3, child: _buildFilterChip("Category", context)
-        )
+        Expanded(flex: 3, child: _buildFilterChip("Category", context))
       ],
     );
   }

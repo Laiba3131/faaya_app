@@ -27,6 +27,7 @@ class InputField extends StatefulWidget {
       super.key,
       this.onChange,
       this.borderColor,
+      this.focusedBorderColor,
       this.borderRadius = 6,
       this.fontSize = 14,
       this.boxConstraints = 44,
@@ -58,6 +59,7 @@ class InputField extends StatefulWidget {
   final bool autoFocus;
   final Function(String)? onChange;
   final Color? borderColor;
+  final Color? focusedBorderColor;
   final double borderRadius;
   final double horizontalPadding;
   final double verticalPadding;
@@ -127,7 +129,7 @@ class _InputFieldState extends State<InputField> {
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(widget.borderRadius),
               borderSide: BorderSide(
-                color: widget.borderColor ?? Colors.transparent,
+                color: widget.focusedBorderColor ?? Colors.transparent,
               ),
             ),
             errorBorder: OutlineInputBorder(

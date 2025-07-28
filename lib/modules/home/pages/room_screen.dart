@@ -1,5 +1,6 @@
 import 'package:bkmc/config/routes/nav_router.dart';
 import 'package:bkmc/modules/common/widgets/custom_reason_dropdown.dart';
+import 'package:bkmc/modules/home/pages/joined_room_screen.dart';
 import 'package:bkmc/modules/home/widgets/action_dropdown_withour_icon.dart';
 import 'package:bkmc/ui/button/primary_button.dart';
 import 'package:bkmc/ui/widgets/on_click.dart';
@@ -7,10 +8,10 @@ import 'package:bkmc/utils/heights_and_widths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+
 import '../../../constants/app_colors.dart';
 import '../../../constants/asset_paths.dart';
 import '../../../ui/widgets/custom_appbar.dart';
-import '../widgets/bottom_sheet/room_bottom_sheet.dart';
 import '../widgets/room_info_button.dart';
 import '../widgets/session_lable.dart';
 
@@ -105,15 +106,29 @@ class _RoomScreenState extends State<RoomScreen> {
       extendBodyBehindAppBar: true,
       appBar: const CustomAppbar(
         title: 'Room',
+        titleColor: AppColors.white,
         showBackButton: true,
       ),
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [Color(0xFF7B3FA0), Color(0xFF18121E)],
-          ),
+              stops: [
+                -50,
+                10,
+                30,
+                60,
+                1000,
+              ],
+              colors: [
+                Color(0xFFC637E5),
+                Color(0xFF161616),
+                Color(0xFF161616),
+                Color(0xFF161616),
+                Color(0xFF161616),
+              ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              tileMode: TileMode.decal),
         ),
         child: SafeArea(
           child: Padding(
@@ -376,13 +391,16 @@ class _RoomScreenState extends State<RoomScreen> {
                 Padding(
                     padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
                     child: PrimaryButton(
+                      // onPressed: () {
+                      //   showModalBottomSheet(
+                      //     context: context,
+                      //     isScrollControlled: true,
+                      //     backgroundColor: Colors.transparent,
+                      //     builder: (context) => RoomBottomSheet(),
+                      //   );
+                      // },
                       onPressed: () {
-                        showModalBottomSheet(
-                          context: context,
-                          isScrollControlled: true,
-                          backgroundColor: Colors.transparent,
-                          builder: (context) => RoomBottomSheet(),
-                        );
+                        NavRouter.push(context, JoinedRoomScreen());
                       },
                       title: 'Join Room',
                       backgroundColor: AppColors.primaryColor,

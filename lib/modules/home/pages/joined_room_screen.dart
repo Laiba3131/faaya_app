@@ -1,10 +1,8 @@
 import 'package:bkmc/config/routes/nav_router.dart';
-import 'package:bkmc/modules/admin_view_room/pages/edit_create_room.dart';
-import 'package:bkmc/modules/admin_view_room/widgets/kick_dialogue.dart';
-import 'package:bkmc/modules/admin_view_room/widgets/request_join_mic.dart';
 import 'package:bkmc/modules/common/widgets/custom_reason_dropdown.dart';
-import 'package:bkmc/modules/home/pages/notification_screen.dart';
 import 'package:bkmc/modules/home/widgets/action_dropdown_withour_icon.dart';
+import 'package:bkmc/modules/home/widgets/bottom_sheet/room_bottom_sheet.dart';
+import 'package:bkmc/ui/button/primary_button.dart';
 import 'package:bkmc/ui/widgets/on_click.dart';
 import 'package:bkmc/utils/heights_and_widths.dart';
 import 'package:flutter/material.dart';
@@ -14,23 +12,21 @@ import 'package:sizer/sizer.dart';
 
 import '../../../constants/app_colors.dart';
 import '../../../constants/asset_paths.dart';
-import '../../../ui/button/primary_button.dart';
 import '../../../ui/input/input_field.dart';
 import '../../../ui/widgets/custom_appbar.dart';
-import '../../home/widgets/bottom_sheet/room_bottom_sheet.dart';
-import '../../home/widgets/session_lable.dart';
+import '../widgets/session_lable.dart';
 
-class AdminViewRoomScreen extends StatefulWidget {
-  const AdminViewRoomScreen({super.key});
+class JoinedRoomScreen extends StatefulWidget {
+  const JoinedRoomScreen({super.key});
 
   @override
-  State<AdminViewRoomScreen> createState() => _AdminViewRoomScreenState();
+  State<JoinedRoomScreen> createState() => _JoinedRoomScreenState();
 }
 
-class _AdminViewRoomScreenState extends State<AdminViewRoomScreen> {
+class _JoinedRoomScreenState extends State<JoinedRoomScreen> {
   @override
   Widget build(BuildContext context) {
-    String selectedReason = "Bullying";
+    String selectedReason = "Abuse";
 
     List<String> reasonList = [
       'Bullying',
@@ -81,48 +77,6 @@ class _AdminViewRoomScreenState extends State<AdminViewRoomScreen> {
             child: ActionDropdownWithoutIcon(
               actions: [
                 DropdownAction(
-                    label: "Invite",
-                    onTap: () {
-                      NavRouter.pop(context);
-                      showDialog(
-                          context: context,
-                          builder: (context) {
-                            // return KickDialogue();
-                            return const RequestJoinMic();
-                          });
-                    }),
-                DropdownAction(
-                    label: "Kick",
-                    onTap: () {
-                      NavRouter.pop(context);
-                      showDialog(
-                          context: context,
-                          builder: (context) {
-                            return KickDialogue();
-                            // return const RequestJoinMic();
-                          });
-                    }),
-                DropdownAction(
-                    label: "Ban",
-                    // onTap: () {
-                    //   NavRouter.pop(context);
-                    //   showDialog(
-                    //       context: context,
-                    //       builder: (context) {
-                    //         return CustomReasonDropdown(
-                    //           onItemSelected: (p0) {
-                    //             setState(() {
-                    //               selectedRegion = p0;
-                    //             });
-                    //           },
-                    //           selectedItem: selectedRegion,
-                    //           items: reasonList,
-                    //         );
-                    //       });
-                    // }
-                    onTap: () {}),
-
-                DropdownAction(
                     label: "Report",
                     onTap: () {
                       NavRouter.pop(context);
@@ -149,40 +103,10 @@ class _AdminViewRoomScreenState extends State<AdminViewRoomScreen> {
       );
     }
 
-    void _showAdminMenu(BuildContext context, Offset position) {
-      final overlay =
-          Overlay.of(context).context.findRenderObject() as RenderBox;
-      showMenu(
-        context: context,
-        position: RelativeRect.fromRect(
-          Rect.fromPoints(position, position),
-          Offset.zero & overlay.size,
-        ),
-        color: Colors.transparent,
-        elevation: 0,
-        items: [
-          PopupMenuItem(
-            padding: EdgeInsets.zero,
-            child: ActionDropdownWithoutIcon(
-              actions: [
-                DropdownAction(
-                    label: "Edit",
-                    onTap: () {
-                      NavRouter.pop(context);
-                      NavRouter.push(context, const EditCreateRoom());
-                    }),
-
-                DropdownAction(label: "End Room", onTap: () {}),
-                // DropdownAction(label: "Kick", onTap: () => print("Kick")),
-                // You can pass only 1, 2, 3, or 4
-              ],
-            ),
-          ),
-        ],
-      );
-    }
-
     return Scaffold(
+      resizeToAvoidBottomInset: true,
+      // This will make sure the bottom sheet moves up when the keyboard is visible
+
       extendBodyBehindAppBar: true,
       appBar: const CustomAppbar(
         title: 'Room',
@@ -192,10 +116,23 @@ class _AdminViewRoomScreenState extends State<AdminViewRoomScreen> {
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [Color(0xFF7B3FA0), Color(0xFF18121E)],
-          ),
+              stops: [
+                -50,
+                10,
+                30,
+                60,
+                1000,
+              ],
+              colors: [
+                Color(0xFFC637E5),
+                Color(0xFF161616),
+                Color(0xFF161616),
+                Color(0xFF161616),
+                Color(0xFF161616),
+              ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              tileMode: TileMode.decal),
         ),
         child: SafeArea(
           child: Column(
@@ -204,10 +141,9 @@ class _AdminViewRoomScreenState extends State<AdminViewRoomScreen> {
                 child: Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                  child: ListView(
-                    // crossAxisAlignment: CrossAxisAlignment.start,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Admin Host Card
                       Column(
                         spacing: 6.0,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -282,48 +218,10 @@ class _AdminViewRoomScreenState extends State<AdminViewRoomScreen> {
                                   ],
                                 ),
                               ),
-                              Row(
-                                mainAxisSize: MainAxisSize.min,
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  InkWell(
-                                    onTap: () {
-                                      NavRouter.push(
-                                          context,
-                                          const NotificationScreen(
-                                            isUserRequestPage: true,
-                                          ));
-                                    },
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                          color: const Color(0xffC637E5),
-                                          borderRadius:
-                                              BorderRadius.circular(12.0)),
-                                      padding: const EdgeInsets.all(
-                                        6.0,
-                                      ),
-                                      child: SvgPicture.asset(
-                                        AssetPaths.thListIcon,
-                                      ),
-                                    ),
-                                  ),
-                                  Builder(
-                                    builder: (iconContext) => OnClick(
-                                      onTap: () async {
-                                        final RenderBox button = iconContext
-                                            .findRenderObject() as RenderBox;
-                                        final Offset position =
-                                            button.localToGlobal(Offset.zero);
-                                        _showAdminMenu(iconContext, position);
-                                      },
-                                      child: const Icon(
-                                        Icons.more_vert,
-                                        color: Colors.white,
-                                        size: 28,
-                                      ),
-                                    ),
-                                  )
-                                ],
+                              const Icon(
+                                Icons.close,
+                                color: Color(0xFF161616),
+                                size: 28.0,
                               )
                             ],
                           ),
@@ -338,45 +236,7 @@ class _AdminViewRoomScreenState extends State<AdminViewRoomScreen> {
                       ).paddingSymmetric(
                         horizontal: 12.0,
                       ),
-                      h2,
 
-                      // Pinned Comments view
-
-                      Container(
-                        decoration: BoxDecoration(
-                            color: const Color(0xffC637E5).withOpacity(0.1),
-                            borderRadius: BorderRadius.circular(12.0)),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(12.0),
-                            color: const Color(0xff888888).withOpacity(0.15),
-                          ),
-                          padding: const EdgeInsets.all(12.0),
-                          child: Column(
-                            spacing: 12.0,
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    "Pinned Comments",
-                                    style:
-                                        context.textTheme.bodyMedium?.copyWith(
-                                      color: AppColors.white,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  SvgPicture.asset(AssetPaths.pinIcon),
-                                ],
-                              ),
-                              const ThreeSecondComment(),
-                              // const SixSecondsComment(),
-                              // const TenSecondsComment(),
-                            ],
-                          ),
-                        ),
-                      ),
                       h2,
 
                       // Speakers
@@ -478,8 +338,6 @@ class _AdminViewRoomScreenState extends State<AdminViewRoomScreen> {
                       h2,
                       Expanded(
                         child: GridView.builder(
-                          shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(),
                           itemCount: audience.length,
                           gridDelegate:
                               const SliverGridDelegateWithFixedCrossAxisCount(
@@ -535,7 +393,7 @@ class _AdminViewRoomScreenState extends State<AdminViewRoomScreen> {
                                       },
                                       child: const Icon(
                                         Icons.more_vert,
-                                        color: Colors.white,
+                                        color: Colors.white54,
                                         size: 18,
                                       ),
                                     ),
@@ -546,6 +404,23 @@ class _AdminViewRoomScreenState extends State<AdminViewRoomScreen> {
                           },
                         ),
                       ),
+                      // // Join Room Button
+                      // Padding(
+                      //     padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
+                      //     child: PrimaryButton(
+                      //       onPressed: () {
+                      //         showModalBottomSheet(
+                      //           context: context,
+                      //           isScrollControlled: true,
+                      //           backgroundColor: Colors.transparent,
+                      //           builder: (context) => RoomBottomSheet(),
+                      //         );
+                      //       },
+                      //       title: 'Join Room',
+                      //       backgroundColor: AppColors.primaryColor,
+                      //       borderRadius: 16,
+                      //       hMargin: 0,
+                      //     )),
                     ],
                   ),
                 ),
@@ -614,234 +489,6 @@ class _AdminViewRoomScreenState extends State<AdminViewRoomScreen> {
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class ThreeSecondComment extends StatelessWidget {
-  const ThreeSecondComment({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12.0),
-        gradient: LinearGradient(colors: [
-          const Color(0xff344BFB).withOpacity(0.6),
-          const Color(0xff374BE5),
-        ]),
-      ),
-      padding: const EdgeInsets.all(12.0),
-      child: Row(
-        spacing: 12.0,
-        children: [
-          CircleAvatar(
-            child: ClipOval(
-              child: Image.asset(AssetPaths.avatarImage),
-            ),
-          ),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Mariah",
-                  style: context.textTheme.bodyMedium?.copyWith(
-                    fontSize: 14.0,
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.white,
-                  ),
-                ),
-                Text(
-                  "Culture is more than style, it’s how we connect.",
-                  style: context.textTheme.bodyMedium?.copyWith(
-                    fontSize: 12.0,
-                    fontWeight: FontWeight.normal,
-                    color: AppColors.white,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Column(
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                    color: const Color(0xff000000).withOpacity(0.15),
-                    borderRadius: BorderRadius.circular(12.0)),
-                padding: const EdgeInsets.symmetric(
-                  vertical: 8.0,
-                  horizontal: 12.0,
-                ),
-                child: Image.asset(
-                  AssetPaths.starIcon,
-                  height: 24.0,
-                ),
-              ),
-              Text(
-                "3s",
-                style: context.textTheme.bodySmall?.copyWith(
-                  color: AppColors.white,
-                  fontSize: 12.0,
-                  fontWeight: FontWeight.normal,
-                ),
-              )
-            ],
-          )
-        ],
-      ),
-    );
-  }
-}
-
-class SixSecondsComment extends StatelessWidget {
-  const SixSecondsComment({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12.0),
-        gradient: LinearGradient(colors: [
-          const Color(0xff00CE56).withOpacity(0.6),
-          const Color(0xff37E5AE),
-        ]),
-      ),
-      padding: const EdgeInsets.all(12.0),
-      child: Row(
-        spacing: 12.0,
-        children: [
-          CircleAvatar(
-            child: ClipOval(
-              child: Image.asset(AssetPaths.avatarImage),
-            ),
-          ),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Mariah",
-                  style: context.textTheme.bodyMedium?.copyWith(
-                    fontSize: 14.0,
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.white,
-                  ),
-                ),
-                Text(
-                  "How many cultures are there in the world can you all count them. Just Curious haha",
-                  style: context.textTheme.bodyMedium?.copyWith(
-                    fontSize: 12.0,
-                    fontWeight: FontWeight.normal,
-                    color: AppColors.white,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Column(
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                    color: const Color(0xff000000).withOpacity(0.15),
-                    borderRadius: BorderRadius.circular(12.0)),
-                padding: const EdgeInsets.symmetric(
-                  vertical: 8.0,
-                  horizontal: 12.0,
-                ),
-                child: Image.asset(
-                  AssetPaths.starIcon,
-                  height: 24.0,
-                ),
-              ),
-              Text(
-                "6s",
-                style: context.textTheme.bodySmall?.copyWith(
-                  color: AppColors.white,
-                  fontSize: 12.0,
-                  fontWeight: FontWeight.normal,
-                ),
-              )
-            ],
-          )
-        ],
-      ),
-    );
-  }
-}
-
-class TenSecondsComment extends StatelessWidget {
-  const TenSecondsComment({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12.0),
-        gradient: LinearGradient(colors: [
-          const Color(0xffFB3434).withOpacity(0.6),
-          const Color(0xffE53737),
-        ]),
-      ),
-      padding: const EdgeInsets.all(12.0),
-      child: Row(
-        spacing: 12.0,
-        children: [
-          CircleAvatar(
-            child: ClipOval(
-              child: Image.asset(AssetPaths.avatarImage),
-            ),
-          ),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Mariah",
-                  style: context.textTheme.bodyMedium?.copyWith(
-                    fontSize: 14.0,
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.white,
-                  ),
-                ),
-                Text(
-                  "Culture is more than style, it’s how we connect.",
-                  style: context.textTheme.bodyMedium?.copyWith(
-                    fontSize: 12.0,
-                    fontWeight: FontWeight.normal,
-                    color: AppColors.white,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Column(
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                    color: const Color(0xff000000).withOpacity(0.15),
-                    borderRadius: BorderRadius.circular(12.0)),
-                padding: const EdgeInsets.symmetric(
-                  vertical: 8.0,
-                  horizontal: 12.0,
-                ),
-                child: Image.asset(
-                  AssetPaths.starIcon,
-                  height: 24.0,
-                ),
-              ),
-              Text(
-                "10s",
-                style: context.textTheme.bodySmall?.copyWith(
-                  color: AppColors.white,
-                  fontSize: 12.0,
-                  fontWeight: FontWeight.normal,
-                ),
-              )
-            ],
-          )
-        ],
       ),
     );
   }

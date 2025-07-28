@@ -3,6 +3,7 @@ import 'package:bkmc/modules/home/widgets/action_dropdown_menu.dart';
 import 'package:bkmc/ui/widgets/on_click.dart';
 import 'package:bkmc/utils/heights_and_widths.dart';
 import 'package:flutter/material.dart';
+
 class NestedCommentTile extends StatefulWidget {
   final CommentModel comment;
   final void Function(int id) onLike;
@@ -51,12 +52,12 @@ class _NestedCommentTileState extends State<NestedCommentTile> {
     final comment = widget.comment;
 
     return Padding(
-      padding: EdgeInsets.only( bottom: 8.0),
+      padding: EdgeInsets.only(bottom: 8.0),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-         h2,
+          h2,
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -114,39 +115,39 @@ class _NestedCommentTileState extends State<NestedCommentTile> {
                     const SizedBox(height: 2),
                     Row(
                       children: [
+                        // GestureDetector(
+                        //   onTap: () => widget.onLike(comment.id),
+                        //   child: Row(
+                        //     children: [
+                        //        const Text(
+                        //         'Like',
+                        //         style: TextStyle(
+                        //           color: Colors.white54,
+                        //           fontSize: 12,
+                        //         ),
+                        //       ),const SizedBox(width: 2),
+                        //       const Icon(Icons.favorite,
+                        //           color: Colors.red, size: 16),
+                        //       const SizedBox(width: 2),
+                        //       Text(
+                        //         comment.likes.toString(),
+                        //         style: const TextStyle(
+                        //           color: Colors.white,
+                        //           fontSize: 12,
+                        //         ),
+                        //       ),
+                        //     ],
+                        //   ),
+                        // ),
+                        // const SizedBox(width: 6),
+                        // Container(
+                        //   height: 12,
+                        //   width: 1,
+                        //   color: Colors.white30,
+                        // ),
+                        // const SizedBox(width: 6),
                         GestureDetector(
-                          onTap: () => widget.onLike(comment.id),
-                          child: Row(
-                            children: [
-                               const Text(
-                                'Like',
-                                style: TextStyle(
-                                  color: Colors.white54,
-                                  fontSize: 12,
-                                ),
-                              ),const SizedBox(width: 2),
-                              const Icon(Icons.favorite,
-                                  color: Colors.red, size: 16),
-                              const SizedBox(width: 2),
-                              Text(
-                                comment.likes.toString(),
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 12,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(width: 6),
-                        Container(
-      height: 12,
-      width: 1,
-      color: Colors.white30,
-    ), const SizedBox(width: 6),
-                        GestureDetector(
-                          onTap: () =>
-                              widget.onReply(comment.id, comment.name),
+                          onTap: () => widget.onReply(comment.id, comment.name),
                           child: const Text(
                             'Reply',
                             style: TextStyle(
@@ -155,13 +156,14 @@ class _NestedCommentTileState extends State<NestedCommentTile> {
                             ),
                           ),
                         ),
-                         const SizedBox(width: 4),
-                              Text(
-                                comment.likes.toString(),
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 12,
-                                ),)
+                        const SizedBox(width: 4),
+                        Text(
+                          comment.likes.toString(),
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 12,
+                          ),
+                        )
                       ],
                     ),
                   ],
@@ -196,20 +198,18 @@ class _NestedCommentTileState extends State<NestedCommentTile> {
                         // )
                       ],
                     )
-                  : 
-                  InkWell(
-                    onTap: () {
+                  : InkWell(
+                      onTap: () {
                         setState(() {
                           comment.isExpanded = true;
                         });
                       },
-                      
                       child: Text(
                         "View ${comment.replies.length} ${comment.replies.length == 1 ? "reply" : "replies"}",
-                         style: TextStyle(
-                              color: Colors.white54,
-                              fontSize: 12,
-                            ),
+                        style: TextStyle(
+                          color: Colors.white54,
+                          fontSize: 12,
+                        ),
                       ),
                     ),
             ),

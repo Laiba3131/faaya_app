@@ -5,7 +5,6 @@ import 'package:bkmc/ui/input/input_field.dart';
 import 'package:bkmc/ui/widgets/on_click.dart';
 import 'package:bkmc/utils/extensions/extended_context.dart';
 import 'package:bkmc/utils/heights_and_widths.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -22,6 +21,8 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   bool isObseure = true;
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -68,11 +69,11 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 h0P5,
                 InputField(
-                  controller: TextEditingController(),
+                  controller: emailController,
                   label: 'Enter email',
                   prefixIcon: SvgPicture.asset(AssetPaths.email),
                   lMargin: 15,
-                  borderColor: AppColors.primaryColor,
+                  focusedBorderColor: AppColors.primaryColor,
                   fillColor: AppColors.inputFieldFillColor,
                   labelColor: AppColors.white,
                   borderRadius: 16,
@@ -93,12 +94,12 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 h0P5,
                 InputField(
-                  controller: TextEditingController(),
+                  controller: passwordController,
                   label: 'Enter password',
                   obscureText: isObseure,
                   prefixIcon: SvgPicture.asset(AssetPaths.password),
                   lMargin: 15,
-                  borderColor: AppColors.primaryColor,
+                  focusedBorderColor: AppColors.primaryColor,
                   fillColor: AppColors.inputFieldFillColor,
                   labelColor: AppColors.white,
                   borderRadius: 16,

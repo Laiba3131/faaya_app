@@ -52,7 +52,7 @@ class _CreateRoomScreenState extends State<CreateRoomScreen> {
     'South America',
   ];
 
-    List<String> categoryList = [
+  List<String> categoryList = [
     'Entertainment',
     'Culture',
     'Music',
@@ -206,7 +206,7 @@ class _CreateRoomScreenState extends State<CreateRoomScreen> {
                       bottom: 8,
                       right: 8,
                       child: Text(
-                        "${22}/${33} max.",
+                        "${22}/${70} max.",
                         style: TextStyle(
                           color: Colors.white70,
                           fontSize: 12,
@@ -279,7 +279,7 @@ class _CreateRoomScreenState extends State<CreateRoomScreen> {
                       bottom: 8,
                       right: 8,
                       child: Text(
-                        "${22}/${33} max.",
+                        "${22}/${100} max.",
                         style: TextStyle(
                           color: Colors.white70,
                           fontSize: 12,
@@ -300,7 +300,7 @@ class _CreateRoomScreenState extends State<CreateRoomScreen> {
                 h0P5,
                 CustomDropdown(
                   height: 50,
-                  hintText: selectedCategory??'Select Category ',
+                  hintText: selectedCategory ?? 'Select Category ',
                   isPrefixIconVisible: false,
                   title: 'Select Category  ',
                   items: categoryList,
@@ -323,9 +323,9 @@ class _CreateRoomScreenState extends State<CreateRoomScreen> {
                 h0P5,
                 CustomDropdown(
                   height: 50,
-                  hintText: selectedRegion?? 'Select Category',
+                  hintText: selectedRegion ?? 'Select Category',
                   isPrefixIconVisible: false,
-                  title:selectedRegion?? 'Select Category',
+                  title: selectedRegion ?? 'Select Category',
                   items: regionList,
                   selectedItem: selectedRegion,
                   onItemSelected: (value) {
