@@ -518,19 +518,18 @@ class _AdminViewRoomScreenState extends State<AdminViewRoomScreen> {
                                           backgroundImage:
                                               AssetImage(a['image']!),
                                         ),
-                                        // if (isEmojiVisible == false)
-
-                                        // Positioned(
-                                        //   left: 24 - 14,
-                                        //   // center horizontally (mainRadius - emojiRadius)
-                                        //   top: 24 - 14,
-                                        //   // center vertically
-                                        //   child: isEmojiVisible
-                                        //       ? const MovingEmojiAvatar(
-                                        //           imagePath: AssetPaths.emoji,
-                                        //         )
-                                        //       : const SizedBox(),
-                                        // ),
+                                        if (i == 5)
+                                          Positioned(
+                                            left: 24 - 14,
+                                            // center horizontally (mainRadius - emojiRadius)
+                                            top: 24 - 14,
+                                            // center vertically
+                                            child: !isEmojiVisible
+                                                ? const MovingEmojiAvatar(
+                                                    imagePath: AssetPaths.emoji,
+                                                  )
+                                                : const SizedBox(),
+                                          ),
                                       ],
                                     ),
                                     const SizedBox(height: 4),
