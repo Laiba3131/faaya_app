@@ -11,12 +11,10 @@ import 'package:bkmc/utils/heights_and_widths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:sizer/sizer.dart';
 
 import '../../../constants/app_colors.dart';
 import '../../../constants/asset_paths.dart';
 import '../../../ui/button/primary_button.dart';
-import '../../../ui/input/input_field.dart';
 import '../../../ui/widgets/custom_appbar.dart';
 import '../../home/widgets/bottom_sheet/room_bottom_sheet.dart';
 import '../../home/widgets/session_lable.dart';
@@ -29,6 +27,8 @@ class AdminViewRoomScreen extends StatefulWidget {
 }
 
 class _AdminViewRoomScreenState extends State<AdminViewRoomScreen> {
+  bool isEmojiVisible = false;
+
   @override
   Widget build(BuildContext context) {
     String selectedReason = "Bullying";
@@ -99,7 +99,7 @@ class _AdminViewRoomScreenState extends State<AdminViewRoomScreen> {
                       showDialog(
                           context: context,
                           builder: (context) {
-                            return KickDialogue();
+                            return const KickDialogue();
                             // return const RequestJoinMic();
                           });
                     }),
@@ -389,7 +389,7 @@ class _AdminViewRoomScreenState extends State<AdminViewRoomScreen> {
                         child: ListView.separated(
                           scrollDirection: Axis.horizontal,
                           itemCount: speakers.length,
-                          separatorBuilder: (_, __) =>
+                          separatorBuilder: (_, index) =>
                               const SizedBox(width: 18),
                           itemBuilder: (context, i) {
                             final s = speakers[i];
@@ -441,6 +441,19 @@ class _AdminViewRoomScreenState extends State<AdminViewRoomScreen> {
                                               ),
                                             ),
                                           ),
+                                          if (i == 0)
+                                            Positioned(
+                                              left: 24 - 14,
+                                              // center horizontally (mainRadius - emojiRadius)
+                                              top: 24 - 14,
+                                              // center vertically
+                                              child: isEmojiVisible
+                                                  ? const MovingEmojiAvatar(
+                                                      imagePath:
+                                                          AssetPaths.emoji,
+                                                    )
+                                                  : const SizedBox(),
+                                            ),
                                         ],
                                       ),
                                       const SizedBox(height: 4),
@@ -479,7 +492,7 @@ class _AdminViewRoomScreenState extends State<AdminViewRoomScreen> {
                       h2,
                       GridView.builder(
                         shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
+                        physics: const NeverScrollableScrollPhysics(),
                         itemCount: audience.length,
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
@@ -497,24 +510,29 @@ class _AdminViewRoomScreenState extends State<AdminViewRoomScreen> {
                                 child: Column(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
-                                   Stack(
-                                clipBehavior: Clip.none,
-                                children: [
-                                   CircleAvatar(
-                                      radius: 24,
-                                      backgroundImage:
-                                          AssetImage(a['image']!),
+                                    Stack(
+                                      clipBehavior: Clip.none,
+                                      children: [
+                                        CircleAvatar(
+                                          radius: 24,
+                                          backgroundImage:
+                                              AssetImage(a['image']!),
+                                        ),
+                                        // if (isEmojiVisible == false)
+
+                                        // Positioned(
+                                        //   left: 24 - 14,
+                                        //   // center horizontally (mainRadius - emojiRadius)
+                                        //   top: 24 - 14,
+                                        //   // center vertically
+                                        //   child: isEmojiVisible
+                                        //       ? const MovingEmojiAvatar(
+                                        //           imagePath: AssetPaths.emoji,
+                                        //         )
+                                        //       : const SizedBox(),
+                                        // ),
+                                      ],
                                     ),
-                                  const Positioned(
-                                    left: 24 -
-                                        14, // center horizontally (mainRadius - emojiRadius)
-                                    top: 24 - 14, // center vertically
-                                    child: MovingEmojiAvatar(
-                                      imagePath: AssetPaths.emoji,
-                                    ),
-                                  ),
-                                ],
-                              ),
                                     const SizedBox(height: 4),
                                     SizedBox(
                                       width: 60,
@@ -558,19 +576,28 @@ class _AdminViewRoomScreenState extends State<AdminViewRoomScreen> {
                           );
                         },
                       ),
-                    
                     ],
                   ),
                 ),
               ),
-             PrimaryButton( backgroundColor: AppColors.primaryColor,
+              PrimaryButton(
+                backgroundColor: AppColors.primaryColor,
                 onPressed: () {
                   showModalBottomSheet(
                       context: context,
                       useSafeArea: true,
                       backgroundColor: Colors.transparent,
                       clipBehavior: Clip.antiAliasWithSaveLayer,
-                      builder: (context) => RoomBottomSheet());
+                      builder: (context) => RoomBottomSheet(
+                            onEmojiClick: (v) {
+                              NavRouter.pop(
+                                context,
+                              );
+                              setState(() {
+                                isEmojiVisible = !isEmojiVisible;
+                              });
+                            },
+                          ));
                 },
                 height: 30,
                 borderRadius: 18,
@@ -579,7 +606,6 @@ class _AdminViewRoomScreenState extends State<AdminViewRoomScreen> {
                 vMargin: 8,
                 fontSize: 10.0,
               ).paddingOnly(right: 10.0),
-             
             ],
           ),
         ),
@@ -663,4 +689,3 @@ class ThreeSecondComment extends StatelessWidget {
     );
   }
 }
-

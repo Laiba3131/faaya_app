@@ -13,6 +13,10 @@ import '../../../../ui/input/input_field.dart';
 import '../../../common/widgets/mic_permission_dialog.dart';
 
 class RoomBottomSheet extends StatefulWidget {
+  const RoomBottomSheet({super.key, this.onEmojiClick});
+
+  final Function(bool)? onEmojiClick;
+
   @override
   State<RoomBottomSheet> createState() => RoomBottomSheetState();
 }
@@ -20,6 +24,8 @@ class RoomBottomSheet extends StatefulWidget {
 class RoomBottomSheetState extends State<RoomBottomSheet> {
   int? replyingToCommentId;
   String? replyingToUserName;
+  bool emojiClicked = false;
+  List<String> emojis = ['👏', '💪', '👌', '🥳', '😊', '😍', '😎', '🔥'];
 
   List<CommentModel> comments = [
     CommentModel(
@@ -181,18 +187,36 @@ class RoomBottomSheetState extends State<RoomBottomSheet> {
                     color: Colors.white.withOpacity(0.08),
                     borderRadius: BorderRadius.circular(12),
                   ),
-                  child: const Row(
+                  child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Text('👏'),
-                      Text('💪'),
-                      Text('👌'),
-                      Text('🥳'),
-                      Text('😊'),
-                      Text('😍'),
-                      Text('😎'),
-                      Text('🔥'),
-                    ],
+                    // children: [
+                    //   InkWell(
+                    //       onTap: () {
+                    //         setState(() {
+                    //           emojiClicked = !emojiClicked;
+                    //         });
+                    //         widget.onEmojiClick(emojiClicked);
+                    //       },
+                    //       child: Text('👏')),
+                    //   Text('💪'),
+                    //   Text('👌'),
+                    //   Text('🥳'),
+                    //   Text('😊'),
+                    //   Text('😍'),
+                    //   Text('😎'),
+                    //   Text('🔥'),
+                    // ],
+                    children: emojis.map((emoji) {
+                      return InkWell(
+                        onTap: () {
+                          setState(() {
+                            emojiClicked = !emojiClicked;
+                          });
+                          widget.onEmojiClick!(emojiClicked);
+                        },
+                        child: Text(emoji, style: TextStyle(fontSize: 24)),
+                      );
+                    }).toList(),
                   ),
                 ),
                 h1,

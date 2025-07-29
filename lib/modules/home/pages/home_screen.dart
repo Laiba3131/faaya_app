@@ -1,14 +1,12 @@
 import 'package:bkmc/config/config.dart';
 import 'package:bkmc/constants/app_colors.dart';
 import 'package:bkmc/constants/asset_paths.dart';
-import 'package:bkmc/modules/home/pages/app_bar_custom.dart';
 import 'package:bkmc/modules/home/pages/notification_screen.dart';
 import 'package:bkmc/modules/home/pages/room_screen.dart';
 import 'package:bkmc/modules/home/pages/rooms_category_screen.dart';
 import 'package:bkmc/modules/home/widgets/custom_dropdown.dart';
 import 'package:bkmc/ui/button/primary_button.dart';
 import 'package:bkmc/ui/input/input_field.dart';
-import 'package:bkmc/ui/widgets/custom_appbar.dart';
 import 'package:bkmc/ui/widgets/on_click.dart';
 import 'package:bkmc/utils/extensions/extended_context.dart';
 import 'package:bkmc/utils/heights_and_widths.dart';
@@ -80,46 +78,46 @@ class _HomeScreenState extends State<HomeScreen> {
             .toList();
 
     return Scaffold(
-       appBar: CustomAppbarForHome(
-        title: 'Home',
-        searchController: searchController,
-        onSearchChange: (value) {
-          setState(() {
-            searchQuery = value.trim();
-          });
-        },
-      ),
-        // appBar: AppBar(
-        //   backgroundColor: AppColors.transparent,
-        //   automaticallyImplyLeading: false,
-          // title: Container(
-          //     padding: const EdgeInsets.symmetric(vertical: 12),
-          //     child: InputField(
-          //       controller: searchController,
-          //       label: 'Search rooms',
-          //       borderRadius: 20,
-          //       suffixIcon: SvgPicture.asset(AssetPaths.search),
-          //       fillColor: Color(0xFF936f9b),
-          //       labelColor: AppColors.white,
-          //       boxConstraints: 20,
-          //       onChange: (value) {
-          //         setState(() {
-          //           searchQuery = value.trim();
-          //         });
-          //       },
-          //     )),
-          // actions: [
-          //   OnClick(
-          //     onTap: () {
-          //       NavRouter.push(context, NotificationScreen());
-          //     },
-          //     child: Padding(
-          //       padding: const EdgeInsets.only(right: 13.0),
-          //       child: SvgPicture.asset(AssetPaths.notification),
-          //     ),
-          //   )
-          // ],
+        //  appBar: CustomAppbarForHome(
+        //   title: 'Home',
+        //   searchController: searchController,
+        //   onSearchChange: (value) {
+        //     setState(() {
+        //       searchQuery = value.trim();
+        //     });
+        //   },
         // ),
+        appBar: AppBar(
+          backgroundColor: AppColors.transparent,
+          automaticallyImplyLeading: false,
+          title: Container(
+              padding: const EdgeInsets.symmetric(vertical: 12),
+              child: InputField(
+                controller: searchController,
+                label: 'Search rooms',
+                borderRadius: 20,
+                suffixIcon: SvgPicture.asset(AssetPaths.search),
+                fillColor: Color(0xFF936f9b),
+                labelColor: AppColors.white,
+                boxConstraints: 20,
+                onChange: (value) {
+                  setState(() {
+                    searchQuery = value.trim();
+                  });
+                },
+              )),
+          actions: [
+            OnClick(
+              onTap: () {
+                NavRouter.push(context, NotificationScreen());
+              },
+              child: Padding(
+                padding: const EdgeInsets.only(right: 13.0),
+                child: SvgPicture.asset(AssetPaths.notification),
+              ),
+            )
+          ],
+        ),
         backgroundColor: AppColors.transparent,
         body: SafeArea(
           child: SingleChildScrollView(
@@ -185,72 +183,71 @@ class _HomeScreenState extends State<HomeScreen> {
     return SizedBox(
       height: 90,
       child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: users.length,
-       itemBuilder: (_, index) {
-  final isLive = index == 1; // 2nd item (0-based index)
+          scrollDirection: Axis.horizontal,
+          itemCount: users.length,
+          itemBuilder: (_, index) {
+            final isLive = index == 1; // 2nd item (0-based index)
 
-  return Padding(
-    padding: const EdgeInsets.only(right: 12),
-    child: Column(
-      children: [
-        Stack(
-          alignment: Alignment.bottomCenter,
-          children: [
-            Container(
-              padding: const EdgeInsets.all(3),
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(
-                  color: AppColors.primaryColor,
-                  width: 2,
-                ),
-              ),
-              child: const CircleAvatar(
-                radius: 26,
-                backgroundImage: AssetImage(AssetPaths.avatarImage),
-              ),
-            ),
-            if (isLive)
-              Positioned(
-                bottom: -3,
-                child: Container(
-                  margin: EdgeInsets.all(4),
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 6,
-                    vertical: 2,
+            return Padding(
+              padding: const EdgeInsets.only(right: 12),
+              child: Column(
+                children: [
+                  Stack(
+                    alignment: Alignment.bottomCenter,
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(3),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(
+                            color: AppColors.primaryColor,
+                            width: 2,
+                          ),
+                        ),
+                        child: const CircleAvatar(
+                          radius: 26,
+                          backgroundImage: AssetImage(AssetPaths.avatarImage),
+                        ),
+                      ),
+                      if (isLive)
+                        Positioned(
+                          bottom: -3,
+                          child: Container(
+                            margin: EdgeInsets.all(4),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 6,
+                              vertical: 2,
+                            ),
+                            decoration: BoxDecoration(
+                              color: Colors.purple,
+                              border: Border.all(color: AppColors.white),
+                              borderRadius: BorderRadius.circular(4),
+                            ),
+                            child: const Text(
+                              'LIVE',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 8,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ),
+                    ],
                   ),
-                  decoration: BoxDecoration(
-                    color: Colors.purple,
-                    border: Border.all(color: AppColors.white),
-                    borderRadius: BorderRadius.circular(4),
-                  ),
-                  child: const Text(
-                    'LIVE',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 8,
-                      fontWeight: FontWeight.bold,
+                  const SizedBox(height: 4),
+                  Text(
+                    users[index],
+                    style: context.textTheme.bodyMedium!.copyWith(
+                      color: AppColors.white,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400,
                     ),
-                  ),
-                ),
+                  )
+                ],
               ),
-          ],
-        ),
-        const SizedBox(height: 4),
-        Text(
-          users[index],
-          style: context.textTheme.bodyMedium!.copyWith(
-            color: AppColors.white,
-            fontSize: 12,
-            fontWeight: FontWeight.w400,
-          ),
-        )
-      ],
-    ),
-  );
-}
-  ),
+            );
+          }),
     );
   }
 
