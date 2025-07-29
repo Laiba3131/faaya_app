@@ -1,12 +1,14 @@
 import 'package:bkmc/config/config.dart';
 import 'package:bkmc/constants/app_colors.dart';
 import 'package:bkmc/constants/asset_paths.dart';
+import 'package:bkmc/modules/home/pages/app_bar_custom.dart';
 import 'package:bkmc/modules/home/pages/notification_screen.dart';
 import 'package:bkmc/modules/home/pages/room_screen.dart';
 import 'package:bkmc/modules/home/pages/rooms_category_screen.dart';
 import 'package:bkmc/modules/home/widgets/custom_dropdown.dart';
 import 'package:bkmc/ui/button/primary_button.dart';
 import 'package:bkmc/ui/input/input_field.dart';
+import 'package:bkmc/ui/widgets/custom_appbar.dart';
 import 'package:bkmc/ui/widgets/on_click.dart';
 import 'package:bkmc/utils/extensions/extended_context.dart';
 import 'package:bkmc/utils/heights_and_widths.dart';
@@ -78,85 +80,96 @@ class _HomeScreenState extends State<HomeScreen> {
             .toList();
 
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: AppColors.transparent,
-          automaticallyImplyLeading: false,
-          title: Container(
-              padding: const EdgeInsets.symmetric(vertical: 12),
-              child: InputField(
-                controller: searchController,
-                label: 'Search rooms',
-                borderRadius: 20,
-                suffixIcon: SvgPicture.asset(AssetPaths.search),
-                fillColor: Color(0xFF936f9b),
-                labelColor: AppColors.white,
-                boxConstraints: 20,
-                onChange: (value) {
-                  setState(() {
-                    searchQuery = value.trim();
-                  });
-                },
-              )),
-          actions: [
-            OnClick(
-              onTap: () {
-                NavRouter.push(context, NotificationScreen());
-              },
-              child: Padding(
-                padding: const EdgeInsets.only(right: 13.0),
-                child: SvgPicture.asset(AssetPaths.notification),
-              ),
-            )
-          ],
-        ),
+       appBar: CustomAppbarForHome(
+        title: 'Home',
+        searchController: searchController,
+        onSearchChange: (value) {
+          setState(() {
+            searchQuery = value.trim();
+          });
+        },
+      ),
+        // appBar: AppBar(
+        //   backgroundColor: AppColors.transparent,
+        //   automaticallyImplyLeading: false,
+          // title: Container(
+          //     padding: const EdgeInsets.symmetric(vertical: 12),
+          //     child: InputField(
+          //       controller: searchController,
+          //       label: 'Search rooms',
+          //       borderRadius: 20,
+          //       suffixIcon: SvgPicture.asset(AssetPaths.search),
+          //       fillColor: Color(0xFF936f9b),
+          //       labelColor: AppColors.white,
+          //       boxConstraints: 20,
+          //       onChange: (value) {
+          //         setState(() {
+          //           searchQuery = value.trim();
+          //         });
+          //       },
+          //     )),
+          // actions: [
+          //   OnClick(
+          //     onTap: () {
+          //       NavRouter.push(context, NotificationScreen());
+          //     },
+          //     child: Padding(
+          //       padding: const EdgeInsets.only(right: 13.0),
+          //       child: SvgPicture.asset(AssetPaths.notification),
+          //     ),
+          //   )
+          // ],
+        // ),
         backgroundColor: AppColors.transparent,
-        body: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-          child: searchQuery.isNotEmpty
-              ? Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: filteredRooms.map((room) {
-                    return Padding(
-                      padding: const EdgeInsets.only(bottom: 16.0),
-                      child: LiveRoomCard(
-                        title: room.title,
-                        description: room.description,
-                        host: room.host,
-                        timeAgo: room.timeAgo,
-                        peopleCount: room.peopleCount,
-                        micCount: room.micCount,
-                        chatCount: room.chatCount,
+        body: SafeArea(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+            child: searchQuery.isNotEmpty
+                ? Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: filteredRooms.map((room) {
+                      return Padding(
+                        padding: const EdgeInsets.only(bottom: 16.0),
+                        child: LiveRoomCard(
+                          title: room.title,
+                          description: room.description,
+                          host: room.host,
+                          timeAgo: room.timeAgo,
+                          peopleCount: room.peopleCount,
+                          micCount: room.micCount,
+                          chatCount: room.chatCount,
+                          onTap: () {
+                            NavRouter.push(context, RoomScreen());
+                          },
+                        ),
+                      );
+                    }).toList(),
+                  )
+                : Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _buildStoryAvatars(context),
+                      h2,
+                      _buildFilterButtons(context),
+                      h2,
+                      LiveRoomCard(
+                        title: "Culture Topic",
+                        description:
+                            "Lets Discuss the culture of the north America.",
+                        host: "Alyan Alee Khan",
+                        timeAgo: "2 Hours Ago",
+                        peopleCount: 11,
+                        micCount: 3,
+                        chatCount: 3,
                         onTap: () {
                           NavRouter.push(context, RoomScreen());
                         },
                       ),
-                    );
-                  }).toList(),
-                )
-              : Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    _buildStoryAvatars(context),
-                    h2,
-                    _buildFilterButtons(context),
-                    h2,
-                    LiveRoomCard(
-                      title: "Culture Topic",
-                      description:
-                          "Lets Discuss the culture of the north America.",
-                      host: "Alyan Alee Khan",
-                      timeAgo: "2 Hours Ago",
-                      peopleCount: 11,
-                      micCount: 3,
-                      chatCount: 3,
-                      onTap: () {
-                        NavRouter.push(context, RoomScreen());
-                      },
-                    ),
-                    h2,
-                    _buildRoomGrid(),
-                  ],
-                ),
+                      h2,
+                      _buildRoomGrid(),
+                    ],
+                  ),
+          ),
         ));
   }
 
@@ -264,7 +277,7 @@ class _HomeScreenState extends State<HomeScreen> {
         Expanded(
           flex: 3,
           child: GenericDropdown<Country>(
-            height: 40,
+            height: 44,
             title: 'Select Country',
             hintText: truncateString(selectedCountry?.name ?? 'Country',
                 maxLength: 10),

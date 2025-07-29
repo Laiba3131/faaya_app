@@ -15,6 +15,7 @@ import '../../../constants/asset_paths.dart';
 import '../../../ui/input/input_field.dart';
 import '../../../ui/widgets/custom_appbar.dart';
 import '../widgets/session_lable.dart';
+import 'animation_test.dart';
 
 class JoinedRoomScreen extends StatefulWidget {
   const JoinedRoomScreen({super.key});
@@ -355,11 +356,25 @@ class _JoinedRoomScreenState extends State<JoinedRoomScreen> {
                                   child: Column(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
-                                      CircleAvatar(
+                                       Stack(
+                                  clipBehavior: Clip.none,
+                                  children: [
+                                     CircleAvatar(
                                         radius: 24,
                                         backgroundImage:
                                             AssetImage(a['image']!),
                                       ),
+                                    const Positioned(
+                                      left: 24 -
+                                          14, // center horizontally (mainRadius - emojiRadius)
+                                      top: 24 - 14, // center vertically
+                                      child: MovingEmojiAvatar(
+                                        imagePath: AssetPaths.emoji,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                     
                                       const SizedBox(height: 4),
                                       SizedBox(
                                         width: 60,
@@ -425,68 +440,23 @@ class _JoinedRoomScreenState extends State<JoinedRoomScreen> {
                   ),
                 ),
               ),
-              Align(
-                alignment: Alignment.bottomRight,
-                child: SizedBox(
-                  width: 30.w,
-                  child: PrimaryButton(
-                    onPressed: () {
-                      showModalBottomSheet(
-                          context: context,
-                          useSafeArea: true,
-                          backgroundColor: Colors.transparent,
-                          clipBehavior: Clip.antiAliasWithSaveLayer,
-                          builder: (context) => RoomBottomSheet());
-                    },
-                    height: 30,
-                    title: "show Comments",
-                    hMargin: 0,
-                    fontSize: 10.0,
-                  ),
-                ).paddingOnly(right: 10.0),
-              ),
-              Container(
-                color: const Color(0xFF18121E),
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: const Color(0xff888888).withOpacity(0.3),
-                          borderRadius: BorderRadius.circular(12.0),
-                        ),
-                        padding: const EdgeInsets.symmetric(horizontal: 14.0),
-                        child: Row(
-                          children: [
-                            Image.asset(AssetPaths.giftIcon),
-                            w2,
-                            Image.asset(AssetPaths.divider),
-                            w1,
-                            Expanded(
-                              child: InputField(
-                                boxConstraints: 12,
-                                controller: TextEditingController(),
-                                label: "Type a thought here",
-                              ),
-                            ),
-                            w1,
-                            Image.asset(AssetPaths.sendMessage),
-                          ],
-                        ),
-                      ),
-                    ),
-                    w1,
-                    SvgPicture.asset(AssetPaths.smileEmoji, height: 30.0),
-                    w1,
-                    SvgPicture.asset(AssetPaths.commentHand, height: 30.0),
-                    w1,
-                    SvgPicture.asset(AssetPaths.micRequest, height: 30.0),
-                  ],
-                ),
-              ),
-            ],
+              PrimaryButton( backgroundColor: AppColors.primaryColor,
+                onPressed: () {
+                  showModalBottomSheet(
+                      context: context,
+                      useSafeArea: true,
+                      backgroundColor: Colors.transparent,
+                      clipBehavior: Clip.antiAliasWithSaveLayer,
+                      builder: (context) => RoomBottomSheet());
+                },
+                height: 30,
+                borderRadius: 18,
+                title: "View More",
+                hMargin: 8,
+                vMargin: 8,
+                fontSize: 10.0,
+              ).paddingOnly(right: 10.0),
+              ],
           ),
         ),
       ),

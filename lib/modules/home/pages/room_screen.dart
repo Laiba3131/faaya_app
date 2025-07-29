@@ -340,23 +340,23 @@ class _RoomScreenState extends State<RoomScreen> {
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                Stack(
-                                  clipBehavior: Clip.none,
-                                  children: [
                                     CircleAvatar(
                                       radius: 24,
                                       backgroundImage: AssetImage(a['image']!),
                                     ),
-                                    Positioned(
-                                      left: 24 -
-                                          14, // center horizontally (mainRadius - emojiRadius)
-                                      top: 24 - 14, // center vertically
-                                      child: MovingEmojiAvatar(
-                                        imagePath: AssetPaths.emoji,
-                                      ),
-                                    ),
-                                  ],
-                                ),
+                                // Stack(
+                                //   clipBehavior: Clip.none,
+                                //   children: [
+                                //     const Positioned(
+                                //       left: 24 -
+                                //           14, // center horizontally (mainRadius - emojiRadius)
+                                //       top: 24 - 14, // center vertically
+                                //       child: MovingEmojiAvatar(
+                                //         imagePath: AssetPaths.emoji,
+                                //       ),
+                                //     ),
+                                //   ],
+                                // ),
                                 const SizedBox(height: 4),
                                 SizedBox(
                                   width:

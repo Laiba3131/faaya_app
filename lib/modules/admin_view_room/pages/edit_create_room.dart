@@ -176,7 +176,7 @@ class _EditCreateRoomState extends State<EditCreateRoom> {
                   labelColor: AppColors.white.withOpacity(0.5),
                   borderRadius: 16,
                   fillColor: AppColors.primaryColor.withOpacity(0.5),
-                  borderColor: AppColors.transparent,
+                  focusedBorderColor: AppColors.primaryColor,
                 ),
                 h1,
                 Text(
@@ -199,7 +199,7 @@ class _EditCreateRoomState extends State<EditCreateRoom> {
                       label: "Enter description up to 70 characters max.",
                       borderRadius: 16,
                       fillColor: AppColors.primaryColor.withOpacity(0.5),
-                      borderColor: AppColors.transparent,
+                      focusedBorderColor: AppColors.primaryColor,
                     ),
                     const Positioned(
                       bottom: 8,
@@ -272,7 +272,7 @@ class _EditCreateRoomState extends State<EditCreateRoom> {
                       label: 'Enter the words you want to filter.',
                       borderRadius: 16,
                       fillColor: AppColors.primaryColor.withOpacity(0.5),
-                      borderColor: AppColors.transparent,
+                      focusedBorderColor: AppColors.primaryColor,
                     ),
                     const Positioned(
                       bottom: 8,

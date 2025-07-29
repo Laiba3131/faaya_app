@@ -3,6 +3,7 @@ import 'package:bkmc/modules/admin_view_room/pages/edit_create_room.dart';
 import 'package:bkmc/modules/admin_view_room/widgets/kick_dialogue.dart';
 import 'package:bkmc/modules/admin_view_room/widgets/request_join_mic.dart';
 import 'package:bkmc/modules/common/widgets/custom_reason_dropdown.dart';
+import 'package:bkmc/modules/home/pages/animation_test.dart';
 import 'package:bkmc/modules/home/pages/notification_screen.dart';
 import 'package:bkmc/modules/home/widgets/action_dropdown_withour_icon.dart';
 import 'package:bkmc/ui/widgets/on_click.dart';
@@ -476,141 +477,109 @@ class _AdminViewRoomScreenState extends State<AdminViewRoomScreen> {
                       // Audience
                       const SectionLabel(label: 'Audience'),
                       h2,
-                      Expanded(
-                        child: GridView.builder(
-                          shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(),
-                          itemCount: audience.length,
-                          gridDelegate:
-                              const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 4,
-                            // mainAxisSpacing: 10,
-                            // crossAxisSpacing: 10,
-                            // childAspectRatio: 0.7,
-                          ),
-                          itemBuilder: (context, i) {
-                            final a = audience[i];
-                            return Stack(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 3.0),
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      CircleAvatar(
-                                        radius: 24,
-                                        backgroundImage:
-                                            AssetImage(a['image']!),
-                                      ),
-                                      const SizedBox(height: 4),
-                                      SizedBox(
-                                        width: 60,
-                                        // restrict width for proper ellipsis
-                                        child: Text(
-                                          a['name']!,
-                                          textAlign: TextAlign.center,
-                                          style: context.textTheme.bodyMedium!
-                                              .copyWith(
-                                            color: AppColors.white,
-                                            fontSize: 10,
-                                            fontWeight: FontWeight.w400,
-                                          ),
-                                          overflow: TextOverflow.ellipsis,
-                                        ),
-                                      ),
-                                    ],
+                      GridView.builder(
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        itemCount: audience.length,
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 4,
+                          // mainAxisSpacing: 10,
+                          // crossAxisSpacing: 10,
+                          // childAspectRatio: 0.7,
+                        ),
+                        itemBuilder: (context, i) {
+                          final a = audience[i];
+                          return Stack(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(top: 3.0),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                   Stack(
+                                clipBehavior: Clip.none,
+                                children: [
+                                   CircleAvatar(
+                                      radius: 24,
+                                      backgroundImage:
+                                          AssetImage(a['image']!),
+                                    ),
+                                  const Positioned(
+                                    left: 24 -
+                                        14, // center horizontally (mainRadius - emojiRadius)
+                                    top: 24 - 14, // center vertically
+                                    child: MovingEmojiAvatar(
+                                      imagePath: AssetPaths.emoji,
+                                    ),
                                   ),
-                                ),
-                                Positioned(
-                                  top: 0,
-                                  right: 12,
-                                  child: Builder(
-                                    builder: (iconContext) => OnClick(
-                                      onTap: () async {
-                                        final RenderBox button = iconContext
-                                            .findRenderObject() as RenderBox;
-                                        final Offset position =
-                                            button.localToGlobal(Offset.zero);
-                                        _showMenu(iconContext, position);
-                                      },
-                                      child: const Icon(
-                                        Icons.more_vert,
-                                        color: Colors.white,
-                                        size: 18,
+                                ],
+                              ),
+                                    const SizedBox(height: 4),
+                                    SizedBox(
+                                      width: 60,
+                                      // restrict width for proper ellipsis
+                                      child: Text(
+                                        a['name']!,
+                                        textAlign: TextAlign.center,
+                                        style: context.textTheme.bodyMedium!
+                                            .copyWith(
+                                          color: AppColors.white,
+                                          fontSize: 10,
+                                          fontWeight: FontWeight.w400,
+                                        ),
+                                        overflow: TextOverflow.ellipsis,
                                       ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Positioned(
+                                top: 0,
+                                right: 12,
+                                child: Builder(
+                                  builder: (iconContext) => OnClick(
+                                    onTap: () async {
+                                      final RenderBox button = iconContext
+                                          .findRenderObject() as RenderBox;
+                                      final Offset position =
+                                          button.localToGlobal(Offset.zero);
+                                      _showMenu(iconContext, position);
+                                    },
+                                    child: const Icon(
+                                      Icons.more_vert,
+                                      color: Colors.white,
+                                      size: 18,
                                     ),
                                   ),
                                 ),
-                              ],
-                            );
-                          },
-                        ),
+                              ),
+                            ],
+                          );
+                        },
                       ),
+                    
                     ],
                   ),
                 ),
               ),
-              Align(
-                alignment: Alignment.bottomRight,
-                child: SizedBox(
-                  width: 30.w,
-                  child: PrimaryButton(
-                    onPressed: () {
-                      showModalBottomSheet(
-                          context: context,
-                          useSafeArea: true,
-                          backgroundColor: Colors.transparent,
-                          clipBehavior: Clip.antiAliasWithSaveLayer,
-                          builder: (context) => RoomBottomSheet());
-                    },
-                    height: 30,
-                    title: "show Comments",
-                    hMargin: 0,
-                    fontSize: 10.0,
-                  ),
-                ).paddingOnly(right: 10.0),
-              ),
-              Container(
-                color: const Color(0xFF18121E),
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: const Color(0xff888888).withOpacity(0.3),
-                          borderRadius: BorderRadius.circular(12.0),
-                        ),
-                        padding: const EdgeInsets.symmetric(horizontal: 14.0),
-                        child: Row(
-                          children: [
-                            Image.asset(AssetPaths.giftIcon),
-                            w2,
-                            Image.asset(AssetPaths.divider),
-                            w1,
-                            Expanded(
-                              child: InputField(
-                                boxConstraints: 12,
-                                controller: TextEditingController(),
-                                label: "Type a thought here",
-                              ),
-                            ),
-                            w1,
-                            Image.asset(AssetPaths.sendMessage),
-                          ],
-                        ),
-                      ),
-                    ),
-                    w1,
-                    SvgPicture.asset(AssetPaths.smileEmoji, height: 30.0),
-                    w1,
-                    SvgPicture.asset(AssetPaths.commentHand, height: 30.0),
-                    w1,
-                    SvgPicture.asset(AssetPaths.micRequest, height: 30.0),
-                  ],
-                ),
-              ),
+             PrimaryButton( backgroundColor: AppColors.primaryColor,
+                onPressed: () {
+                  showModalBottomSheet(
+                      context: context,
+                      useSafeArea: true,
+                      backgroundColor: Colors.transparent,
+                      clipBehavior: Clip.antiAliasWithSaveLayer,
+                      builder: (context) => RoomBottomSheet());
+                },
+                height: 30,
+                borderRadius: 18,
+                title: "View More",
+                hMargin: 8,
+                vMargin: 8,
+                fontSize: 10.0,
+              ).paddingOnly(right: 10.0),
+             
             ],
           ),
         ),
@@ -695,154 +664,3 @@ class ThreeSecondComment extends StatelessWidget {
   }
 }
 
-class SixSecondsComment extends StatelessWidget {
-  const SixSecondsComment({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12.0),
-        gradient: LinearGradient(colors: [
-          const Color(0xff00CE56).withOpacity(0.6),
-          const Color(0xff37E5AE),
-        ]),
-      ),
-      padding: const EdgeInsets.all(12.0),
-      child: Row(
-        spacing: 12.0,
-        children: [
-          CircleAvatar(
-            child: ClipOval(
-              child: Image.asset(AssetPaths.avatarImage),
-            ),
-          ),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Mariah",
-                  style: context.textTheme.bodyMedium?.copyWith(
-                    fontSize: 14.0,
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.white,
-                  ),
-                ),
-                Text(
-                  "How many cultures are there in the world can you all count them. Just Curious haha",
-                  style: context.textTheme.bodyMedium?.copyWith(
-                    fontSize: 12.0,
-                    fontWeight: FontWeight.normal,
-                    color: AppColors.white,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Column(
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                    color: const Color(0xff000000).withOpacity(0.15),
-                    borderRadius: BorderRadius.circular(12.0)),
-                padding: const EdgeInsets.symmetric(
-                  vertical: 8.0,
-                  horizontal: 12.0,
-                ),
-                child: Image.asset(
-                  AssetPaths.starIcon,
-                  height: 24.0,
-                ),
-              ),
-              Text(
-                "6s",
-                style: context.textTheme.bodySmall?.copyWith(
-                  color: AppColors.white,
-                  fontSize: 12.0,
-                  fontWeight: FontWeight.normal,
-                ),
-              )
-            ],
-          )
-        ],
-      ),
-    );
-  }
-}
-
-class TenSecondsComment extends StatelessWidget {
-  const TenSecondsComment({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12.0),
-        gradient: LinearGradient(colors: [
-          const Color(0xffFB3434).withOpacity(0.6),
-          const Color(0xffE53737),
-        ]),
-      ),
-      padding: const EdgeInsets.all(12.0),
-      child: Row(
-        spacing: 12.0,
-        children: [
-          CircleAvatar(
-            child: ClipOval(
-              child: Image.asset(AssetPaths.avatarImage),
-            ),
-          ),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Mariah",
-                  style: context.textTheme.bodyMedium?.copyWith(
-                    fontSize: 14.0,
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.white,
-                  ),
-                ),
-                Text(
-                  "Culture is more than style, it’s how we connect.",
-                  style: context.textTheme.bodyMedium?.copyWith(
-                    fontSize: 12.0,
-                    fontWeight: FontWeight.normal,
-                    color: AppColors.white,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Column(
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                    color: const Color(0xff000000).withOpacity(0.15),
-                    borderRadius: BorderRadius.circular(12.0)),
-                padding: const EdgeInsets.symmetric(
-                  vertical: 8.0,
-                  horizontal: 12.0,
-                ),
-                child: Image.asset(
-                  AssetPaths.starIcon,
-                  height: 24.0,
-                ),
-              ),
-              Text(
-                "10s",
-                style: context.textTheme.bodySmall?.copyWith(
-                  color: AppColors.white,
-                  fontSize: 12.0,
-                  fontWeight: FontWeight.normal,
-                ),
-              )
-            ],
-          )
-        ],
-      ),
-    );
-  }
-}
