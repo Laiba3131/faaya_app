@@ -92,4 +92,5 @@ class AssetPaths {
   static const String imageMusic = 'assets/images/png/imageMusic.png';
   static const String listen = 'assets/images/png/listen.png';
   static const String sound = 'assets/images/png/sound.png';
+  static const String emoji = 'assets/images/png/emoji.png';
 }

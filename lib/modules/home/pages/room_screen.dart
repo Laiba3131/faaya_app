@@ -1,5 +1,6 @@
 import 'package:bkmc/config/routes/nav_router.dart';
 import 'package:bkmc/modules/common/widgets/custom_reason_dropdown.dart';
+import 'package:bkmc/modules/home/pages/animation_test.dart';
 import 'package:bkmc/modules/home/pages/joined_room_screen.dart';
 import 'package:bkmc/modules/home/widgets/action_dropdown_withour_icon.dart';
 import 'package:bkmc/ui/button/primary_button.dart';
@@ -335,13 +336,26 @@ class _RoomScreenState extends State<RoomScreen> {
                       return Stack(
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(top: 3.0),
+                            padding: const EdgeInsets.only(top: 10.0),
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                CircleAvatar(
-                                  radius: 24,
-                                  backgroundImage: AssetImage(a['image']!),
+                                Stack(
+                                  clipBehavior: Clip.none,
+                                  children: [
+                                    CircleAvatar(
+                                      radius: 24,
+                                      backgroundImage: AssetImage(a['image']!),
+                                    ),
+                                    Positioned(
+                                      left: 24 -
+                                          14, // center horizontally (mainRadius - emojiRadius)
+                                      top: 24 - 14, // center vertically
+                                      child: MovingEmojiAvatar(
+                                        imagePath: AssetPaths.emoji,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                                 const SizedBox(height: 4),
                                 SizedBox(

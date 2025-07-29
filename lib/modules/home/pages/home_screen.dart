@@ -174,38 +174,70 @@ class _HomeScreenState extends State<HomeScreen> {
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: users.length,
-        itemBuilder: (_, index) {
-          return Padding(
-            padding: const EdgeInsets.only(right: 12),
-            child: Column(
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(3),
+       itemBuilder: (_, index) {
+  final isLive = index == 1; // 2nd item (0-based index)
+
+  return Padding(
+    padding: const EdgeInsets.only(right: 12),
+    child: Column(
+      children: [
+        Stack(
+          alignment: Alignment.bottomCenter,
+          children: [
+            Container(
+              padding: const EdgeInsets.all(3),
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(
+                  color: AppColors.primaryColor,
+                  width: 2,
+                ),
+              ),
+              child: const CircleAvatar(
+                radius: 26,
+                backgroundImage: AssetImage(AssetPaths.avatarImage),
+              ),
+            ),
+            if (isLive)
+              Positioned(
+                bottom: -3,
+                child: Container(
+                  margin: EdgeInsets.all(4),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 6,
+                    vertical: 2,
+                  ),
                   decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    border: Border.all(
-                      color: AppColors.primaryColor,
-                      width: 2,
+                    color: Colors.purple,
+                    border: Border.all(color: AppColors.white),
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                  child: const Text(
+                    'LIVE',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 8,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
-                  child: const CircleAvatar(
-                    radius: 26,
-                    backgroundImage: AssetImage(AssetPaths.avatarImage),
-                  ),
                 ),
-                const SizedBox(height: 4),
-                Text(
-                  users[index],
-                  style: context.textTheme.bodyMedium!.copyWith(
-                      color: AppColors.white,
-                      fontSize: 12,
-                      fontWeight: FontWeight.w400),
-                )
-              ],
-            ),
-          );
-        },
-      ),
+              ),
+          ],
+        ),
+        const SizedBox(height: 4),
+        Text(
+          users[index],
+          style: context.textTheme.bodyMedium!.copyWith(
+            color: AppColors.white,
+            fontSize: 12,
+            fontWeight: FontWeight.w400,
+          ),
+        )
+      ],
+    ),
+  );
+}
+  ),
     );
   }
 
@@ -234,8 +266,8 @@ class _HomeScreenState extends State<HomeScreen> {
           child: GenericDropdown<Country>(
             height: 40,
             title: 'Select Country',
-            hintText: truncateString(selectedCountry!.name, maxLength: 10) ??
-                'Country',
+            hintText: truncateString(selectedCountry?.name ?? 'Country',
+                maxLength: 10),
             items: countries,
             selectedItem: selectedCountry,
             onItemSelected: (value) {
