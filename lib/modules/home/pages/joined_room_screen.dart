@@ -28,7 +28,7 @@ class _JoinedRoomScreenState extends State<JoinedRoomScreen> {
   @override
   Widget build(BuildContext context) {
     String selectedReason = "Abuse";
-
+    bool isEmojiVisible = false;
     List<String> reasonList = [
       'Bullying',
       'Inappropriate content',
@@ -301,6 +301,19 @@ class _JoinedRoomScreenState extends State<JoinedRoomScreen> {
                                               ),
                                             ),
                                           ),
+                                          if (i == 0)
+                                            Positioned(
+                                              left: 24 - 14,
+                                              // center horizontally (mainRadius - emojiRadius)
+                                              top: 24 - 14,
+                                              // center vertically
+                                              child: isEmojiVisible
+                                                  ? const MovingEmojiAvatar(
+                                                      imagePath:
+                                                          AssetPaths.emoji,
+                                                    )
+                                                  : const SizedBox(),
+                                            ),
                                         ],
                                       ),
                                       const SizedBox(height: 4),
@@ -356,25 +369,29 @@ class _JoinedRoomScreenState extends State<JoinedRoomScreen> {
                                   child: Column(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
-                                       Stack(
-                                  clipBehavior: Clip.none,
-                                  children: [
-                                     CircleAvatar(
-                                        radius: 24,
-                                        backgroundImage:
-                                            AssetImage(a['image']!),
+                                      Stack(
+                                        clipBehavior: Clip.none,
+                                        children: [
+                                          CircleAvatar(
+                                            radius: 24,
+                                            backgroundImage:
+                                                AssetImage(a['image']!),
+                                          ),
+                                          if (i == 5)
+                                            Positioned(
+                                              left: 24 - 14,
+                                              // center horizontally (mainRadius - emojiRadius)
+                                              top: 24 - 14,
+                                              // center vertically
+                                              child: !isEmojiVisible
+                                                  ? const MovingEmojiAvatar(
+                                                      imagePath:
+                                                          AssetPaths.emoji,
+                                                    )
+                                                  : const SizedBox(),
+                                            ),
+                                        ],
                                       ),
-                                    const Positioned(
-                                      left: 24 -
-                                          14, // center horizontally (mainRadius - emojiRadius)
-                                      top: 24 - 14, // center vertically
-                                      child: MovingEmojiAvatar(
-                                        imagePath: AssetPaths.emoji,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                     
                                       const SizedBox(height: 4),
                                       SizedBox(
                                         width: 60,
@@ -440,14 +457,24 @@ class _JoinedRoomScreenState extends State<JoinedRoomScreen> {
                   ),
                 ),
               ),
-              PrimaryButton( backgroundColor: AppColors.primaryColor,
+              PrimaryButton(
+                backgroundColor: AppColors.primaryColor,
                 onPressed: () {
                   showModalBottomSheet(
                       context: context,
                       useSafeArea: true,
                       backgroundColor: Colors.transparent,
                       clipBehavior: Clip.antiAliasWithSaveLayer,
-                      builder: (context) => RoomBottomSheet());
+                      builder: (context) => RoomBottomSheet(
+                            onEmojiClick: (v) {
+                              NavRouter.pop(
+                                context,
+                              );
+                              setState(() {
+                                isEmojiVisible = !isEmojiVisible;
+                              });
+                            },
+                          ));
                 },
                 height: 30,
                 borderRadius: 18,
@@ -456,7 +483,7 @@ class _JoinedRoomScreenState extends State<JoinedRoomScreen> {
                 vMargin: 8,
                 fontSize: 10.0,
               ).paddingOnly(right: 10.0),
-              ],
+            ],
           ),
         ),
       ),
