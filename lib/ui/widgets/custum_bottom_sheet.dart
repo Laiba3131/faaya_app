@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:bkmc/utils/extensions/text_extension.dart';
+import 'package:oxyn_dev/utils/extensions/text_extension.dart';
 
 import '../../config/config.dart';
 import '../button/gradient_button.dart';

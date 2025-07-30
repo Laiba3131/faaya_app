@@ -1,7 +1,7 @@
-import 'package:bkmc/modules/home/model/comment_model.dart';
-import 'package:bkmc/modules/home/widgets/action_dropdown_menu.dart';
-import 'package:bkmc/ui/widgets/on_click.dart';
-import 'package:bkmc/utils/heights_and_widths.dart';
+import 'package:oxyn_dev/modules/home/model/comment_model.dart';
+import 'package:oxyn_dev/modules/home/widgets/action_dropdown_menu.dart';
+import 'package:oxyn_dev/ui/widgets/on_click.dart';
+import 'package:oxyn_dev/utils/heights_and_widths.dart';
 import 'package:flutter/material.dart';
 
 class NestedCommentTile extends StatefulWidget {

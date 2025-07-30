@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:bkmc/constants/app_colors.dart';
-import 'package:bkmc/utils/extensions/extended_context.dart';
+import 'package:oxyn_dev/constants/app_colors.dart';
+import 'package:oxyn_dev/utils/extensions/extended_context.dart';
 
 class RoomInfoButton extends StatelessWidget {
   final String label;

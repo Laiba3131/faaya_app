@@ -1,4 +1,4 @@
-import 'package:bkmc/modules/startup/cubits/startup_state.dart';
+import 'package:oxyn_dev/modules/startup/cubits/startup_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class StartupCubit extends Cubit<StartupState> {

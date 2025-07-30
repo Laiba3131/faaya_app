@@ -1,4 +1,4 @@
-import 'package:bkmc/modules/home/pages/home_screen.dart';
+import 'package:oxyn_dev/modules/home/pages/home_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../add_room/pages/create_room_screen.dart';

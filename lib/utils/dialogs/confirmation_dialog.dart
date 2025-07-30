@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:bkmc/utils/extensions/extended_context.dart';
+import 'package:oxyn_dev/utils/extensions/extended_context.dart';
 
 class ConfirmationDialog extends StatelessWidget {
   const ConfirmationDialog({

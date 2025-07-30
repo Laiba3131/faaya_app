@@ -1,10 +1,10 @@
-import 'package:bkmc/constants/app_colors.dart';
-import 'package:bkmc/constants/asset_paths.dart';
-import 'package:bkmc/modules/auth/pages/login_screen.dart';
-import 'package:bkmc/ui/input/input_field.dart';
-import 'package:bkmc/ui/widgets/on_click.dart';
-import 'package:bkmc/utils/extensions/extended_context.dart';
-import 'package:bkmc/utils/heights_and_widths.dart';
+import 'package:oxyn_dev/constants/app_colors.dart';
+import 'package:oxyn_dev/constants/asset_paths.dart';
+import 'package:oxyn_dev/modules/auth/pages/login_screen.dart';
+import 'package:oxyn_dev/ui/input/input_field.dart';
+import 'package:oxyn_dev/ui/widgets/on_click.dart';
+import 'package:oxyn_dev/utils/extensions/extended_context.dart';
+import 'package:oxyn_dev/utils/heights_and_widths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 

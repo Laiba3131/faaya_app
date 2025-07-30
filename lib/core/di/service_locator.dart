@@ -1,7 +1,7 @@
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:bkmc/core/notifications/cloud_messaging_api.dart';
-import 'package:bkmc/core/notifications/local_notification_api.dart';
+import 'package:oxyn_dev/core/notifications/cloud_messaging_api.dart';
+import 'package:oxyn_dev/core/notifications/local_notification_api.dart';
 import '../../config/environment.dart';
 import '../network/dio_client.dart';
 import '../security/secured_auth_storage.dart';

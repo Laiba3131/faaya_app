@@ -1,4 +1,4 @@
-import 'package:bkmc/core/storage_service/storage_service.dart';
+import 'package:oxyn_dev/core/storage_service/storage_service.dart';
 
 import '../core/di/service_locator.dart';
 

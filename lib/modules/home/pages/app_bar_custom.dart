@@ -1,10 +1,10 @@
-import 'package:bkmc/config/routes/nav_router.dart';
-import 'package:bkmc/constants/app_colors.dart';
-import 'package:bkmc/constants/asset_paths.dart';
-import 'package:bkmc/modules/home/pages/notification_screen.dart';
-import 'package:bkmc/ui/input/input_field.dart';
-import 'package:bkmc/ui/widgets/on_click.dart';
-import 'package:bkmc/utils/extensions/extended_context.dart';
+import 'package:oxyn_dev/config/routes/nav_router.dart';
+import 'package:oxyn_dev/constants/app_colors.dart';
+import 'package:oxyn_dev/constants/asset_paths.dart';
+import 'package:oxyn_dev/modules/home/pages/notification_screen.dart';
+import 'package:oxyn_dev/ui/input/input_field.dart';
+import 'package:oxyn_dev/ui/widgets/on_click.dart';
+import 'package:oxyn_dev/utils/extensions/extended_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 

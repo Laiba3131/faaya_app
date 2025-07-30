@@ -1,4 +1,4 @@
-import 'package:bkmc/constants/app_colors.dart';
+import 'package:oxyn_dev/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class DropdownAction {

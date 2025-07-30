@@ -1,5 +1,5 @@
-import 'package:bkmc/constants/app_colors.dart';
-import 'package:bkmc/constants/asset_paths.dart';
+import 'package:oxyn_dev/constants/app_colors.dart';
+import 'package:oxyn_dev/constants/asset_paths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 

@@ -1,6 +1,6 @@
-import 'package:bkmc/config/config.dart';
-import 'package:bkmc/constants/constants.dart';
-import 'package:bkmc/ui/button/primary_button.dart';
+import 'package:oxyn_dev/config/config.dart';
+import 'package:oxyn_dev/constants/constants.dart';
+import 'package:oxyn_dev/ui/button/primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';

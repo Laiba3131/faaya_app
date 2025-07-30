@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:bkmc/constants/app_colors.dart';
+import 'package:oxyn_dev/constants/app_colors.dart';
 
 class SectionLabel extends StatelessWidget {
   final String label;

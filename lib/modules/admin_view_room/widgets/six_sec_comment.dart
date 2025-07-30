@@ -1,6 +1,6 @@
-import 'package:bkmc/constants/app_colors.dart';
-import 'package:bkmc/constants/asset_paths.dart';
-import 'package:bkmc/utils/extensions/extended_context.dart';
+import 'package:oxyn_dev/constants/app_colors.dart';
+import 'package:oxyn_dev/constants/asset_paths.dart';
+import 'package:oxyn_dev/utils/extensions/extended_context.dart';
 import 'package:flutter/material.dart';
 
 class SixSecondsComment extends StatelessWidget {

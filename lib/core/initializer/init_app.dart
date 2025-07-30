@@ -1,5 +1,5 @@
-import 'package:bkmc/core/notifications/cloud_messaging_api.dart';
-import 'package:bkmc/core/notifications/local_notification_api.dart';
+import 'package:oxyn_dev/core/notifications/cloud_messaging_api.dart';
+import 'package:oxyn_dev/core/notifications/local_notification_api.dart';
 
 import '../../config/environment.dart';
 import '../di/service_locator.dart';

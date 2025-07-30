@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:bkmc/utils/extensions/extended_context.dart';
+import 'package:oxyn_dev/utils/extensions/extended_context.dart';
 
 import '../../constants/app_colors.dart';
 

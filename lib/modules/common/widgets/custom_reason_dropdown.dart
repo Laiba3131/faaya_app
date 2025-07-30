@@ -1,10 +1,10 @@
-import 'package:bkmc/config/config.dart';
-import 'package:bkmc/constants/app_colors.dart';
-import 'package:bkmc/ui/button/primary_button.dart';
-import 'package:bkmc/ui/widgets/congratulations_lottie.dart';
-import 'package:bkmc/ui/widgets/on_click.dart';
-import 'package:bkmc/utils/extensions/extended_context.dart';
-import 'package:bkmc/utils/heights_and_widths.dart';
+import 'package:oxyn_dev/config/config.dart';
+import 'package:oxyn_dev/constants/app_colors.dart';
+import 'package:oxyn_dev/ui/button/primary_button.dart';
+import 'package:oxyn_dev/ui/widgets/congratulations_lottie.dart';
+import 'package:oxyn_dev/ui/widgets/on_click.dart';
+import 'package:oxyn_dev/utils/extensions/extended_context.dart';
+import 'package:oxyn_dev/utils/heights_and_widths.dart';
 import 'package:flutter/material.dart';
 
 class CustomReasonDropdown extends StatefulWidget {

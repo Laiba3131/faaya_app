@@ -1,15 +1,15 @@
-import 'package:bkmc/config/config.dart';
-import 'package:bkmc/constants/app_colors.dart';
-import 'package:bkmc/constants/asset_paths.dart';
-import 'package:bkmc/modules/home/pages/notification_screen.dart';
-import 'package:bkmc/modules/home/pages/room_screen.dart';
-import 'package:bkmc/modules/home/pages/rooms_category_screen.dart';
-import 'package:bkmc/modules/home/widgets/custom_dropdown.dart';
-import 'package:bkmc/ui/button/primary_button.dart';
-import 'package:bkmc/ui/input/input_field.dart';
-import 'package:bkmc/ui/widgets/on_click.dart';
-import 'package:bkmc/utils/extensions/extended_context.dart';
-import 'package:bkmc/utils/heights_and_widths.dart';
+import 'package:oxyn_dev/config/config.dart';
+import 'package:oxyn_dev/constants/app_colors.dart';
+import 'package:oxyn_dev/constants/asset_paths.dart';
+import 'package:oxyn_dev/modules/home/pages/notification_screen.dart';
+import 'package:oxyn_dev/modules/home/pages/room_screen.dart';
+import 'package:oxyn_dev/modules/home/pages/rooms_category_screen.dart';
+import 'package:oxyn_dev/modules/home/widgets/custom_dropdown.dart';
+import 'package:oxyn_dev/ui/button/primary_button.dart';
+import 'package:oxyn_dev/ui/input/input_field.dart';
+import 'package:oxyn_dev/ui/widgets/on_click.dart';
+import 'package:oxyn_dev/utils/extensions/extended_context.dart';
+import 'package:oxyn_dev/utils/heights_and_widths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 

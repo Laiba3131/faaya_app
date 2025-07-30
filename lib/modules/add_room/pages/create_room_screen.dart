@@ -1,12 +1,12 @@
 import 'dart:io';
 
-import 'package:bkmc/constants/app_colors.dart';
-import 'package:bkmc/modules/admin_view_room/pages/admin_view_room_screen.dart';
-import 'package:bkmc/modules/home/widgets/custom_dropdown.dart';
-import 'package:bkmc/ui/button/primary_button.dart';
-import 'package:bkmc/ui/input/input_field.dart';
-import 'package:bkmc/utils/extensions/extended_context.dart';
-import 'package:bkmc/utils/heights_and_widths.dart';
+import 'package:oxyn_dev/constants/app_colors.dart';
+import 'package:oxyn_dev/modules/admin_view_room/pages/admin_view_room_screen.dart';
+import 'package:oxyn_dev/modules/home/widgets/custom_dropdown.dart';
+import 'package:oxyn_dev/ui/button/primary_button.dart';
+import 'package:oxyn_dev/ui/input/input_field.dart';
+import 'package:oxyn_dev/utils/extensions/extended_context.dart';
+import 'package:oxyn_dev/utils/heights_and_widths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';

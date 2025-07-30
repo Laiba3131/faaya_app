@@ -1,10 +1,10 @@
-import 'package:bkmc/constants/asset_paths.dart';
-import 'package:bkmc/modules/home/model/comment_model.dart';
-import 'package:bkmc/modules/home/widgets/coin_button.dart';
-import 'package:bkmc/modules/home/widgets/nested_comment_tile.dart';
-import 'package:bkmc/ui/button/primary_button.dart';
-import 'package:bkmc/utils/extensions/extended_context.dart';
-import 'package:bkmc/utils/heights_and_widths.dart';
+import 'package:oxyn_dev/constants/asset_paths.dart';
+import 'package:oxyn_dev/modules/home/model/comment_model.dart';
+import 'package:oxyn_dev/modules/home/widgets/coin_button.dart';
+import 'package:oxyn_dev/modules/home/widgets/nested_comment_tile.dart';
+import 'package:oxyn_dev/ui/button/primary_button.dart';
+import 'package:oxyn_dev/utils/extensions/extended_context.dart';
+import 'package:oxyn_dev/utils/heights_and_widths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 

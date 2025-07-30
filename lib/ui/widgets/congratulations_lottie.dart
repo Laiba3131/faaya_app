@@ -1,5 +1,5 @@
-import 'package:bkmc/constants/constants.dart';
-import 'package:bkmc/utils/extensions/extended_context.dart';
+import 'package:oxyn_dev/constants/constants.dart';
+import 'package:oxyn_dev/utils/extensions/extended_context.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 

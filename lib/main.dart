@@ -3,7 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:bkmc/app/bloc/bloc_di.dart';
+import 'package:oxyn_dev/app/bloc/bloc_di.dart';
 import 'app/bloc/app_bloc_observer.dart';
 import 'app/my_app.dart';
 import 'config/environment.dart';

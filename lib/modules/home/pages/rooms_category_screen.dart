@@ -1,11 +1,11 @@
-import 'package:bkmc/utils/extensions/extended_context.dart';
+import 'package:oxyn_dev/utils/extensions/extended_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../../constants/app_colors.dart';
 import '../../../constants/asset_paths.dart';
 import '../../../ui/widgets/custom_appbar.dart';
 import '../widgets/room_card.dart';
-import 'package:bkmc/modules/home/pages/room_screen.dart';
+import 'package:oxyn_dev/modules/home/pages/room_screen.dart';
 
 class RoomsCategoryScreen extends StatelessWidget {
   const RoomsCategoryScreen({Key? key}) : super(key: key);

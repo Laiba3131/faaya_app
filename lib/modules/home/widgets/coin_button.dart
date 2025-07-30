@@ -1,5 +1,5 @@
-import 'package:bkmc/constants/asset_paths.dart';
-import 'package:bkmc/utils/extensions/extended_context.dart';
+import 'package:oxyn_dev/constants/asset_paths.dart';
+import 'package:oxyn_dev/utils/extensions/extended_context.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:svg_flutter/svg.dart';
