@@ -1,6 +1,7 @@
 import 'package:bkmc/constants/asset_paths.dart';
 import 'package:bkmc/utils/extensions/extended_context.dart';
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 import 'package:svg_flutter/svg.dart';
 
 class CoinButton extends StatelessWidget {
@@ -20,6 +21,7 @@ class CoinButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: 35.w,
       padding: const EdgeInsets.symmetric(
         vertical: 8.0,
         horizontal: 12.0,

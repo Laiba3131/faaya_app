@@ -137,11 +137,13 @@ class RoomBottomSheetState extends State<RoomBottomSheet> {
                 const Divider(color: Colors.white24, height: 32),
 
                 // Coin Buttons
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      child: CoinButton(
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    spacing: 12.0,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      CoinButton(
                         label: '3s',
                         coins: 5,
                         coinBoxColor: const Color(0xFF3B3BFF),
@@ -150,10 +152,8 @@ class RoomBottomSheetState extends State<RoomBottomSheet> {
                           const Color(0xff374BE5),
                         ],
                       ),
-                    ),
-                    w1,
-                    Expanded(
-                      child: CoinButton(
+
+                      CoinButton(
                         label: '6s',
                         coins: 20,
                         coinBoxColor: const Color(0xFF2ECC71),
@@ -162,10 +162,7 @@ class RoomBottomSheetState extends State<RoomBottomSheet> {
                           const Color(0xff37E5AE),
                         ],
                       ),
-                    ),
-                    w1,
-                    Expanded(
-                      child: CoinButton(
+                      CoinButton(
                         label: '10s',
                         coins: 50,
                         coinBoxColor: const Color(0xFFFF3B3B),
@@ -174,8 +171,8 @@ class RoomBottomSheetState extends State<RoomBottomSheet> {
                           const Color(0xffE53737),
                         ],
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
                 h2,
 

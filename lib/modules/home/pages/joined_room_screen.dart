@@ -25,10 +25,11 @@ class JoinedRoomScreen extends StatefulWidget {
 }
 
 class _JoinedRoomScreenState extends State<JoinedRoomScreen> {
+
+  bool isEmojiVisible = false;
   @override
   Widget build(BuildContext context) {
     String selectedReason = "Abuse";
-    bool isEmojiVisible = false;
     List<String> reasonList = [
       'Bullying',
       'Inappropriate content',
