@@ -15,7 +15,7 @@ import '../../../constants/asset_paths.dart';
 import '../../../ui/input/input_field.dart';
 import '../../../ui/widgets/custom_appbar.dart';
 import '../widgets/session_lable.dart';
-import 'animation_test.dart';
+import 'moving_emoji_avatar.dart';
 
 class JoinedRoomScreen extends StatefulWidget {
   const JoinedRoomScreen({super.key});

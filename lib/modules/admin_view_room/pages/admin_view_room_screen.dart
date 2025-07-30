@@ -3,7 +3,7 @@ import 'package:oxyn_dev/modules/admin_view_room/pages/edit_create_room.dart';
 import 'package:oxyn_dev/modules/admin_view_room/widgets/kick_dialogue.dart';
 import 'package:oxyn_dev/modules/admin_view_room/widgets/request_join_mic.dart';
 import 'package:oxyn_dev/modules/common/widgets/custom_reason_dropdown.dart';
-import 'package:oxyn_dev/modules/home/pages/animation_test.dart';
+import 'package:oxyn_dev/modules/home/pages/moving_emoji_avatar.dart';
 import 'package:oxyn_dev/modules/home/pages/notification_screen.dart';
 import 'package:oxyn_dev/modules/home/widgets/action_dropdown_withour_icon.dart';
 import 'package:oxyn_dev/ui/widgets/on_click.dart';

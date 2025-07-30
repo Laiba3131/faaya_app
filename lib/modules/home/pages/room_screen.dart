@@ -1,6 +1,6 @@
 import 'package:oxyn_dev/config/routes/nav_router.dart';
 import 'package:oxyn_dev/modules/common/widgets/custom_reason_dropdown.dart';
-import 'package:oxyn_dev/modules/home/pages/animation_test.dart';
+import 'package:oxyn_dev/modules/home/pages/moving_emoji_avatar.dart';
 import 'package:oxyn_dev/modules/home/pages/joined_room_screen.dart';
 import 'package:oxyn_dev/modules/home/widgets/action_dropdown_withour_icon.dart';
 import 'package:oxyn_dev/ui/button/primary_button.dart';
