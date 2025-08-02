@@ -12,10 +12,8 @@ import 'package:bkmc/utils/extensions/extended_context.dart';
 import 'package:bkmc/utils/heights_and_widths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
 import '../../../utils/country.dart';
 import '../widgets/dummy_live_room.dart';
-import '../widgets/live_card_room.dart';
 import '../widgets/room_card.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -128,18 +126,31 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: filteredRooms.map((room) {
                       return Padding(
                         padding: const EdgeInsets.only(bottom: 16.0),
-                        child: LiveRoomCard(
-                          title: room.title,
-                          description: room.description,
-                          host: room.host,
-                          timeAgo: room.timeAgo,
-                          peopleCount: room.peopleCount,
-                          micCount: room.micCount,
-                          chatCount: room.chatCount,
-                          onTap: () {
-                            NavRouter.push(context, RoomScreen());
-                          },
-                        ),
+                        child:   SizedBox(
+                        height: 260,
+                        child: RoomCard(
+                                  onTap: () {
+                                    NavRouter.push(context, RoomScreen());
+                                  },
+                                  title: "Culture Topic",
+                                  subtitle:  "Lets Discuss the culture of the north America.",
+                                  imagePath: AssetPaths.music,
+                                  peopleCount: 11,
+                                  micCount: 3,
+                                  timeAgo: "2 hours ago",
+                                ),)
+                        //  LiveRoomCard(
+                        //   title: room.title,
+                        //   description: room.description,
+                        //   host: room.host,
+                        //   timeAgo: room.timeAgo,
+                        //   peopleCount: room.peopleCount,
+                        //   micCount: room.micCount,
+                        //   chatCount: room.chatCount,
+                        //   onTap: () {
+                        //     NavRouter.push(context, RoomScreen());
+                        //   },
+                        // ),
                       );
                     }).toList(),
                   )
@@ -150,19 +161,33 @@ class _HomeScreenState extends State<HomeScreen> {
                       h2,
                       _buildFilterButtons(context),
                       h2,
-                      LiveRoomCard(
-                        title: "Culture Topic",
-                        description:
-                            "Lets Discuss the culture of the north America.",
-                        host: "Alyan Alee Khan",
-                        timeAgo: "2 Hours Ago",
-                        peopleCount: 11,
-                        micCount: 3,
-                        chatCount: 3,
-                        onTap: () {
-                          NavRouter.push(context, RoomScreen());
-                        },
+                      SizedBox(
+                        height: 260,
+                        child: RoomCard(
+                                  onTap: () {
+                                    NavRouter.push(context, RoomScreen());
+                                  },
+                                  title: "Culture Topic",
+                                  subtitle:  "Lets Discuss the culture of the north America.",
+                                  imagePath: AssetPaths.music,
+                                  peopleCount: 11,
+                                  micCount: 3,
+                                  timeAgo: "2 hours ago",
+                                ),
                       ),
+                      // LiveRoomCard(
+                      //   title: "Culture Topic",
+                      //   description:
+                      //       "Lets Discuss the culture of the north America.",
+                      //   host: "Alyan Alee Khan",
+                      //   timeAgo: "2 Hours Ago",
+                      //   peopleCount: 11,
+                      //   micCount: 3,
+                      //   chatCount: 3,
+                      //   onTap: () {
+                      //     NavRouter.push(context, RoomScreen());
+                      //   },
+                      // ),
                       h2,
                       _buildRoomGrid(),
                     ],
@@ -173,11 +198,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _buildStoryAvatars(BuildContext context) {
     final users = [
-      'Your Story',
+      'John Doe',
       'karenanne',
       'zackJohn',
-      'karen_d',
-      'craig_love'
+      'karen d',
+      'John hd'
     ];
 
     return SizedBox(
@@ -186,56 +211,55 @@ class _HomeScreenState extends State<HomeScreen> {
           scrollDirection: Axis.horizontal,
           itemCount: users.length,
           itemBuilder: (_, index) {
-            final isLive = index == 1; // 2nd item (0-based index)
+            // final isLive = index == 1; // 2nd item (0-based index)
 
             return Padding(
               padding: const EdgeInsets.only(right: 12),
               child: Column(
                 children: [
-                  Stack(
-                    alignment: Alignment.bottomCenter,
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.all(3),
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(
-                            color: AppColors.primaryColor,
-                            width: 2,
-                          ),
-                        ),
-                        child: const CircleAvatar(
-                          radius: 26,
-                          backgroundImage: AssetImage(AssetPaths.avatarImage),
-                        ),
-                      ),
-                      if (isLive)
-                        Positioned(
-                          bottom: -3,
-                          child: Container(
-                            margin: EdgeInsets.all(4),
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 6,
-                              vertical: 2,
-                            ),
-                            decoration: BoxDecoration(
-                              color: Colors.purple,
-                              border: Border.all(color: AppColors.white),
-                              borderRadius: BorderRadius.circular(4),
-                            ),
-                            child: const Text(
-                              'LIVE',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 8,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ),
-                    ],
-                  ),
-                  const SizedBox(height: 4),
+                 Stack(
+  clipBehavior: Clip.none, 
+  alignment: Alignment.bottomCenter,
+  children: [
+    Container(
+      padding: const EdgeInsets.all(3),
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        border: Border.all(
+          color: AppColors.primaryColor,
+          width: 2,
+        ),
+      ),
+      child: const CircleAvatar(
+        radius: 26,
+        backgroundImage: AssetImage(AssetPaths.avatarImage),
+      ),
+    ),
+    Positioned(
+      bottom: -4, 
+      child: Container(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 6,
+          vertical: 2,
+        ),
+        decoration: BoxDecoration(
+          color:AppColors.blurColor,
+          border: Border.all(color: AppColors.white,width: 2),
+          borderRadius: BorderRadius.circular(4),
+        ),
+        child: const Text(
+          'LIVE',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 8,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
+    ),
+  ],
+),
+                  const SizedBox(height: 5),
                   Text(
                     users[index],
                     style: context.textTheme.bodyMedium!.copyWith(

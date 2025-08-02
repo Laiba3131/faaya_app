@@ -2,6 +2,7 @@ import 'package:bkmc/config/routes/nav_router.dart';
 import 'package:bkmc/modules/admin_view_room/pages/edit_create_room.dart';
 import 'package:bkmc/modules/admin_view_room/widgets/kick_dialogue.dart';
 import 'package:bkmc/modules/admin_view_room/widgets/request_join_mic.dart';
+import 'package:bkmc/modules/admin_view_room/widgets/three_sec_comment.dart';
 import 'package:bkmc/modules/common/widgets/custom_reason_dropdown.dart';
 import 'package:bkmc/modules/home/pages/animation_test.dart';
 import 'package:bkmc/modules/home/pages/notification_screen.dart';
@@ -339,48 +340,11 @@ class _AdminViewRoomScreenState extends State<AdminViewRoomScreen> {
                       ).paddingSymmetric(
                         horizontal: 12.0,
                       ),
+                      h1,
+
+                      const ThreeSecondComment(),
                       h2,
 
-                      // Pinned Comments view
-
-                      Container(
-                        decoration: BoxDecoration(
-                            color: const Color(0xffC637E5).withOpacity(0.1),
-                            borderRadius: BorderRadius.circular(12.0)),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(12.0),
-                            color: const Color(0xff888888).withOpacity(0.15),
-                          ),
-                          padding: const EdgeInsets.all(12.0),
-                          child: Column(
-                            spacing: 12.0,
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    "Pinned Comments",
-                                    style:
-                                        context.textTheme.bodyMedium?.copyWith(
-                                      color: AppColors.white,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  SvgPicture.asset(AssetPaths.pinIcon),
-                                ],
-                              ),
-                              const ThreeSecondComment(),
-                              // const SixSecondsComment(),
-                              // const TenSecondsComment(),
-                            ],
-                          ),
-                        ),
-                      ),
-                      h2,
-
-                      // Speakers
                       const SectionLabel(label: 'Speaker'),
 
                       h2,
@@ -608,82 +572,6 @@ class _AdminViewRoomScreenState extends State<AdminViewRoomScreen> {
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class ThreeSecondComment extends StatelessWidget {
-  const ThreeSecondComment({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12.0),
-        gradient: LinearGradient(colors: [
-          const Color(0xff344BFB).withOpacity(0.6),
-          const Color(0xff374BE5),
-        ]),
-      ),
-      padding: const EdgeInsets.all(12.0),
-      child: Row(
-        spacing: 12.0,
-        children: [
-          CircleAvatar(
-            child: ClipOval(
-              child: Image.asset(AssetPaths.avatarImage),
-            ),
-          ),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Mariah",
-                  style: context.textTheme.bodyMedium?.copyWith(
-                    fontSize: 14.0,
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.white,
-                  ),
-                ),
-                Text(
-                  "Culture is more than style, it’s how we connect.",
-                  style: context.textTheme.bodyMedium?.copyWith(
-                    fontSize: 12.0,
-                    fontWeight: FontWeight.normal,
-                    color: AppColors.white,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Column(
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                    color: const Color(0xff000000).withOpacity(0.15),
-                    borderRadius: BorderRadius.circular(12.0)),
-                padding: const EdgeInsets.symmetric(
-                  vertical: 8.0,
-                  horizontal: 12.0,
-                ),
-                child: Image.asset(
-                  AssetPaths.starIcon,
-                  height: 24.0,
-                ),
-              ),
-              Text(
-                "3s",
-                style: context.textTheme.bodySmall?.copyWith(
-                  color: AppColors.white,
-                  fontSize: 12.0,
-                  fontWeight: FontWeight.normal,
-                ),
-              )
-            ],
-          )
-        ],
       ),
     );
   }

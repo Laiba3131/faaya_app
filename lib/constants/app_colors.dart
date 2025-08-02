@@ -13,6 +13,7 @@ class AppColors {
   static const secondary = Color(0xffc08827);
   static const inputFieldFillColor = Color(0xFFae5cc0);
   static const containerColor = Color(0xFF81568b);
+  static const blurColor = Color(0xFF374BE5);
 
   static const grey = Color(0xFFF6F6F6);
   static const greyColor = Color(0xFFd9d9d9);
