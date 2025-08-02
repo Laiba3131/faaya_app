@@ -186,11 +186,11 @@ class _AdminViewRoomScreenState extends State<AdminViewRoomScreen> {
 
     return Scaffold(
       extendBodyBehindAppBar: true,
-      appBar: const CustomAppbar(
-        title: 'Room',
-        titleColor: AppColors.white,
-        showBackButton: true,
-      ),
+      // appBar: const CustomAppbar(
+      //   title: 'Room',
+      //   titleColor: AppColors.white,
+      //   showBackButton: true,
+      // ),
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
@@ -214,121 +214,116 @@ class _AdminViewRoomScreenState extends State<AdminViewRoomScreen> {
                         spacing: 6.0,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Row(
-                            children: [
-                              Expanded(
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  spacing: 12.0,
-                                  children: [
-                                    Container(
-                                      width: 53,
-                                      height: 53,
-                                      decoration: BoxDecoration(
-                                        border: Border.all(
-                                          color: AppColors.primaryColor,
-                                          width: 2.0,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(6),
-                                        child: Image.asset(
-                                          host['image']!,
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
-                                    ),
-                                    Expanded(
-                                        child: Column(
-                                      spacing: 8.0,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Row(
-                                          spacing: 6.0,
-                                          children: [
-                                            SvgPicture.asset(AssetPaths.prince),
-                                            Text(
-                                              host['name']!,
-                                              style: context
-                                                  .textTheme.bodyMedium!
-                                                  .copyWith(
-                                                      color: AppColors.white,
-                                                      fontSize: 14,
-                                                      fontWeight:
-                                                          FontWeight.w600),
-                                            ),
-                                          ],
-                                        ),
-                                        Container(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 15, vertical: 4),
-                                          decoration: BoxDecoration(
-                                            color: const Color(0xFFF05ED0),
-                                            borderRadius:
-                                                BorderRadius.circular(12),
-                                          ),
-                                          child: Text(
-                                            host['role']!,
-                                            style: context.textTheme.bodyMedium!
-                                                .copyWith(
-                                                    color: AppColors.white,
-                                                    fontSize: 14,
-                                                    fontWeight:
-                                                        FontWeight.w600),
-                                          ),
-                                        ),
-                                      ],
-                                    ))
-                                  ],
-                                ),
-                              ),
-                              Row(
-                                mainAxisSize: MainAxisSize.min,
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  InkWell(
-                                    onTap: () {
-                                      NavRouter.push(
-                                          context,
-                                          const NotificationScreen(
-                                            isUserRequestPage: true,
-                                          ));
-                                    },
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                          color: const Color(0xffC637E5),
-                                          borderRadius:
-                                              BorderRadius.circular(12.0)),
-                                      padding: const EdgeInsets.all(
-                                        6.0,
-                                      ),
-                                      child: SvgPicture.asset(
-                                        AssetPaths.thListIcon,
-                                      ),
-                                    ),
-                                  ),
-                                  Builder(
-                                    builder: (iconContext) => OnClick(
-                                      onTap: () async {
-                                        final RenderBox button = iconContext
-                                            .findRenderObject() as RenderBox;
-                                        final Offset position =
-                                            button.localToGlobal(Offset.zero);
-                                        _showAdminMenu(iconContext, position);
-                                      },
-                                      child: const Icon(
-                                        Icons.more_vert,
-                                        color: Colors.white,
-                                        size: 28,
-                                      ),
-                                    ),
-                                  )
-                                ],
-                              )
-                            ],
-                          ),
+                        Row(
+  crossAxisAlignment: CrossAxisAlignment.start, // Align everything from top
+  children: [
+    Expanded(
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            width: 53,
+            height: 53,
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: AppColors.primaryColor,
+                width: 2.0,
+              ),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(6),
+              child: Image.asset(
+                host['image']!,
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    SvgPicture.asset(AssetPaths.prince),
+                    const SizedBox(width: 6),
+                    Text(
+                      host['name']!,
+                      style: context.textTheme.bodyMedium!.copyWith(
+                        color: AppColors.white,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 8),
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 15,
+                    vertical: 4,
+                  ),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFF05ED0),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Text(
+                    host['role']!,
+                    style: context.textTheme.bodyMedium!.copyWith(
+                      color: AppColors.white,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    ),
+    Row(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        InkWell(
+          onTap: () {
+            NavRouter.push(
+              context,
+              const NotificationScreen(isUserRequestPage: true),
+            );
+          },
+          child: Container(
+            decoration: BoxDecoration(
+              color: const Color(0xffC637E5),
+              borderRadius: BorderRadius.circular(12.0),
+            ),
+            padding: const EdgeInsets.all(6.0),
+            child: SvgPicture.asset(AssetPaths.thListIcon),
+          ),
+        ),
+        const SizedBox(width: 5),
+        Builder(
+          builder: (iconContext) => OnClick(
+            onTap: () async {
+              final RenderBox button =
+                  iconContext.findRenderObject() as RenderBox;
+              final Offset position =
+                  button.localToGlobal(Offset.zero);
+              _showAdminMenu(iconContext, position);
+            },
+            child: const Icon(
+              Icons.more_vert,
+              color: Colors.white,
+              size: 28,
+            ),
+          ),
+        ),
+      ],
+    ),
+  ],
+),
                           Text(
                             host['desc']!,
                             style: context.textTheme.bodyMedium!.copyWith(

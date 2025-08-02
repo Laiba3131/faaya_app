@@ -110,12 +110,31 @@ class _JoinedRoomScreenState extends State<JoinedRoomScreen> {
       // This will make sure the bottom sheet moves up when the keyboard is visible
 
       extendBodyBehindAppBar: true,
-      appBar: const CustomAppbar(
-        title: 'Room',
-        titleColor: AppColors.white,
-        showBackButton: true,
-      ),
+      // appBar: const CustomAppbar(
+      //   title: 'Room',
+      //   titleColor: AppColors.white,
+      //   showBackButton: true,
+      // ),
       body: Container(
+        //  decoration: const BoxDecoration(
+        //   gradient: LinearGradient(
+        //     begin: Alignment.topCenter,
+        //     end: Alignment.bottomCenter,
+        //     colors: [Color(0xFF7B3FA0), Color(0xFF18121E)],
+        //   ),
+        // ),
+        //   decoration: const BoxDecoration(
+        //   gradient: RadialGradient(
+        //     center: Alignment(-1.1, 0),
+        //     radius: 1.5,
+        //     colors: [
+        //       Color(0xFFC637E5),
+        //       Color(0xFF161616),
+        //       Color(0xFF161616),
+        //     ],
+        //     stops: [0.0, 0.75, 1.0],
+        //   ),
+        // ),
         decoration: const BoxDecoration(
           gradient: LinearGradient(
               stops: [
@@ -195,6 +214,17 @@ class _JoinedRoomScreenState extends State<JoinedRoomScreen> {
                                                       fontWeight:
                                                           FontWeight.w600),
                                             ),
+                                            Spacer(),
+                                            OnClick(
+                                              onTap: (){
+                                                NavRouter.pop(context);
+                                              },
+                                              child: const Icon(
+                                                                              Icons.close,
+                                                                              color:AppColors.black,
+                                                                              size: 28.0,
+                                                                            ),
+                                            )
                                           ],
                                         ),
                                         Container(
@@ -220,11 +250,7 @@ class _JoinedRoomScreenState extends State<JoinedRoomScreen> {
                                   ],
                                 ),
                               ),
-                              const Icon(
-                                Icons.close,
-                                color: Color(0xFF161616),
-                                size: 28.0,
-                              )
+                              
                             ],
                           ),
                           Text(
