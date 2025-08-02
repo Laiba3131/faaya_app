@@ -125,33 +125,35 @@ class _HomeScreenState extends State<HomeScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: filteredRooms.map((room) {
                       return Padding(
-                        padding: const EdgeInsets.only(bottom: 16.0),
-                        child:   SizedBox(
-                        height: 260,
-                        child: RoomCard(
-                                  onTap: () {
-                                    NavRouter.push(context, RoomScreen());
-                                  },
-                                  title: "Culture Topic",
-                                  subtitle:  "Lets Discuss the culture of the north America.",
-                                  imagePath: AssetPaths.music,
-                                  peopleCount: 11,
-                                  micCount: 3,
-                                  timeAgo: "2 hours ago",
-                                ),)
-                        //  LiveRoomCard(
-                        //   title: room.title,
-                        //   description: room.description,
-                        //   host: room.host,
-                        //   timeAgo: room.timeAgo,
-                        //   peopleCount: room.peopleCount,
-                        //   micCount: room.micCount,
-                        //   chatCount: room.chatCount,
-                        //   onTap: () {
-                        //     NavRouter.push(context, RoomScreen());
-                        //   },
-                        // ),
-                      );
+                          padding: const EdgeInsets.only(bottom: 16.0),
+                          child: SizedBox(
+                            height: 260,
+                            child: RoomCard(
+                              onTap: () {
+                                NavRouter.push(context, RoomScreen());
+                              },
+                              title: "Culture Topic",
+                              subtitle:
+                                  "Lets Discuss the culture of the north America.",
+                              imagePath: AssetPaths.music,
+                              peopleCount: 11,
+                              micCount: 3,
+                              timeAgo: "2 hours ago",
+                            ),
+                          )
+                          //  LiveRoomCard(
+                          //   title: room.title,
+                          //   description: room.description,
+                          //   host: room.host,
+                          //   timeAgo: room.timeAgo,
+                          //   peopleCount: room.peopleCount,
+                          //   micCount: room.micCount,
+                          //   chatCount: room.chatCount,
+                          //   onTap: () {
+                          //     NavRouter.push(context, RoomScreen());
+                          //   },
+                          // ),
+                          );
                     }).toList(),
                   )
                 : Column(
@@ -164,16 +166,17 @@ class _HomeScreenState extends State<HomeScreen> {
                       SizedBox(
                         height: 260,
                         child: RoomCard(
-                                  onTap: () {
-                                    NavRouter.push(context, RoomScreen());
-                                  },
-                                  title: "Culture Topic",
-                                  subtitle:  "Lets Discuss the culture of the north America.",
-                                  imagePath: AssetPaths.music,
-                                  peopleCount: 11,
-                                  micCount: 3,
-                                  timeAgo: "2 hours ago",
-                                ),
+                          onTap: () {
+                            NavRouter.push(context, RoomScreen());
+                          },
+                          title: "Culture Topic",
+                          subtitle:
+                              "Lets Discuss the culture of the north America.",
+                          imagePath: AssetPaths.music,
+                          peopleCount: 11,
+                          micCount: 3,
+                          timeAgo: "2 hours ago",
+                        ),
                       ),
                       // LiveRoomCard(
                       //   title: "Culture Topic",
@@ -197,13 +200,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _buildStoryAvatars(BuildContext context) {
-    final users = [
-      'John Doe',
-      'karenanne',
-      'zackJohn',
-      'karen d',
-      'John hd'
-    ];
+    final users = ['John Doe', 'karenanne', 'zackJohn', 'karen d', 'John hd'];
 
     return SizedBox(
       height: 90,
@@ -217,48 +214,49 @@ class _HomeScreenState extends State<HomeScreen> {
               padding: const EdgeInsets.only(right: 12),
               child: Column(
                 children: [
-                 Stack(
-  clipBehavior: Clip.none, 
-  alignment: Alignment.bottomCenter,
-  children: [
-    Container(
-      padding: const EdgeInsets.all(3),
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        border: Border.all(
-          color: AppColors.primaryColor,
-          width: 2,
-        ),
-      ),
-      child: const CircleAvatar(
-        radius: 26,
-        backgroundImage: AssetImage(AssetPaths.avatarImage),
-      ),
-    ),
-    Positioned(
-      bottom: -4, 
-      child: Container(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 6,
-          vertical: 2,
-        ),
-        decoration: BoxDecoration(
-          color:AppColors.blurColor,
-          border: Border.all(color: AppColors.white,width: 2),
-          borderRadius: BorderRadius.circular(4),
-        ),
-        child: const Text(
-          'LIVE',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 8,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ),
-    ),
-  ],
-),
+                  Stack(
+                    clipBehavior: Clip.none,
+                    alignment: Alignment.bottomCenter,
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(3),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(
+                            color: AppColors.primaryColor,
+                            width: 2,
+                          ),
+                        ),
+                        child: const CircleAvatar(
+                          radius: 26,
+                          backgroundImage: AssetImage(AssetPaths.avatarImage),
+                        ),
+                      ),
+                      Positioned(
+                        bottom: -4,
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 6,
+                            vertical: 2,
+                          ),
+                          decoration: BoxDecoration(
+                            color: AppColors.blurColor,
+                            border:
+                                Border.all(color: AppColors.white, width: 2),
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                          child: const Text(
+                            'LIVE',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 8,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                   const SizedBox(height: 5),
                   Text(
                     users[index],

@@ -8,8 +8,8 @@ import 'package:bkmc/utils/extensions/extended_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-
-class CustomAppbarForHome extends StatelessWidget implements PreferredSizeWidget {
+class CustomAppbarForHome extends StatelessWidget
+    implements PreferredSizeWidget {
   final String title;
   final bool showBackButton;
   final List<Widget>? actions;
@@ -35,7 +35,8 @@ class CustomAppbarForHome extends StatelessWidget implements PreferredSizeWidget
   @override
   Widget build(BuildContext context) {
     return PreferredSize(
-      preferredSize: Size.fromHeight(kToolbarHeight + (bottom?.preferredSize.height ?? 0) + 20),
+      preferredSize: Size.fromHeight(
+          kToolbarHeight + (bottom?.preferredSize.height ?? 0) + 20),
       child: Container(
         padding: const EdgeInsets.fromLTRB(16, 10, 16, 10),
         decoration: const BoxDecoration(

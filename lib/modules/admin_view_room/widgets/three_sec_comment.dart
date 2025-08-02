@@ -1,4 +1,3 @@
-
 import 'package:bkmc/constants/app_colors.dart';
 import 'package:bkmc/constants/asset_paths.dart';
 import 'package:bkmc/utils/extensions/extended_context.dart';
@@ -17,7 +16,7 @@ class ThreeSecondComment extends StatelessWidget {
           const Color(0xff374BE5),
         ]),
       ),
-      padding: const EdgeInsets.symmetric(vertical: 8.0,horizontal: 12),
+      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12),
       child: Row(
         spacing: 12.0,
         children: [

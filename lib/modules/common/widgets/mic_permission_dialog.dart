@@ -123,11 +123,10 @@ class _MicPermissionDialogState extends State<MicPermissionDialog> {
                       CustomReasonDropdown.show(
                         context,
                         items: regionList,
-                        selectedItem: selectedRegion, 
+                        selectedItem: selectedRegion,
                         onItemSelected: (selected) {
                           setState(() {
-                            selectedRegion =
-                                selected; 
+                            selectedRegion = selected;
                           });
                         },
                       );

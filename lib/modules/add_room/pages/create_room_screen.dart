@@ -177,7 +177,7 @@ class _CreateRoomScreenState extends State<CreateRoomScreen> {
                   labelColor: AppColors.white.withOpacity(0.5),
                   borderRadius: 16,
                   fillColor: AppColors.primaryColor.withOpacity(0.5),
-                   focusedBorderColor: AppColors.primaryColor,
+                  focusedBorderColor: AppColors.primaryColor,
                 ),
                 h1,
                 Text(
@@ -200,7 +200,7 @@ class _CreateRoomScreenState extends State<CreateRoomScreen> {
                       label: "Enter description up to 70 characters max.",
                       borderRadius: 16,
                       fillColor: AppColors.primaryColor.withOpacity(0.5),
-                       focusedBorderColor: AppColors.primaryColor,
+                      focusedBorderColor: AppColors.primaryColor,
                     ),
                     const Positioned(
                       bottom: 8,
@@ -273,7 +273,7 @@ class _CreateRoomScreenState extends State<CreateRoomScreen> {
                       label: 'Enter the words you want to filter.',
                       borderRadius: 16,
                       fillColor: AppColors.primaryColor.withOpacity(0.5),
-                       focusedBorderColor: AppColors.primaryColor,
+                      focusedBorderColor: AppColors.primaryColor,
                     ),
                     const Positioned(
                       bottom: 8,

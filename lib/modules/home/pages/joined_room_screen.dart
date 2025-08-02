@@ -25,7 +25,6 @@ class JoinedRoomScreen extends StatefulWidget {
 }
 
 class _JoinedRoomScreenState extends State<JoinedRoomScreen> {
-
   bool isEmojiVisible = false;
   @override
   Widget build(BuildContext context) {
@@ -216,14 +215,14 @@ class _JoinedRoomScreenState extends State<JoinedRoomScreen> {
                                             ),
                                             Spacer(),
                                             OnClick(
-                                              onTap: (){
+                                              onTap: () {
                                                 NavRouter.pop(context);
                                               },
                                               child: const Icon(
-                                                                              Icons.close,
-                                                                              color:AppColors.black,
-                                                                              size: 28.0,
-                                                                            ),
+                                                Icons.close,
+                                                color: AppColors.black,
+                                                size: 28.0,
+                                              ),
                                             )
                                           ],
                                         ),
@@ -250,7 +249,6 @@ class _JoinedRoomScreenState extends State<JoinedRoomScreen> {
                                   ],
                                 ),
                               ),
-                              
                             ],
                           ),
                           Text(

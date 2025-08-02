@@ -12,10 +12,13 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(extendBodyBehindAppBar: true,
+    return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: const CustomAppbar(
-          title: 'Profile',titleColor: AppColors.white,
-        showBackButton: true,),
+        title: 'Profile',
+        titleColor: AppColors.white,
+        showBackButton: true,
+      ),
       // backgroundColor: AppColors.transparent,
       // extendBodyBehindAppBar: true,
 

@@ -152,7 +152,6 @@ class RoomBottomSheetState extends State<RoomBottomSheet> {
                           const Color(0xff374BE5),
                         ],
                       ),
-
                       CoinButton(
                         label: '6s',
                         coins: 20,

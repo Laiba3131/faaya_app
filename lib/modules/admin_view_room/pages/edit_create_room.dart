@@ -38,6 +38,7 @@ class _EditCreateRoomState extends State<EditCreateRoom> {
       });
     }
   }
+
   String _privacy = 'Private';
   double _speakerLimit = 17;
   double _audienceLimit = 45;
@@ -50,7 +51,7 @@ class _EditCreateRoomState extends State<EditCreateRoom> {
     super.dispose();
   }
 
- String? selectedRegion;
+  String? selectedRegion;
   String? selectedCategory;
 
   List<String> regionList = [
@@ -63,7 +64,7 @@ class _EditCreateRoomState extends State<EditCreateRoom> {
     'South America',
   ];
 
-    List<String> categoryList = [
+  List<String> categoryList = [
     'Entertainment',
     'Culture',
     'Music',
@@ -112,7 +113,7 @@ class _EditCreateRoomState extends State<EditCreateRoom> {
                 const SizedBox(height: 12),
                 Row(
                   children: [
-                     Container(
+                    Container(
                       width: 64,
                       height: 64,
                       decoration: BoxDecoration(
@@ -143,12 +144,11 @@ class _EditCreateRoomState extends State<EditCreateRoom> {
                               ),
                       ),
                     ),
-                 
                   ],
                 ),
                 h2,
                 PrefixIconButton(
-                  onPressed:_pickImage,
+                  onPressed: _pickImage,
                   title: 'Upload Images',
                   prefixIconPath: AssetPaths.galary,
                   backgroundColor: AppColors.primaryColor,
@@ -297,9 +297,9 @@ class _EditCreateRoomState extends State<EditCreateRoom> {
                   ),
                 ),
                 h0P5,
-                 CustomDropdown(
+                CustomDropdown(
                   height: 50,
-                  hintText: selectedCategory??'Select Category ',
+                  hintText: selectedCategory ?? 'Select Category ',
                   isPrefixIconVisible: false,
                   title: 'Select Category  ',
                   items: categoryList,
@@ -320,11 +320,11 @@ class _EditCreateRoomState extends State<EditCreateRoom> {
                   ),
                 ),
                 h0P5,
-              CustomDropdown(
+                CustomDropdown(
                   height: 50,
-                  hintText: selectedRegion?? 'Select Category',
+                  hintText: selectedRegion ?? 'Select Category',
                   isPrefixIconVisible: false,
-                  title:selectedRegion?? 'Select Category',
+                  title: selectedRegion ?? 'Select Category',
                   items: regionList,
                   selectedItem: selectedRegion,
                   onItemSelected: (value) {

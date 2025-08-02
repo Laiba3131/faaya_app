@@ -19,7 +19,7 @@ void main() async {
     DeviceOrientation.portraitDown,
   ]);
 
-  /// =============== App initialization ================ 
+  /// =============== App initialization ================
   await initApp(Environment.fromEnv(AppEnv.dev));
   runApp(BlocDI(child: OxynDev()));
 }

@@ -340,10 +340,10 @@ class _RoomScreenState extends State<RoomScreen> {
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                    CircleAvatar(
-                                      radius: 24,
-                                      backgroundImage: AssetImage(a['image']!),
-                                    ),
+                                CircleAvatar(
+                                  radius: 24,
+                                  backgroundImage: AssetImage(a['image']!),
+                                ),
                                 // Stack(
                                 //   clipBehavior: Clip.none,
                                 //   children: [
