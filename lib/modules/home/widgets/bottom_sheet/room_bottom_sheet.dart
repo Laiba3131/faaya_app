@@ -1,13 +1,13 @@
 import 'package:bkmc/constants/asset_paths.dart';
+import 'package:bkmc/modules/common/widgets/mic_request_dialog.dart';
 import 'package:bkmc/modules/home/model/comment_model.dart';
 import 'package:bkmc/modules/home/widgets/coin_button.dart';
 import 'package:bkmc/modules/home/widgets/nested_comment_tile.dart';
-import 'package:bkmc/ui/button/primary_button.dart';
+import 'package:bkmc/ui/widgets/on_click.dart';
 import 'package:bkmc/utils/extensions/extended_context.dart';
 import 'package:bkmc/utils/heights_and_widths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
 import '../../../../constants/app_colors.dart';
 import '../../../../ui/input/input_field.dart';
 import '../../../common/widgets/mic_permission_dialog.dart';
@@ -25,6 +25,10 @@ class RoomBottomSheetState extends State<RoomBottomSheet> {
   int? replyingToCommentId;
   String? replyingToUserName;
   bool emojiClicked = false;
+  bool emojiList = false;
+  bool hasMicPermission = false;
+  bool hasMicPermissionShow = false;
+bool isMute=false;
   List<String> emojis = ['👏', '💪', '👌', '🥳', '😊', '😍', '😎', '🔥'];
 
   List<CommentModel> comments = [
@@ -175,46 +179,29 @@ class RoomBottomSheetState extends State<RoomBottomSheet> {
                 ),
                 h2,
 
-                // Emoji bar
-                Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                  decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.08),
-                    borderRadius: BorderRadius.circular(12),
+                if (emojiList)
+                  Container(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                    decoration: BoxDecoration(
+                      color: Colors.white.withOpacity(0.08),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: emojis.map((emoji) {
+                        return InkWell(
+                          onTap: () {
+                            setState(() {
+                              emojiClicked = !emojiClicked;
+                            });
+                            widget.onEmojiClick!(emojiClicked);
+                          },
+                          child: Text(emoji, style: TextStyle(fontSize: 24)),
+                        );
+                      }).toList(),
+                    ),
                   ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    // children: [
-                    //   InkWell(
-                    //       onTap: () {
-                    //         setState(() {
-                    //           emojiClicked = !emojiClicked;
-                    //         });
-                    //         widget.onEmojiClick(emojiClicked);
-                    //       },
-                    //       child: Text('👏')),
-                    //   Text('💪'),
-                    //   Text('👌'),
-                    //   Text('🥳'),
-                    //   Text('😊'),
-                    //   Text('😍'),
-                    //   Text('😎'),
-                    //   Text('🔥'),
-                    // ],
-                    children: emojis.map((emoji) {
-                      return InkWell(
-                        onTap: () {
-                          setState(() {
-                            emojiClicked = !emojiClicked;
-                          });
-                          widget.onEmojiClick!(emojiClicked);
-                        },
-                        child: Text(emoji, style: TextStyle(fontSize: 24)),
-                      );
-                    }).toList(),
-                  ),
-                ),
                 h1,
 
                 // Reply bar
@@ -257,33 +244,6 @@ class RoomBottomSheetState extends State<RoomBottomSheet> {
                     ),
                   ),
                 h2,
-
-                // Request to Speak
-                SuffixIconButton(
-                  onPressed: () {
-                    showDialog(
-                      context: context,
-                      builder: (context) => MicPermissionDialog(),
-                    );
-                  },
-                  title: 'Request to Speak',
-                  suffixIconWidget: Container(
-                    padding: const EdgeInsets.all(2),
-                    decoration: const BoxDecoration(
-                        color: AppColors.white, shape: BoxShape.circle),
-                    child: SvgPicture.asset(
-                      AssetPaths.mic,
-                      color: AppColors.primaryColor,
-                    ),
-                  ),
-                  backgroundColor: AppColors.primaryColor,
-                  height: 55,
-                  borderColor: Colors.transparent,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  hPadding: 18,
-                  borderRadius: 16,
-                ),
-                const SizedBox(height: 10), // Small gap above input
               ],
             ),
           ),
@@ -292,22 +252,31 @@ class RoomBottomSheetState extends State<RoomBottomSheet> {
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
             child: Row(
               children: [
+                GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      emojiList = !emojiList;
+                    });
+                  },
+                  child: SvgPicture.asset(AssetPaths.smileEmoji, height: 30.0),
+                ),
+                w1,Image.asset(AssetPaths.giftIcon),w1,
                 Expanded(
                   child: Container(
                     decoration: BoxDecoration(
                       color: const Color(0xff888888).withOpacity(0.3),
                       borderRadius: BorderRadius.circular(12.0),
                     ),
-                    padding: const EdgeInsets.symmetric(horizontal: 14.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 12),
                     child: Row(
                       children: [
-                        Image.asset(AssetPaths.giftIcon),
-                        w2,
-                        Image.asset(AssetPaths.divider),
-                        w1,
+                        
+                        // w2,
+                        // Image.asset(AssetPaths.divider),
+                        // w1,
                         Expanded(
                           child: InputField(
-                            boxConstraints: 12,
+                            boxConstraints: 6,
                             controller: TextEditingController(),
                             label: "Type a thought here",
                           ),
@@ -319,11 +288,56 @@ class RoomBottomSheetState extends State<RoomBottomSheet> {
                   ),
                 ),
                 w1,
-                SvgPicture.asset(AssetPaths.smileEmoji, height: 30.0),
+                if (!hasMicPermission)
+                  OnClick(
+                    onTap: () async {
+                      setState(() {
+                        hasMicPermissionShow = true;
+                      });
+
+                      final accepted = await showDialog<bool>(
+                        context: context,
+                        builder: (context) => const MicRequestDialog(),
+                      );
+
+                      if (accepted == true) {
+                        setState(() {
+                          hasMicPermission = true;
+                        });
+                      }
+                    },
+                    child: SvgPicture.asset(
+                      hasMicPermissionShow
+                          ? AssetPaths.requestHand
+                          : AssetPaths.commentHand,
+                      height: 30.0,
+                    ),
+                  ),
                 w1,
-                SvgPicture.asset(AssetPaths.commentHand, height: 30.0),
-                w1,
-                SvgPicture.asset(AssetPaths.micRequest, height: 30.0),
+                OnClick(
+                  onTap: (){
+                    setState(() {
+                      
+                      isMute=!isMute;
+                    });
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.all(6),
+                    decoration: const BoxDecoration(
+                        color: AppColors.white,
+                        shape: BoxShape.circle),
+                    child: SvgPicture.asset(
+                     !isMute? AssetPaths.mic:AssetPaths.microphoneSlash  ,
+                      color: AppColors.primaryColor,
+                      height: 22,
+                    ),
+                  ),
+                ),
+                  w1,
+                Container( padding: const EdgeInsets.all(6), decoration: const BoxDecoration(
+                        color: AppColors.white,
+                        shape: BoxShape.circle),child: SvgPicture.asset(AssetPaths.volumeCross, height: 22.0,  color: AppColors.primaryColor,)),
+                
               ],
             ),
           ),

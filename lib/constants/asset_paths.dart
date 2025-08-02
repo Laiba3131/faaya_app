@@ -82,6 +82,9 @@ class AssetPaths {
   static const String delete = 'assets/images/svg/material-symbols_delete.svg';
   static const String galary = 'assets/images/svg/gallery_add.svg';
   static const String option = 'assets/images/svg/octicon.svg';
+  static const String requestHand = 'assets/images/svg/requestHand.svg';
+  static const String volumeCross = 'assets/images/svg/volume-cross.svg';
+  static const String microphoneSlash = 'assets/images/svg/microphone-slash.svg';
 
   //png
   static const String avatarImage = 'assets/images/png/Inner Oval (1).png';
